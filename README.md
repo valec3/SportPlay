@@ -24,7 +24,7 @@ Descripcion
 
 <br>
 
-## 👨‍💻 Equipo ( c15-38-n-java-react )
+## 👨‍💻 Equipo ( s13-23-n-react-back )
 
 <br>
 
