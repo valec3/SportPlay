@@ -1,9 +1,7 @@
-import './App.css';
-
 function App() {
 	return (
 		<>
-			<div className='text-center'>App sportPlay</div>
+			<div className='text-center text-primary'>App sportPlay</div>
 		</>
 	);
 }
