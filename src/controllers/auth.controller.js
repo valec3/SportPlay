@@ -13,9 +13,14 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-    res.json({
-        message: 'Logout',
-    });
+    const query = 'show tables;';
+    pool.query(query)
+        .then((result) => {
+            res.json(result[0]);
+        })
+        .catch((error) => {
+            res.json(error);
+        });
 };
 
 export const exampleOfQuery = (req, res) => {

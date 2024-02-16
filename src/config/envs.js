@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 export const configDb = {
     host: process.env.DATABASE_HOST || 'localhost',
     user: process.env.DATABASE_USER || 'root',
@@ -5,5 +8,5 @@ export const configDb = {
     database: process.env.DATABASE_NAME || 'tournament',
     port: process.env.DATABASE_PORT || 3306,
 };
-export const PORT = process.env.PORT || 3000;
+export const PORT = process.env.PORT || 3100;
 export const SECRET = process.env.SECRET;
