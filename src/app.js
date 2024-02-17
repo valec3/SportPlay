@@ -8,7 +8,12 @@ const app = express();
 // ver logs de las peticiones
 app.use(morgan('dev'));
 // habilitar CORS
-app.use(cors());
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        optionsSuccessStatus: 200,
+    }),
+);
 // habilitar express.json
 app.use(express.json());
 
