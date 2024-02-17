@@ -4,14 +4,17 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#50075D',
-				secondary: '#D20DF3',
-				tertiary: '#B0C9FB',
-				accent: '#89169C',
+				primary: '#181829',
+				secondary: '#222232',
+				base_100: '#FFFCFC',
+				warning: '#CB2C2C',
+				accent: '#51A331',
+				success: '#2648D1',
+				neutral: '#C4C4C4',
 			},
 			fontFamily: {
-				roboto: ['Roboto Flex', 'sans-serif'],
-				karla: ['Karla', 'sans-serif'],
+				Roboto: ["Roboto", "sans-serif"],
+				SourceSansPro: ["Source Sans Pro", "sans-serif"],
 			},
 		},
 	},
