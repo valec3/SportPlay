@@ -1,3 +1,5 @@
+import Modals from "./components/FormComponents/Modals";
+
 function App() {
 	return (
 		<>
@@ -5,6 +7,7 @@ function App() {
 				{/* header */}
 				<main className='px-4 space-y-4 text-base-100'>
 					<div className=''>App sportPlay</div>
+					<Modals/>
 				</main>
 				{/* footer */}
 			</div>
