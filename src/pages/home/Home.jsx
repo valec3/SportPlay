@@ -1,3 +1,4 @@
+import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
 
 function Home() {
@@ -10,6 +11,7 @@ function Home() {
 			{/*section equipos de torneo */}
 			<section>
 				<Title2 title='Equipos'></Title2>
+				<MyTable></MyTable>
 			</section>
 			{/* section ultimo partido */}
 			<section></section>

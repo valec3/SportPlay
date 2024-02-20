@@ -6,7 +6,7 @@ function App() {
 			<div className='bg-primary h-[100vh] px-4 space-y-4 text-base-100'>
 				{/* header */}
 
-				<main className='px-4 space-y-4'>
+				<main className='px-4 space-y-4 text-base-100'>
 					<Home></Home>
 				</main>
 				{/* footer */}
