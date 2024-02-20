@@ -1,5 +1,6 @@
 import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
+import LastMatch from '../../components/homeComponents/LastMatch';
 
 function Home() {
 	return (
@@ -18,9 +19,11 @@ function Home() {
 				</div>
 			</section>
 			{/* section ultimo partido */}
-			<section className='border-b border-b-50 border-ternary'>
+			{/* <section className='border-b border-b-50 border-ternary'>
 				<Title2 title='Partidos' link='partidos'></Title2>
-			</section>
+				<LastMatch />
+			</section> */}
+			<LastMatch />
 			{/* section equipos logos */}
 			<section>
 				<Title2 title='Equipos' link='equipos'></Title2>
