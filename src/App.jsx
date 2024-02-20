@@ -1,4 +1,4 @@
-import Modals from "./components/FormComponents/Modals";
+import Modals from "./components/formComponents/Modals";
 
 function App() {
 	return (

@@ -25,7 +25,7 @@ const Modals = () => {
 
 
   return (
-    <div className="h-full">
+    <div className="h-full ">
         <button onClick={openModal}>open</button>
       <ModalForm isOpenModal={isOpenModal} closeModal={closeModal}>
         {isLogin ? <FormSignIn handleLogin={handleLogin} /> : <FormLogIn handleLogin={handleLogin}/>}
