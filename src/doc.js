@@ -19,6 +19,10 @@ const swaggerOptions = {
                 url: 'http://localhost:3100',
                 description: 'Development server',
             },
+            {
+                url: 'https://tournament-sport.onrender.com',
+                description: 'Production server',
+            },
         ],
     },
     components: {

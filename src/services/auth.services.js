@@ -32,6 +32,6 @@ export const registerService = async (user) => {
     const hashedPassword = hashPassword(password);
     const query = `INSERT INTO users (email, password, dni, first_name, last_name) VALUES ('${email}', '${hashedPassword}', '${dni}', '${first_name}', '${last_name}');`;
     const response = await pool.query(query);
-    if (!response) throw new Error('Error registering user');
+    if (!response) throw new Error('Internal server error');
     return response;
 };
