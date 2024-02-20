@@ -1,6 +1,6 @@
 export default function MyTable() {
 	return (
-		<div className='p-4 pt-0 w-fit bg-secondary rounded-3xl'>
+		<div className='p-4 pt-0 w-fit bg-secondary rounded-3xl mb-4'>
 			<table className='w-ful  '>
 				{/* head */}
 				<thead className=''>

@@ -1,13 +1,18 @@
-import MyTable from './components/common/MyTable';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
 
 function App() {
 	return (
 		<>
-			<div className='bg-primary h-[100vh]'>
+			<div className='bg-primary h-[100vh]  text-base-100'>
 				{/* header */}
-				<main className='px-4 space-y-4 text-base-100'>
-					<div className=''>App sportPlay</div>
-					<MyTable></MyTable>
+
+				<main className=''>
+					<BrowserRouter>
+						<Routes>
+							<Route path='/' element={<Home />} />
+						</Routes>
+					</BrowserRouter>
 				</main>
 				{/* footer */}
 			</div>
