@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 function App() {
 	return (
 		<>
-			<div className='bg-primary  text-base-100'>
+			<div className='bg-primary  text-base-100 min-h-screen flex flex-col'>
 				{/* header */}
 
 				<main className=''>

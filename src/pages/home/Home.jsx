@@ -19,8 +19,8 @@ function Home() {
 				</div>
 			</section>
 			{/* section ultimo partido */}
-			<section className='border-b border-b-50 border-ternary space-y-4 px-4 pb-8'>
-				<Title2 title='Partidos' link='partidos'></Title2>
+			<section className='border-b border-b-50 border-ternary space-y-4 px-[30px] pb-8'>
+				<Title2 title='Último Partido' link='partidos'></Title2>
 				<LastMatch />
 			</section>
 			{/* section equipos logos */}
