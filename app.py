@@ -1,8 +1,11 @@
-a, b, c, d = map(int, input().split())
+# order array
 
-front_middle_max = min(b - a, d - c)
+lsita = [15, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+# order
+lsita.sort()
 
-len_max = front_middle_max
+print(lsita)
 
-print("{:.2f}".format(len_max))
+# find number 4
+print(lsita.index(4))

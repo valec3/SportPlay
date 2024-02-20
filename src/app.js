@@ -10,10 +10,11 @@ app.use(morgan('dev'));
 // habilitar CORS
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'http://localhost:3100'],
         optionsSuccessStatus: 200,
     }),
 );
+
 // habilitar express.json
 app.use(express.json());
 
