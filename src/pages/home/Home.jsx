@@ -1,12 +1,19 @@
 import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
 import LastMatch from '../../components/homeComponents/LastMatch';
+import Carrousel from '../../components/homeComponents/Carrousel';
 
 function Home() {
 	return (
 		<div className='space-y-8'>
 			{/* section banner */}
 			<section>banner</section>
+
+			{/* carrousel section */}
+			<section>
+				<Carrousel></Carrousel>
+			</section>
+
 			{/* section torneo abierto*/}
 			<section className='border-b border-b-50 border-ternary space-y-4 px-4 pb-8 '>
 				<Title2 title='Torneos Abiertos' link='torneos'></Title2>
