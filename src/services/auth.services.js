@@ -27,11 +27,20 @@ export const registerService = async (user) => {
         'SELECT * FROM users WHERE email = ?',
         [email],
     );
-    console.log(userExists);
     if (userExists.length > 0) throw new Error('User already exists');
     const hashedPassword = hashPassword(password);
     const query = `INSERT INTO users (email, password, dni, first_name, last_name) VALUES ('${email}', '${hashedPassword}', '${dni}', '${first_name}', '${last_name}');`;
-    const response = await pool.query(query);
+    const [response] = await pool.query(query);
     if (!response) throw new Error('Internal server error');
-    return response;
+    const [userCreated] = await pool.query(
+        'SELECT id FROM users WHERE email = ?',
+        [email],
+    );
+    const token = await createAccessToken({ id: userCreated[0].id });
+    return {
+        message: 'User registered successfully',
+        data: {
+            token,
+        },
+    };
 };

@@ -32,21 +32,8 @@ const swaggerOptions = {
             },
         ],
     },
-    components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer',
-                bearerFormat: 'JWT',
-            },
-            cookieAuth: {
-                type: 'apiKey',
-                in: 'cookie',
-                name: 'mysecret',
-            },
-        },
-    },
-    apis: ['./src/docs/*.json'],
+
+    apis: ['./src/docs/*.yaml'],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);

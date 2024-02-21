@@ -7,6 +7,7 @@ CREATE TABLE users (
     last_name VARCHAR(100) NOT NULL
 );
 
+
 CREATE TABLE teams(
     id SERIAL PRIMARY KEY,
     creator_id INT, 
@@ -14,3 +15,11 @@ CREATE TABLE teams(
     logo_url VARCHAR(100),
     FOREIGN KEY (creator_id) REFERENCES users(id)
 )
+
+CREATE TABLE player_team(
+    id PRIMARY KEY,
+    camiseta INT,
+    team_id INT,
+    FOREIGN KEY (team_id) REFERENCES teams(id)
+)
+
