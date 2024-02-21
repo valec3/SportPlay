@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 
 import Footer from './components/Footer';
+import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 
 function App() {
 	return (
@@ -13,10 +14,9 @@ function App() {
 					<BrowserRouter>
 						<Routes>
 							<Route path='/' element={<Home />} />
+							<Route path='crear-torneo' element={<CrearTorneo />} />
 						</Routes>
 					</BrowserRouter>
-
-					{/* <main className=' px-[30px] space-y-4 text-base-100 md:px-[45px] min-h-screen'> */}
 				</main>
 				{/* footer */}
 				<Footer />
