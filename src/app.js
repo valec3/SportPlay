@@ -10,7 +10,11 @@ app.use(morgan('dev'));
 // habilitar CORS
 app.use(
     cors({
-        origin: ['http://localhost:3000', 'http://localhost:3100'],
+        origin: [
+            'http://localhost:3000',
+            'http://localhost:3100',
+            'https://spor7play.vercel.app',
+        ],
         optionsSuccessStatus: 200,
     }),
 );

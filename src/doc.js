@@ -1,6 +1,5 @@
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import e from 'express';
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -24,6 +23,14 @@ const swaggerOptions = {
                 description: 'Production server',
             },
         ],
+        tags: [
+            { name: 'user', description: 'Operations about user' },
+            { name: 'teams', description: 'Everything about your Pets' },
+            {
+                name: 'tournaments',
+                description: 'Access to Petstore orders',
+            },
+        ],
     },
     components: {
         securitySchemes: {
@@ -32,9 +39,14 @@ const swaggerOptions = {
                 scheme: 'bearer',
                 bearerFormat: 'JWT',
             },
+            cookieAuth: {
+                type: 'apiKey',
+                in: 'cookie',
+                name: 'mysecret',
+            },
         },
     },
-    apis: ['./src/routes/*.js'],
+    apis: ['./src/docs/*.json'],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);

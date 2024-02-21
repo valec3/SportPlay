@@ -14,48 +14,6 @@ router.get('/', (req, res) => {
     });
 });
 
-/**
- * @openapi
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       name: Authorization
- *       scheme: bearer
- *       bearerFormat: JWT
- *     cookieAuth:
- *       type: apiKey
- *       in: cookie
- *       name: mysecret
- */
-
-/**
- * @openapi
- *   /api/auth/register:
- *     post:
- *       summary: Register a new user
- *       responses:
- *          200:
- *           description: User registered successfully
- *       requestBody:
- *         required: true
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 first_name:
- *                   type: string
- *                 last_name:
- *                   type: string
- *                 email:
- *                   type: string
- *                 password:
- *                   type: string
- *                 dni:
- *                   type: string
- *
- */
 router.post('/register', register);
 /**
  * @openapi
