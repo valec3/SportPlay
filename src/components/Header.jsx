@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { FiMenu, FiUser, FiX } from 'react-icons/fi';
+
 import IconUser from './componentHeader/IconUser';
+
+import { FaUserLarge } from 'react-icons/fa6';
+import { FaRegUser } from 'react-icons/fa';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { RxExit } from 'react-icons/rx';
+
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -20,15 +27,15 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav className='bg-primary text-white p-4 flex justify-between items-center sticky top-0 z-10 '>
+		<nav className='bg-primary text-white p-4 flex justify-between items-center sticky top-0 z-10 h-[90px]'>
 			{/* Menú hamburguesa */}
 			<div className='flex items-center'>
-				<div className='sm:hidden'>
+				<div className='sm:hidden '>
 					<button
 						onClick={toggleMenu}
 						className='text-white focus:outline-none'
 					>
-						<FiMenu className='h-6 w-6' />
+						<FiMenu className='h-6 w-10' />
 					</button>
 					{/* Menú hamburguesa desplegable */}
 					{isOpen && (
@@ -41,14 +48,22 @@ const Navbar = () => {
 								className='absolute top-[90px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
-									<li className='py-2 hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
 										{' '}
 										<a>Inicio</a>
 									</li>
-									<li className='py-2 hover:bg-gray-700'>Torneos Abiertos</li>
-									<li className='py-2 hover:bg-gray-700'>Resultados Torneos</li>
-									<li className='py-2 hover:bg-gray-700'>Partidos</li>
-									<li className='py-2 hover:bg-gray-700'>Equipo</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Resultados Torneos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Torneos Abiertos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Partidos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
+										Equipo
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -60,7 +75,7 @@ const Navbar = () => {
 					<img
 						src='/images/logo-hori-2.png'
 						alt='Logo'
-						className='h-14 sm:h-16 mr-4'
+						className='h-14 sm:h-16 ml-10 '
 					/>
 				</div>
 			</div>
@@ -84,15 +99,12 @@ const Navbar = () => {
 				</a>
 			</div>
 
+
+			{/* Icono de usuario y menú desplegable */}
 			<IconUser/>
 
-			{/* Overlay para cerrar el menú al hacer clic fuera */}
-			{isOpen && (
-				<div
-					className='fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-40'
-					onClick={closeMenu}
-				></div>
-			)}
+
+			
 		</nav>
 	);
 };
