@@ -19,7 +19,7 @@ const FormSignIn = ({ handleLogin }) => {
 	const expRegPass = /^\d{4,8}$/;
 	const expRegEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-	const submitForm = (values) =>{
+	const submitForm = (values, {resetForm}) =>{
 		axios
 			.post('https://tournament-sport.onrender.com/api/auth/register',
 			values)
