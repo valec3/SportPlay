@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { FiMenu, FiUser, FiX } from 'react-icons/fi';
+import { FaUserLarge } from 'react-icons/fa6';
+import { FaRegUser } from 'react-icons/fa';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import { RxExit } from 'react-icons/rx';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -22,12 +26,12 @@ const Navbar = () => {
 		<nav className='bg-primary text-white p-4 flex justify-between items-center sticky top-0 z-10 '>
 			{/* Menú hamburguesa */}
 			<div className='flex items-center'>
-				<div className='sm:hidden'>
+				<div className='sm:hidden '>
 					<button
 						onClick={toggleMenu}
 						className='text-white focus:outline-none'
 					>
-						<FiMenu className='h-6 w-6' />
+						<FiMenu className='h-6 w-10' />
 					</button>
 					{/* Menú hamburguesa desplegable */}
 					{isOpen && (
@@ -40,14 +44,22 @@ const Navbar = () => {
 								className='absolute top-[90px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
-									<li className='py-2 hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
 										{' '}
 										<a>Inicio</a>
 									</li>
-									<li className='py-2 hover:bg-gray-700'>Torneos Abiertos</li>
-									<li className='py-2 hover:bg-gray-700'>Resultados Torneos</li>
-									<li className='py-2 hover:bg-gray-700'>Partidos</li>
-									<li className='py-2 hover:bg-gray-700'>Equipo</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Resultados Torneos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Torneos Abiertos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+										Partidos
+									</li>
+									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
+										Equipo
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -59,7 +71,7 @@ const Navbar = () => {
 					<img
 						src='/images/logo-hori-2.png'
 						alt='Logo'
-						className='h-14 sm:h-16 mr-4'
+						className='h-14 sm:h-16 ml-10 '
 					/>
 				</div>
 			</div>
@@ -84,37 +96,58 @@ const Navbar = () => {
 			</div>
 
 			{/* Icono de usuario y menú desplegable */}
-			<div className='relative'>
+			<div className='relative '>
 				<button
 					onClick={toggleDropdown}
-					className='text-white focus:outline-none'
+					className='text-white focus:outline-none flex items-center'
 				>
-					<FiUser className='h-6 w-6' />
+					<FaUserLarge
+						className={`${isDropdownOpen ? 'text-green-500' : 'text-white'}`}
+					/>
+					<MdKeyboardArrowDown
+						className={`${isDropdownOpen ? 'text-green-500' : 'text-white'} ml-2`}
+					/>
 				</button>
+
 				{/* Dropdown para el menú de usuario */}
 				{isDropdownOpen && (
-					<div className='absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg'>
-						<ul className='py-2'>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+					<div className='absolute  right-0 mt-9 w-48 bg-secondary rounded-lg shadow-lg'>
+						{/* Botón de cerrar */}
+						<button
+							className='absolute top-0 right-0 mr-2 mt-4 text-white focus:outline-none'
+							onClick={toggleDropdown}
+						>
+							<FiX />
+						</button>
+						{/* Contenido del dropdown */}
+						<ul className='py-12 '>
+							<li className='px-12 py-2 hover:bg-gray-700 flex items-center '>
+								<FaUserLarge className='' />
 								<a href='#'>Perfil</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+							<li className='px-12 py-2 hover:bg-gray-700'>
 								<a href='#'>Actividad</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+							<li className='px-12 py-2 hover:bg-gray-700'>
 								<a href='#'>Torneos</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+							<li className='px-12 py-2 hover:bg-gray-700'>
 								<a href='#'>Jugador</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+							<li className='px-12 py-2 hover:bg-gray-700'>
 								<a href='#'>Resultados</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
+							<li className='px-12 py-2 hover:bg-gray-700'>
 								<a href='#'>Notificaciones</a>
 							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Cerrar Sesión</a>
+							<li className='px-12 py-2 mb-16 hover:bg-gray-700 '>
+								<div className='flex items-center'>
+									<RxExit className='text-warning h-6 w-6 mr-2' />
+									
+								</div>
+								<a className='text-warning' href='#'>
+										Cerrar Sesión
+									</a>
 							</li>
 						</ul>
 					</div>
