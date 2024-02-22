@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiMenu, FiUser, FiX } from 'react-icons/fi';
+import IconUser from './componentHeader/IconUser';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -83,43 +84,7 @@ const Navbar = () => {
 				</a>
 			</div>
 
-			{/* Icono de usuario y menú desplegable */}
-			<div className='relative'>
-				<button
-					onClick={toggleDropdown}
-					className='text-white focus:outline-none'
-				>
-					<FiUser className='h-6 w-6' />
-				</button>
-				{/* Dropdown para el menú de usuario */}
-				{isDropdownOpen && (
-					<div className='absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg'>
-						<ul className='py-2'>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Perfil</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Actividad</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Torneos</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Jugador</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Resultados</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Notificaciones</a>
-							</li>
-							<li className='px-4 py-2 hover:bg-gray-700'>
-								<a href='#'>Cerrar Sesión</a>
-							</li>
-						</ul>
-					</div>
-				)}
-			</div>
+			<IconUser/>
 
 			{/* Overlay para cerrar el menú al hacer clic fuera */}
 			{isOpen && (
