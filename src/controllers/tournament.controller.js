@@ -4,13 +4,17 @@ import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdS
 export const createTournament = async (req, res) => {
     try {
         const tournamentData = req.body;
-        await newTournamentService(tournamentData, req.user.id);
+        const creatorId = req.body.creator_id;
+        const tournamentImage = req.files?.logo; 
+        await newTournamentService(tournamentData, tournamentImage, creatorId);
+
         res.status(201).json({ message: 'Torneo creado exitosamente' });
     } catch (error) {
         console.error('Error al crear el torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
+
 
 
 export const getAllTournaments = async (req, res) => {

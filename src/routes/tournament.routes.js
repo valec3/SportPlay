@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createTournament, getTournamentsByUserId } from '../controllers/tournament.controller.js';
+import { createTournament, getAllTournaments, getTournamentsByUserId } from '../controllers/tournament.controller.js';
 import { validatorJwt } from '../middlewares/validatorJwt.js';
 
 
@@ -12,7 +12,8 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/create-tournament', validatorJwt, createTournament);
+router.post('/create-tournament', createTournament);
+router.get('/all-tournaments', getAllTournaments)
 router.get('/my-tournaments', validatorJwt, getTournamentsByUserId)
 
 
