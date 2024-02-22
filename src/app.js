@@ -12,10 +12,17 @@ app.use(morgan('dev'));
 // habilitar CORS
 app.use(
     cors({
-        origin: 'http://localhost:3100',
+        origin: [
+            'http://localhost:3000',
+            'http://localhost:3100',
+            'http://localhost:5173',
+            'http://localhost:5173/',
+            'https://spor7play.vercel.app',
+        ],
         optionsSuccessStatus: 200,
     }),
 );
+
 // habilitar express.json
 app.use(express.json());
 //Configuracion para express-fileUpload para subir imagenes

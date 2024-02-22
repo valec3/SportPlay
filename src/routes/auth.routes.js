@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
         message: 'Auth routes works!',
     });
 });
+
 router.post('/register', register);
 router.post('/login', login);
 router.get('/profile', validatorJwt, profile);
