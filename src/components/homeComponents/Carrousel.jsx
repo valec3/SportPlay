@@ -8,15 +8,24 @@ function Carrousel() {
 	const slides = [
 		{
 			image: './/public/images/banner0.png',
-			caption: 'Simplifica la gestion deportiva con SportPlay',
+			caption: 	`Simplifica
+						la gestion
+						deportiva con
+						SportPlay`,
 		},
 		{
 			image: './/public/images/banner1.png',
-			caption: 'Crea torneos para todos o solo amigos',
+			caption: 	`Inscribete
+						y juega.
+						La cancha
+						te espera`,
 		},
 		{
-			image: './/public/images/banner4.png',
-			caption: 'Invita a tus jugadores o rivales de juego',
+			image: './/public/images/banner2.png',
+			caption: 	`Desafia a
+						tus Amigos.
+						La Competencia
+						está aquí.`,
 		},
 	];
 
@@ -42,7 +51,7 @@ function Carrousel() {
 								alt={`Slide ${index + 1}`}
 								className='w-full h-auto'
 							/>
-							<div className='absolute bottom-32 left-10 transform -translate-x-4 text-left text-4xl drop-shadow-[3px_3px_2px_rgba(0,0,0,1)] flex flex-col'>
+							<div className='whitespace-pre-line absolute top-12 left-10 transform -translate-x-4 text-left text-3xl drop-shadow-[3px_3px_2px_rgba(0,0,0,1)] flex flex-col'>
 								{slide.caption}
 							</div>
 						</div>
