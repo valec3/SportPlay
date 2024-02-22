@@ -5,13 +5,13 @@ const ModalForm = ({ children, isOpenModal, closeModal }) => {
   const handleModalContainerClick = (e) => e.stopPropagation();
   return (
     <article
-      className={`bg-black/75 fixed z-40 top-0 left-0 w-full h-full overflow-y-auto flex justify-center items-center  ${
+      className={`bg-black/75 absolute z-40 top-0 left-0 w-full h-[auto] flex justify-center items-center ${
         !isOpenModal && "hidden"
       }`}
       onClick={closeModal}
     >
       <div  //modal container
-        className=" bg-primary lg:rounded w-full h-full "
+        className=" bg-primary  w-full h-full md:w-[450px] md:my-[30px] md:rounded-[14px]  "
         onClick={handleModalContainerClick}
       >
         

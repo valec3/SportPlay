@@ -1,18 +1,56 @@
+import axios from 'axios';
+import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
+import Swal from "sweetalert2";
+
 
 const FormLogIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
+	const [submitOk, setSubmitOk] = useState(false)
 
 	const handleEyeSlash = () => {
 		setShowPass(!showPass);
 	};
-	const handleSubmit = () => {};
 	const IconClaseName = 'text-neutral absolute top-[25px] right-[20px]';
 
+	const submitForm = (values, {resetForm}) =>{
+		axios
+			.post('https://tournament-sport.onrender.com/api/auth/login',
+			values)
+			.then((res) => {
+				console.log(res);
+				setTimeout(() => {
+					setSubmitOk(false);
+					resetForm();
+				}, 1000);
+			})
+			.catch((er) =>{
+				console.log(er);
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "Hubo un error en su email o contraseña",
+					footer: '<a href="#">Por favor vuelve a intentarlo.</a>',
+				  })
+				  setSubmitOk(false);
+
+			})
+	}
+
 	return (
-		<form className='w-full h-full flex flex-col px-[30px]'>
+		<Formik
+			initialValues={{
+				email: '',
+				password: ''
+			}}
+			onSubmit={(values, {resetForm})=>{
+				submitForm(values, {resetForm})
+				setSubmitOk(true);			}}
+		>
+			{()=>(
+			<Form className='w-full h-full flex flex-col px-[30px]'>
 			<h1 className='text-[32px] font-Roboto font-medium text-base-100 py-2 text-left'>
 				¡Hola!
 			</h1>
@@ -20,28 +58,21 @@ const FormLogIn = ({ handleLogin }) => {
 				Inicia sesión para vivir la emoción de tus torneos favoritos{' '}
 			</p>
 
-			<input
+			<Field
 				className='bg-secondary h-[64px] w-full rounded-xl px-4 my-3 mx-auto'
-				type='Email'
-				id='userEmail'
-				name='userEmail'
+				type='email'
+				id='email'
+				name='email'
 				placeholder='Email'
-				// value={}
-				// onChange={}
-				// onKeyUp={}
 				required
 			/>
 			<div className='relative h-[64px] w-full my-3'>
-				<input
+				<Field
 					className='bg-secondary w-full h-full rounded-xl px-4  '
 					type={`${showPass ? 'text' : 'password'}`}
 					id='password'
 					name='password'
 					placeholder='Contraseña'
-					//     value={form.password}
-					//     onChange={handleChange}
-					//     onFocus={handleOnFocusPassword}
-					//     onBlur={handleOnBlurPassword}
 					required
 				/>
 				{showPass ? (
@@ -55,15 +86,17 @@ const FormLogIn = ({ handleLogin }) => {
 				* La contraseña debe tener entre 4 y 8 caracteres
 			</p>
 			<div className='px-[30px] my-10'>
-				<input
+			<div className={` ${submitOk?' w-[43px] h-[43px] m-auto rounded-full ':'w-full  text-base-100 text-[18px] font-SourceSansPro text-center font-medium rounded-2xl  cursor-pointer hover:scale-[102%] '} h-[43px] bg-accent flex justify-center items-center transition-all duration-1000`}>
+					{submitOk?<FaCheck className=' w-[30px] h-[30px] text-base-100'/>:<input
+					className='w-full h-full'
 					value='Ingresar'
-					className='bg-accent w-full h-[43px] text-base-100 text-[18px] font-SourceSansPro font-medium rounded-2xl  cursor-pointer hover:scale-[102%] mx-auto '
 					type='submit'
-					onClick={handleSubmit}
-				/>
+				/>}
+				</div>
+				
 			</div>
 
-			<p className='mx-auto mt-16 text-[16px] font-Roboto text-neutral'>
+			<p className='mx-auto my-28 text-[16px] font-Roboto text-neutral'>
 				¿Eres nuevo en SportPlay?{' '}
 				<span
 					className='text-success text-[16px] cursor-pointer'
@@ -72,7 +105,11 @@ const FormLogIn = ({ handleLogin }) => {
 					Regístrate
 				</span>
 			</p>
-		</form>
+		</Form>
+		)}
+			
+		</Formik>
+		
 	);
 };
 

@@ -1,13 +1,13 @@
-import Modals from "./components/formComponents/Modals";
+
 
 function App() {
 	return (
 		<>
-			<div className='bg-primary h-[100vh]'>
+			<div className='bg-primary h-full'>
 				{/* header */}
-				<main className='px-4 space-y-4 text-base-100'>
+				<main className='px-4   text-base-100'>
 					<div className=''>App sportPlay</div>
-					<Modals/>
+
 				</main>
 				{/* footer */}
 			</div>

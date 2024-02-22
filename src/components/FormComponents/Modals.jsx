@@ -1,12 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import ModalForm from "../../pages/registerForm/ModalForm";
-
 import FormLogIn from "./FormLogIn";
 import FormSignIn from "./FormSignIn";
-
-
-
 
 
 const Modals = () => {
@@ -22,15 +18,12 @@ const Modals = () => {
     setIsLogin(!isLogin);
   }
 
-
-
   return (
-    <div className="h-full ">
-        <button onClick={openModal}>open</button>
+    
       <ModalForm isOpenModal={isOpenModal} closeModal={closeModal}>
         {isLogin ? <FormSignIn handleLogin={handleLogin} /> : <FormLogIn handleLogin={handleLogin}/>}
       </ModalForm>
-    </div>
+    
   );
 };
 
