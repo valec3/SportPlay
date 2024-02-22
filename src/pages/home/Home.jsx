@@ -3,6 +3,7 @@ import Title2 from '../../components/common/Title2';
 import LastMatch from '../../components/homeComponents/LastMatch';
 import Carrousel from '../../components/homeComponents/Carrousel';
 
+
 function Home() {
 	return (
 		<div className='space-y-8'>
@@ -11,7 +12,7 @@ function Home() {
 
 			{/* carrousel section */}
 			<section>
-				<Carrousel></Carrousel>
+				<Carrousel/>
 			</section>
 
 			{/* section torneo abierto*/}
