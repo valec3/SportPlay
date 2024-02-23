@@ -11,11 +11,11 @@ function Home() {
 			</section>
 
 			{/* section torneo abierto*/}
-			<section className='border-b  border-[#545458] space-y-4 px-4 pb-8 '>
+			<section className='border-b  border-[#545458] space-y-4 px-[30px] pb-8 '>
 				<Title2 title='Torneos Abiertos' link='torneos'></Title2>
 			</section>
 			{/*section equipos de torneo */}
-			<section className='border-b  border-[#545458] space-y-4 px-4 pb-8'>
+			<section className='border-b  border-[#545458] space-y-4 px-[30px] pb-8'>
 				<Title2 title='Resultado de torneos' link='resultados'></Title2>
 				<div className='flex justify-center '>
 					<MyTable></MyTable>
@@ -27,7 +27,7 @@ function Home() {
 				<LastMatch />
 			</section>
 			{/* section equipos logos */}
-			<section className='space-y-4 px-4 pb-8'>
+			<section className='space-y-4 px-[30px] pb-8'>
 				<Title2 title='Equipos' link='equipos'></Title2>
 			</section>
 		</div>
