@@ -21,7 +21,7 @@ export default function Activity() {
 			<div className=' px-[30px]'>
 				<div className='w-full mt-[33px] bg-secondary px-5 flex items-center justify-between py-[13px] rounded-[14px]'>
 					<div className='flex items-center gap-[6px]'>
-						<img src='/images/cup.png' alt='Cup' />
+						<img src='images/cup.png' alt='Cup' />
 						<span className='text-xl font-semibold text-base-100 font-SourceSansPro'>
 							Torneo “A”
 						</span>
@@ -32,7 +32,7 @@ export default function Activity() {
 				</div>
 			</div>
 
-			<img className=' mt-[102px]' src='/images/divider.svg' alt='Divider' />
+			<img className=' mt-[102px]' src='images/divider.svg' alt='Divider' />
 
 			<div className='px-[30px] mt-[56.89px]'>
 				<h3 className=' font-Roboto text-base-100 font-medium text-[22px] leading-[24.53px] tracking-[0.263px]'>
