@@ -7,7 +7,7 @@ import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 function App() {
 	return (
 		<>
-			<div className='bg-primary  text-base-100 min-h-screen flex flex-col'>
+			<div className='bg-primary  text-base-100 min-h-screen flex flex-col space-y-4'>
 				{/* header */}
 
 				<main className=''>
