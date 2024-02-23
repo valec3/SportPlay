@@ -9,7 +9,7 @@ const Buttons = () => {
 		<div className='absolute bottom-12 left-14 px-2 transform -translate-x-1/4 flex flex-col space-y-8'>
 			<button
 				onClick={() => openLinkInNewTab('https://www.google.com')}
-				className='px-6 py-2 rounded-2xl drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] font-SourceSansPro text-primary bg-accent hover:bg-success transition duration-300 ease-in-out'
+				className='px-6 py-2 rounded-2xl drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] font-SourceSansPro font-semibold text-primary bg-accent hover:bg-success transition duration-300 ease-in-out'
 			>
 				Registrarse
 			</button>
