@@ -34,7 +34,7 @@ function Home() {
 			</section>
 			
 			{/* slider section */}
-			<section className='space-y-2 px-7 pb-8'>
+			<section className='space-y-2 px-7 pb-6'>
 				<Slider/>
 			</section>
 

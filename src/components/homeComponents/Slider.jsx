@@ -1,59 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-function Slider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const slides = [
-    { image: 'images/real-madrid (1).png' },
-    { image: 'images/real-madrid (2).png' },
-    { image: 'images/real-madrid (3).png' },
-    { image: 'images/real-madrid (4).png' },
-    { image: 'images/real-madrid (4).png' },
-    { image: 'images/real-madrid (1).png' },
-    { image: 'images/real-madrid (3).png' },
-    { image: 'images/real-madrid (2).png' },
-    { image: 'images/real-madrid (3).png' },
-    { image: 'images/real-madrid (4).png' },
-    { image: 'images/real-madrid (4).png' },
-    { image: 'images/real-madrid (1).png' },
-  ];
-
-  const repeatedSlides = [...slides, ...slides];
-
-  useEffect(() => {
-    const intervalId = setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 2000);
-
-    return () => clearTimeout(intervalId);
-  }, [currentIndex, slides.len]);
-
-  
-
+function AutoPlay() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
   return (
-    <div className='relative w-full h-auto flex justify-center items-center'>
-      <div className='overflow-hidden flex justify-center items-center'>
-        <div
-          className='flex transition-transform duration-1000 ease-in-out transform'
-          style={{
-            transform: `translateX(-${currentIndex * (100)}%)`,
-            transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-            width: `${repeatedSlides.length * (100)}%`,
-          }}
-        >
-          {repeatedSlides.map((slide, index) => (
-            <div key={index} className='flex-shrink-0 relative'>
-              <img
-                src={slide.image}
-                alt={`Slide ${currentIndex + 1}`}
-                className='object-cover object-center px-1.5'
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="slider-container">
+      <Slider {...settings} className='w-[90%] mx-auto'>
+      <div>
+				<img src='images\real-madrid (1).png' alt='slide1' />
+			</div>
+			<div>
+				<img src='images\real-madrid (2).png' alt='slide2' />
+			</div>
+			<div>
+				<img src='images\real-madrid (3).png' alt='slide3' />
+			</div>
+			<div>
+				<img src='images\real-madrid (4).png' alt='slide4' />
+			</div>
+			<div>
+				<img src='images\real-madrid (4).png' alt='slide5' />
+			</div>
+			<div>
+				<img src='images\real-madrid (3).png' alt='slide6' />
+			</div>
+			<div>
+				<img src='images\real-madrid (2).png' alt='slide7' />
+			</div>
+			<div>
+				<img src='images\real-madrid (1).png' alt='slide8' />
+			</div>
+      </Slider>
     </div>
   );
 }
 
-export default Slider;
+export default AutoPlay;
