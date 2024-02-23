@@ -10,7 +10,7 @@ export default {
 				'base-100': '#FFFCFC',
 				warning: '#CB2C2C',
 				accent: '#51A331',
-				success: '#2648D1',
+				success: '#246BFD',
 				neutral: '#C4C4C4',
 			},
 			fontFamily: {
@@ -19,5 +19,6 @@ export default {
 			},
 		},
 	},
-	plugins: [require("daisyui")],
+
+	plugins: [require('daisyui')],
 };

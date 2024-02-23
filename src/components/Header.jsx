@@ -53,10 +53,10 @@ const Navbar = () => {
 										<a>Inicio</a>
 									</li>
 									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
-										Resultados Torneos
+										Resultados 
 									</li>
 									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
-										Torneos Abiertos
+										Torneos 
 									</li>
 									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
 										Partidos
@@ -86,10 +86,10 @@ const Navbar = () => {
 					Inicio
 				</a>
 				<a href='#' className='hover:text-gray-400'>
-					Torneos Abiertos
+					Torneos 
 				</a>
 				<a href='#' className='hover:text-gray-400'>
-					Resultados Torneos
+					Resultados 
 				</a>
 				<a href='#' className='hover:text-gray-400'>
 					Partidos

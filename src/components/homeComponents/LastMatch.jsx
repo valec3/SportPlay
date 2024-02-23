@@ -1,7 +1,7 @@
 export default function LastMatch() {
 	return (
 		<>
-			<div className='w-full bg-secondary mt-[45px] rounded-[14px] text-center py-[28px] px-7'>
+			<div className='w-full bg-secondary mt-[45px] text-base-100 rounded-[14px] text-center py-[28px] px-7'>
 				<h2 className=' text-[32px] font-semibold font-Roboto md:text-[38px] md:leading-[54px]'>
 					Torneo “A”
 				</h2>
