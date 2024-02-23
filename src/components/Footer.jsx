@@ -16,8 +16,8 @@ export default function Footer() {
 					<FaInstagram className=' w-7 h-8 text-neutral' />
 				</a>
 			</div>
-			<div>
-				<img src='images/divider.svg' alt='Divider' />
+			<div className='bg-[#545458] w-full h-[0.5px]'>
+				
 			</div>
 			<p className=' font-Roboto leading-[19.2px] text-neutral'>
 				2024 Todos los Derechos Reservados © SportPlay

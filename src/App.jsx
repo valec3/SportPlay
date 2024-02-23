@@ -1,6 +1,7 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
-
+import Header from './components/Header';
 import Footer from './components/Footer';
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 
@@ -9,7 +10,7 @@ function App() {
 		<>
 			<div className='bg-primary  text-base-100 min-h-screen flex flex-col space-y-4'>
 				{/* header */}
-
+				<Header />
 				<main className=''>
 					<BrowserRouter>
 						<Routes>
@@ -18,7 +19,6 @@ function App() {
 						</Routes>
 					</BrowserRouter>
 				</main>
-				{/* footer */}
 				<Footer />
 			</div>
 		</>

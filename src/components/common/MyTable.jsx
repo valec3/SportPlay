@@ -18,7 +18,7 @@ export default function MyTable() {
 					<tr className=''>
 						<th className='p-2'>1</th>
 						<td className='flex flex-row space-x-2 p-2 pr-8'>
-							<img src='src/assets/images/atletico.svg' alt='' />
+							<img src='images/atletico.svg' alt='' />
 							<div>AtléticoMadrid</div>
 						</td>
 						<td className='p-2 border-b border-primary'>0</td>
@@ -30,7 +30,7 @@ export default function MyTable() {
 					<tr className=''>
 						<th className='p-2'>1</th>
 						<td className='flex flex-row space-x-2 p-2 pr-8'>
-							<img src='src/assets/images/atletico.svg' alt='' />
+							<img src='images/atletico.svg' alt='' />
 							<div>AtléticoMadrid</div>
 						</td>
 						<td className='p-2 border-b border-primary'>0</td>
