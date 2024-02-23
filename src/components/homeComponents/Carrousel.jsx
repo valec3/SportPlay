@@ -6,14 +6,14 @@ function Carrousel() {
 
 	const slides = [
 		{
-			image: './public/images/banner0.png',
+			image: 'images/banner0.png',
 			caption: `Simplifica
                 la gestion
                 deportiva con
                 SportPlay`,
 		},
 		{
-			image: './public/images/banner1.png',
+			image: 'images/banner1.png',
 			caption: `Inscribete
                 y juega.
                 La cancha
@@ -21,7 +21,7 @@ function Carrousel() {
 			color: '#181829',
 		},
 		{
-			image: './public/images/banner2.png',
+			image: 'images/banner2.png',
 			caption: `Desafia a
                 tus Amigos.
                 La Competencia
