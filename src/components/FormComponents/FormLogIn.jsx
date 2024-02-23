@@ -3,12 +3,19 @@ import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
+import { closeModal } from '../../redux/featuresSlice/modalSlice';
+import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
 
 
 const FormLogIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
 	const [submitOk, setSubmitOk] = useState(false)
+
+	const dispatch = useDispatch();
+    //const isOpenModal = useSelector((state) => state.isOpenModal.isOpenModal);
+    const isRegister = useSelector((state) => state.isRegister.isRegister);
 
 	const handleEyeSlash = () => {
 		setShowPass(!showPass);
@@ -24,6 +31,8 @@ const FormLogIn = ({ handleLogin }) => {
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
+					dispatch(initiaSesion())
+					dispatch(closeModal());
 				}, 1000);
 			})
 			.catch((er) =>{

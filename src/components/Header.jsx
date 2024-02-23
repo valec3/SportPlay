@@ -1,30 +1,15 @@
 import React, { useState } from 'react';
-import { FiMenu, FiUser, FiX } from 'react-icons/fi';
-
+import { FiMenu } from 'react-icons/fi';
 import IconUser from './componentHeader/IconUser';
-
-import { FaUserLarge } from 'react-icons/fa6';
-import { FaRegUser } from 'react-icons/fa';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { RxExit } from 'react-icons/rx';
-
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
 	const handleModalContainerClick = e => e.stopPropagation();
 
-	const toggleDropdown = () => {
-		setIsDropdownOpen(!isDropdownOpen);
-	};
-
-	const closeMenu = () => {
-		setIsOpen(false);
-	};
 
 	return (
 		<nav className='bg-primary text-white p-4 flex justify-between items-center sticky top-0 z-10 h-[90px]'>
@@ -48,20 +33,19 @@ const Navbar = () => {
 								className='absolute top-[90px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
-										{' '}
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
 										<a>Inicio</a>
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
 										Resultados 
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
 										Torneos 
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
 										Partidos
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
 										Equipo
 									</li>
 								</ul>
@@ -82,29 +66,24 @@ const Navbar = () => {
 
 			{/* Menú de navegación para pantallas grandes */}
 			<div className='hidden sm:flex space-x-4'>
-				<a href='#' className='hover:text-gray-400'>
+				<a href='#' className='hover:text-neutral/20'>
 					Inicio
 				</a>
-				<a href='#' className='hover:text-gray-400'>
+				<a href='#' className='hover:text-neutral/20'>
 					Torneos 
 				</a>
-				<a href='#' className='hover:text-gray-400'>
+				<a href='#' className='hover:text-neutral/20'>
 					Resultados 
 				</a>
-				<a href='#' className='hover:text-gray-400'>
+				<a href='#' className='hover:text-neutral/20'>
 					Partidos
 				</a>
-				<a href='#' className='hover:text-gray-400'>
+				<a href='#' className='hover:text-neutral/20'>
 					Equipo
 				</a>
 			</div>
-
-
 			{/* Icono de usuario y menú desplegable */}
-			<IconUser/>
-
-
-			
+			<IconUser/>			
 		</nav>
 	);
 };
