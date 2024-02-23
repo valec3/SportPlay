@@ -68,10 +68,29 @@ function CrearTorneo() {
 						</div>
 					</div>
 				</div>
-				<button className='bg-accent btn btn-sm border-accent text-base-100 '>
+				<button
+					className='bg-accent btn btn-sm border-accent text-base-100 '
+					onClick={() =>
+						document.getElementById('modal-crear-torneo').showModal()
+					}
+				>
 					Crear torneo
 				</button>
 			</form>
+			{/* Open the modal using document.getElementById('ID').showModal() method */}
+
+			<dialog id='modal-crear-torneo' className='modal px-6'>
+				<div className='modal-box flex flex-col items-center'>
+					<img src='/images/trophy.svg' alt='es una imagen de trofeo' />
+					<h3 className='text-accent text-[2rem] font-bold'>Fantastico!</h3>
+					<p className='text-secondary font-semibold text-[24px] text-center'>
+						Tu torneo ha sido creado con éxito
+					</p>
+				</div>
+				<form method='dialog' className='modal-backdrop'>
+					<button>close</button>
+				</form>
+			</dialog>
 		</div>
 	);
 }
