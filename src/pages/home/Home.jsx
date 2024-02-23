@@ -2,6 +2,7 @@ import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
 import LastMatch from '../../components/homeComponents/LastMatch';
 import Carrousel from '../../components/homeComponents/Carrousel';
+import Slider from '../../components/homeComponents/Slider';
 
 
 function Home() {
@@ -31,10 +32,12 @@ function Home() {
 				<Title2 title='Último Partido' link='partidos'></Title2>
 				<LastMatch />
 			</section>
-			{/* section equipos logos */}
-			<section className='space-y-4 px-4 pb-8'>
-				<Title2 title='Equipos' link='equipos'></Title2>
+			
+			{/* slider section */}
+			<section className='space-y-2 px-7 pb-8'>
+				<Slider/>
 			</section>
+
 		</div>
 	);
 }
