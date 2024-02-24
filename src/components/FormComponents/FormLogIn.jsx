@@ -31,7 +31,7 @@ const FormLogIn = ({ handleLogin }) => {
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
-					dispatch(initiaSesion())
+					dispatch(initiaSesion());
 					dispatch(closeModal());
 				}, 1000);
 			})

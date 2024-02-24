@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//const [first, setfirst] = useState(initialState)
+
 const initialState = {
     isRegister: false,
 };

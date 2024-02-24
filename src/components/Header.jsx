@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import IconUser from './componentHeader/IconUser';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -34,53 +35,48 @@ const Navbar = () => {
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
-										<a>Inicio</a>
+										<Link to="/" >Inicio</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-										Resultados 
+										 <Link to='/TorneosAbiertos'>Torneos</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-										Torneos 
+									<Link to='/ResultadosTorneos'>Resultados</Link> 
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-										Partidos
+									<Link to='/Partidos'>Partidos</Link> 
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
-										Equipo
+									<Link to='/Equipos'>Equipos</Link> 
 									</li>
 								</ul>
 							</div>
 						</div>
 					)}
 				</div>
-
 				{/* Logo */}
 				<div className='flex items-center justify-center sm:justify-start w-64'>
+				<Link to="/" >
 					<img
 						src='/images/logo-hori-2.png'
 						alt='Logo'
 						className='h-14 sm:h-16 ml-10 '
 					/>
+				</Link>					
 				</div>
 			</div>
-
 			{/* Menú de navegación para pantallas grandes */}
 			<div className='hidden sm:flex space-x-4'>
-				<a href='#' className='hover:text-neutral/20'>
-					Inicio
-				</a>
-				<a href='#' className='hover:text-neutral/20'>
-					Torneos 
-				</a>
-				<a href='#' className='hover:text-neutral/20'>
-					Resultados 
-				</a>
-				<a href='#' className='hover:text-neutral/20'>
-					Partidos
-				</a>
-				<a href='#' className='hover:text-neutral/20'>
-					Equipo
-				</a>
+				<Link to="/" >Inicio</Link>
+
+				<Link to='/TorneosAbiertos'>Torneos</Link>
+
+				<Link to='/ResultadosTorneos'>Resultados</Link> 
+
+				<Link to='/Partidos'>Partidos</Link> 
+
+				<Link to='/Equipos'>Equipos</Link> 
+
 			</div>
 			{/* Icono de usuario y menú desplegable */}
 			<IconUser/>			

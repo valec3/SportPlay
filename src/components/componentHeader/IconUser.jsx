@@ -3,7 +3,6 @@ import { FiUser } from 'react-icons/fi';
 import { FaUserLarge } from 'react-icons/fa6';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { RxExit } from 'react-icons/rx';
-import Modals from '../FormComponents/Modals';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
@@ -13,7 +12,6 @@ const IconUser = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const dispatch = useDispatch();
-    const isOpenModal = useSelector((state) => state.isOpenModal.isOpenModal);
     const isRegister = useSelector((state) => state.isRegister.isRegister);
 
     const toggleDropdown = () => {
@@ -75,7 +73,6 @@ const IconUser = () => {
                 </div>
                 
             )}
-            {isOpenModal&&<Modals/>}
         </>
   )
 }
