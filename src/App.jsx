@@ -8,6 +8,7 @@ import DetalleTorneoAbierto from './pages/torneosAbiertos/detalleTorneoAbierto/D
 import ResultadosTorneos from './pages/resultadosTorneos/ResultadosTorneos';
 import Partidos from './pages/partidos/Partidos';
 import Equipos from './pages/equipos/Equipos';
+import Perfil from './pages/perfil/Perfil';
 
 function App() {
 	return (
@@ -23,6 +24,8 @@ function App() {
 								<Route path='/DetalleTorneoAbierto' element={<DetalleTorneoAbierto/>} />
 								<Route path='/Partidos' element={<Partidos/>} />
 								<Route path='/Equipos' element={<Equipos/>} />
+								<Route path='/Perfil' element={<Perfil/>} />
+
 							</Routes>					
 					</main>				
 					<Footer />

@@ -6,13 +6,14 @@ import { RxExit } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
+import { Link } from 'react-router-dom';
 
 const IconUser = () => {
-
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const dispatch = useDispatch();
     const isRegister = useSelector((state) => state.isRegister.isRegister);
+    const userData = useSelector((state) => state.userData.userData);
 
     const toggleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -50,7 +51,7 @@ const IconUser = () => {
             </div>
             <hr className='border-[#545458]'/>
                         <li className='pl-[15px] h-[47px] flex items-center hover:bg-neutral/20'>
-                        <FiUser className='h-[20px] w-[20px] mr-[13px]' /><a href='#'>Perfil</a>
+                        <FiUser className='h-[20px] w-[20px] mr-[13px]' /><Link to={'/Perfil'}>Perfil</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Actividad</a>

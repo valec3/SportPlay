@@ -7,7 +7,8 @@ const initialState = {
         id: null,
         first_name:'',
         last_name:'',
-        activity: 0,
+        dni: 0,
+        email:'',
     },
 };
 
@@ -15,12 +16,9 @@ export const userSlice = createSlice({
     name: "userData",
     initialState,
     reducers: {
-        // changeData: ( state ) => {
-        //     state.userData = {
-                
-        // activity: 2,
-        //     }
-        //  },
+        changeData: ( state , action ) => {
+            state.userData = action.payload
+         },
     },
 });
 
