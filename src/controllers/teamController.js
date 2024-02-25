@@ -4,12 +4,18 @@ const teamController = {
     createTeam: async (req, res) => {
         try {
             const { creator_id, name, logo_url } = req.body;
-            const team = await Team.createTeam({
-                creator_id,
-                name,
-                logo_url,
+            if (!creator_id || !name || !logo_url) {
+                return res.status(400).json({
+                    message:
+                        'Faltan campos obligatorios: creator_id, name, logo_url',
+                });
+            }
+            const newTeam = { creator_id, name, logo_url };
+            const createdTeam = await Team.createTeam(newTeam);
+            res.status(201).json({
+                message: 'Equipo creado exitosamente',
+                team: createdTeam,
             });
-            res.status(201).json(team);
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error al crear el equipo' });
@@ -19,7 +25,7 @@ const teamController = {
     //Obteniendo todos los teams
     getAllTeams: async (req, res) => {
         try {
-            const teams = await Team.findAll();
+            const teams = await Team.getAllTeams();
             res.status(200).json(teams);
         } catch (error) {
             console.error(error);
@@ -34,7 +40,7 @@ const teamController = {
     getTeamById: async (req, res) => {
         try {
             const { id } = req.params;
-            const team = await Team.findByPk(id);
+            const team = await Team.getTeamById(id);
             if (!team) {
                 res.status(404).json({ message: 'Equipo no encontrado' });
             } else {
@@ -50,18 +56,21 @@ const teamController = {
 
     updateTeamById: async (req, res) => {
         try {
-            const { name, logo_url } = req.body;
-            const team = await Team.findByPk(req.params.id);
-            if (!team) {
-                res.status(404).json({ message: 'Equipo no encontrado' });
+            const { id } = req.params;
+            const updatedTeam = req.body;
+            const updateSuccess = await Team.updateTeamById(id, updatedTeam);
+            if (updateSuccess) {
+                res.status(200).json({
+                    message: 'Equipo actualizado correctamente',
+                });
+            } else {
+                res.status(400).json({
+                    message: 'No se pudo actualizar el equipo',
+                });
             }
-            team.name = name;
-            team.logo_url = logo_url;
-            await team.save();
-            res.status(200).json(team);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error al actualizar el equipo.' });
+            res.status(500).json({ message: 'Error al actualizar el equipo' });
         }
     },
 
@@ -69,13 +78,15 @@ const teamController = {
 
     deleteTeambyId: async (req, res) => {
         try {
-            const team = await Team.findByPk(req.params.id);
-            if (!team) {
-                res.status(404).json({ message: 'Equipo no encontrado' });
-            } else {
-                await team.destroy();
+            const { id } = req.params;
+            const deleteSuccess = await Team.deleteTeamById(id);
+            if (!deleteSuccess) {
                 res.status(200).json({
                     message: 'Equipo eliminado correctamente',
+                });
+            } else {
+                res.status(400).json({
+                    message: 'Error al eliminar el equipo',
                 });
             }
         } catch (error) {
