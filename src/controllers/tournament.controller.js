@@ -15,7 +15,7 @@ export const createTournament = async (req, res) => {
     }
 };
 
-export const getAllTournaments = async (res) => {
+export const getAllTournaments = async (req, res) => {
     try {
         const tournamentsData = await getAllTournamentsService();
         const tournaments = tournamentsData[0]
@@ -25,6 +25,7 @@ export const getAllTournaments = async (res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
+
 
 export const getTournamentsByUserId = async (req, res) => {
     try {
