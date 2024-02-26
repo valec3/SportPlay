@@ -1,11 +1,11 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
-    dni VARCHAR(10) NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
+    dni VARCHAR(10) NOT NULL UNIQUE, 
     last_name VARCHAR(100) NOT NULL
 );
+
 
 
 CREATE TABLE teams(
