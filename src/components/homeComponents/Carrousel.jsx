@@ -45,7 +45,7 @@ function Carrousel() {
 					style={{ transform: `translateX(-${currentIndex * 100}%)` }}
 				>
 					{slides.map((slide, index) => (
-						<div key={index} className='w-full flex-shrink-0 relative'>
+						<div key={index} className='w-full h-[423px] flex-shrink-0 relative'>
 							<img
 								src={slide.image}
 								alt={`Slide ${index + 1}`}

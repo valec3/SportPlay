@@ -1,7 +1,7 @@
 export default function MyTable() {
 	return (
-		<div className='p-4 pt-0 w-fit bg-secondary rounded-3xl mb-4'>
-			<table className='w-ful  '>
+		<div className='p-1 pt-0 w-full bg-secondary rounded-3xl mb-4'>
+			<table className='w-full  '>
 				{/* head */}
 				<thead className=''>
 					<tr className='text-base-100 text-left  '>
