@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
 import { closeModal } from '../../redux/featuresSlice/modalSlice';
+import { changeData } from '../../redux/featuresSlice/userSlice';
 
 const FormSignIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
@@ -29,11 +30,13 @@ const FormSignIn = ({ handleLogin }) => {
 			.post('https://tournament-sport.onrender.com/api/auth/register',
 			values)
 			.then((res) => {
-				console.log(res.data);
+				//console.log(res.data);
+				
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
 					dispatch(initiaSesion())
+					dispatch(changeData(values))
 					dispatch(closeModal());
 				}, 1000);
 			})

@@ -4,9 +4,10 @@ import { FaUserLarge } from 'react-icons/fa6';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { RxExit } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../redux/featuresSlice/modalSlice';
+import { closeModal, openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
 import { Link } from 'react-router-dom';
+import { changeData } from '../../redux/featuresSlice/userSlice';
 
 const IconUser = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -23,6 +24,20 @@ const IconUser = () => {
     const handleOpenModal = () => {
 		dispatch(openModal());
 	};
+    const handleCloseSesion = () => {
+        let initialState = {
+            userData: {
+                id: null,
+                first_name:'',
+                last_name:'',
+                dni: 0,
+                email:'',
+            },
+        };
+        dispatch(changeData(initialState))
+        dispatch(closeModal());
+		dispatch(closeSesion());
+	};
     
 
     
@@ -31,7 +46,7 @@ const IconUser = () => {
 			<>
             <button
                 onClick={isRegister?toggleDropdown:handleOpenModal}
-                className='w-[35px] flex'
+                className={`${isRegister?'w-[35px] flex':''} `}
             >                
                 <FaUserLarge
 						className={`${isRegister?'text-accent':'text-base-100'} `}
@@ -47,11 +62,11 @@ const IconUser = () => {
                    <div className='absolute right-0 top-[90px]  w-[50%] bg-secondary  shadow-lg'
                     onClick={handleModalContainerClick}>
                     <ul className='h-[376px]'>
-                    <div className=' w-full  h-[47px]'  >   
+                    <div className=' w-full  h-[47px] flex justify-start items-center'  ><FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' /><h3>¡Hola, {userData.first_name}!</h3>  
             </div>
             <hr className='border-[#545458]'/>
-                        <li className='pl-[15px] h-[47px] flex items-center hover:bg-neutral/20'>
-                        <FiUser className='h-[20px] w-[20px] mr-[13px]' /><Link to={'/Perfil'}>Perfil</Link>
+                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
+                        <Link to={'/Perfil'}>Perfil</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Actividad</a>
@@ -67,7 +82,7 @@ const IconUser = () => {
                         </li>      
                     </ul>
                     <hr className='border-[#545458]'/>
-                    <button onClick={()=>dispatch(closeSesion())} className='text-warning pl-[25px] h-[47px] flex items-center w-full'>
+                    <button onClick={handleCloseSesion} className='text-warning pl-[25px] h-[47px] flex items-center w-full'>
                            <RxExit className='w-[15px] h-[15px] mr-[7px]' /> <div >Cerrar Sesión</div>
                         </button>
                 </div> 

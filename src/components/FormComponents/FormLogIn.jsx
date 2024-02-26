@@ -27,7 +27,7 @@ const FormLogIn = ({ handleLogin }) => {
 			.post('https://tournament-sport.onrender.com/api/auth/login',
 			values)
 			.then((res) => {
-				console.log(res.data.data);
+				//console.log(res.data.data);
 				dispatch(changeData(res.data.data))
 				setTimeout(() => {
 					setSubmitOk(false);
