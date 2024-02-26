@@ -1,0 +1,129 @@
+{
+    "paths": {
+        "/api/tournament/create-tournament": {
+            "post": {
+                "tags": [
+                    "tournaments"
+                ],
+                "summary": "Create a new tournament",
+                "responses": {
+                    "200": {
+                        "description": "Tournament created successfully"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "logo": {
+                                        "type": "string"
+                                    },
+                                    "creator_id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "players_count": {
+                                        "type": "string"
+                                    },
+                                    "teams_count": {
+                                        "type": "string"
+                                    },
+                                    "type_tournament": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tournament/all-tournaments": {
+            "get": {
+                "tags": [
+                    "tournaments"
+                ],
+                "summary": "Get all tournaments",
+                "operationId": "getAllTournaments",
+                "responses": {
+                    "200": {
+                        "description": "sucessfull operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/tournaments"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/tournament/my-tournaments": {
+            "get": {
+                "tags": [
+                    "tournaments"
+                ],
+                "summary": "Get all tournaments by user",
+                "operationId": "getTournamentsByUser",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/tournaments"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username id supplied"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "tournaments"
+                ],
+                "summary": "Close a tournament",
+                "operationId": "closeATournament",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/tournaments"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username id supplied"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        }
+    }
+}
