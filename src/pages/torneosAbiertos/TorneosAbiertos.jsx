@@ -1,18 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import CardTorneosAbiertos from '../../components/common/CardTorneosAbiertos';
 
 const TorneosAbiertos = () => {
-	const navigate = useNavigate();
 	return (
-		<div className='bg-primary h-96 w-full px-[30px]'>
+		<div className='bg-primary h-96 w-full px-8'>
 			<div className='w-full'>
-				<h1 className=' text-3xl'>Torneos Abiertos</h1>
-				<button
-                  onClick={() => {
-                    navigate("/DetalleTorneoAbierto");
-                  }}
-                  className="py-3 px-2 mt-5 text-base-100 transition-colors bg-secondary rounded-sm hover:bg-[#262525]"
-                >Detalle del Torneo (provisorio)</button>
+				<h1 className='font-roboto font-bold text-2xl '>Torneos Abiertos</h1>
+
+				<div className='mt-6'>
+					<CardTorneosAbiertos />
+				</div>
 			</div>
 		</div>
 	);
