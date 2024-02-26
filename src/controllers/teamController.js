@@ -80,7 +80,7 @@ const teamController = {
         try {
             const { id } = req.params;
             const deleteSuccess = await Team.deleteTeamById(id);
-            if (!deleteSuccess) {
+            if (deleteSuccess) {
                 res.status(200).json({
                     message: 'Equipo eliminado correctamente',
                 });
