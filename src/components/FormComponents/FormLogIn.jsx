@@ -3,12 +3,19 @@ import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
+import { closeModal } from '../../redux/featuresSlice/modalSlice';
+import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
+import { changeData } from '../../redux/featuresSlice/userSlice';
 
 
 const FormLogIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
 	const [submitOk, setSubmitOk] = useState(false)
+
+	const dispatch = useDispatch();
+    const isRegister = useSelector((state) => state.isRegister.isRegister);
 
 	const handleEyeSlash = () => {
 		setShowPass(!showPass);
@@ -20,10 +27,13 @@ const FormLogIn = ({ handleLogin }) => {
 			.post('https://tournament-sport.onrender.com/api/auth/login',
 			values)
 			.then((res) => {
-				console.log(res);
+				//console.log(res.data.data);
+				dispatch(changeData(res.data.data))
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
+					dispatch(initiaSesion());
+					dispatch(closeModal());
 				}, 1000);
 			})
 			.catch((er) =>{

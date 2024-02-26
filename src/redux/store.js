@@ -1,9 +1,13 @@
 
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
+import registerReducer from './featuresSlice/registerSlice';
+import modalReducer from './featuresSlice/modalSlice';
+import userReducer from './featuresSlice/userSlice';
 
 export const store = configureStore({
     reducer: {
-        userRegister: userReducer,
+        isRegister: registerReducer,
+        isOpenModal: modalReducer,
+        userData: userReducer,
     },
 })

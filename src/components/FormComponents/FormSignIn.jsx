@@ -3,11 +3,17 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
+import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
+import { closeModal } from '../../redux/featuresSlice/modalSlice';
+import { changeData } from '../../redux/featuresSlice/userSlice';
 
 const FormSignIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
-	const [submitOk, setSubmitOk] = useState(false)
+	const [submitOk, setSubmitOk] = useState(false);
+
+	const dispatch = useDispatch();
 	
 	const handleEyeSlash = () => {
 		setShowPass(!showPass);
@@ -24,10 +30,14 @@ const FormSignIn = ({ handleLogin }) => {
 			.post('https://tournament-sport.onrender.com/api/auth/register',
 			values)
 			.then((res) => {
-				console.log(res.data);
+				//console.log(res.data);
+				
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
+					dispatch(initiaSesion())
+					dispatch(changeData(values))
+					dispatch(closeModal());
 				}, 1000);
 			})
 			.catch((er) =>{
@@ -110,8 +120,7 @@ const FormSignIn = ({ handleLogin }) => {
 			/>
 			<ErrorMessage name='first_name' component={()=>(
 				<div className='text-[12px] text-warning font-Roboto mx-auto'>{errors.first_name}</div>
-			)}/>
-	
+			)}/>	
 			<Field
 				className='bg-secondary h-[64px] w-full rounded-xl px-4 my-3'
 				type='text'
@@ -171,11 +180,8 @@ const FormSignIn = ({ handleLogin }) => {
 					value='Registrarme'
 					type='submit'
 				/>}
-				</div>
-			
-				
+				</div>			
 			</div>
-
 			<div className='mx-auto my-16'>
 				<p className='text-[16px] font-Roboto text-neutral'>
 					¿Ya tienes cuenta en SportPlay?{' '}
@@ -190,8 +196,7 @@ const FormSignIn = ({ handleLogin }) => {
 		</Form>
 			)}
 			
-		</Formik>
-		
+		</Formik>		
 	);
 };
 
