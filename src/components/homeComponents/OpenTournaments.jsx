@@ -35,42 +35,65 @@ const OpenTournaments = () => {
         },
     ];
 
-    // Estado para almacenar el número de tarjetas a mostrar
-    const [numCardsToShow, setNumCardsToShow] = useState(2); // Por defecto, mostrar solo 2 tarjetas en pantallas pequeñas
+    const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
+    const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
 
-    // Función para determinar el número de tarjetas a mostrar según el tamaño de la pantalla
     const updateNumCardsToShow = () => {
         if (window.innerWidth < 640) {
-            setNumCardsToShow(2); // Mostrar solo 2 tarjetas en pantallas pequeñas (menos de 640px de ancho)
+            setNumCardsToShow(2);
         } else if (window.innerWidth < 1024) {
-            setNumCardsToShow(3); // Mostrar 3 tarjetas en pantallas medianas (entre 640px y 1024px de ancho)
+            setNumCardsToShow(3);
         } else {
-            setNumCardsToShow(torneos.length); // Mostrar todas las tarjetas en pantallas grandes (más de 1024px de ancho)
+            setNumCardsToShow(4);
         }
     };
 
-    // Efecto secundario para actualizar el número de tarjetas a mostrar al cambiar el tamaño de la ventana
     useEffect(() => {
         updateNumCardsToShow();
 
-        // Agregar un listener para el evento resize de la ventana
         window.addEventListener('resize', updateNumCardsToShow);
 
-        // Limpiar el listener en la limpieza del efecto
         return () => {
             window.removeEventListener('resize', updateNumCardsToShow);
         };
     }, []);
 
-    // Filtrar las tarjetas para mostrar solo el número deseado
-    const torneosFiltrados = torneos.slice(0, numCardsToShow);
+    const handlePrevClick = () => {
+        setStartIndex(Math.max(startIndex - 1, 0));
+    };
+
+    const handleNextClick = () => {
+        setStartIndex(Math.min(startIndex + 1, torneos.length - numCardsToShow));
+    };
+
+    const torneosToShow = torneos.slice(startIndex, startIndex + numCardsToShow);
 
     return (
         <div className='container mx-auto'>
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4'>
-                {torneosFiltrados.map(torneo => (
-                    <Cards key={torneo.nombre} {...torneo} />
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4 relative -mx-2'>
+                {torneosToShow.map((torneo, index) => (
+                    <Cards key={index} {...torneo} />
                 ))}
+                {startIndex > 0 && (
+                    <button
+                        className='absolute top-1/2 transform -translate-y-1/2 left-0 bg-white p-2 rounded'
+                        onClick={handlePrevClick}
+                    >
+                        <img src='/public/icons/Vector.png' alt='Previous' />
+                    </button>
+                )}
+                {startIndex + numCardsToShow < torneos.length && (
+                    <button
+                        className='absolute top-1/2 transform -translate-y-1/2 right-0 bg-white p-2 rounded'
+                        onClick={handleNextClick}
+                    >
+                        <img
+                            className='text-base-100'
+                            src='/public/icons/Vector derecha.png'
+                            alt='Next'
+                        />
+                    </button>
+                )}
             </div>
         </div>
     );
