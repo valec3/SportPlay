@@ -2,6 +2,7 @@ import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
 import LastMatch from '../../components/homeComponents/LastMatch';
 import Carrousel from '../../components/homeComponents/Carrousel';
+import OpenTournaments from '../../components/homeComponents/OpenTournaments';
 
 function Home() {
 	return (
@@ -13,6 +14,7 @@ function Home() {
 			{/* section torneo abierto*/}
 			<section className='border-b  border-[#545458] space-y-4 px-[30px] pb-8 '>
 				<Title2 title='Torneos Abiertos' link='torneos'></Title2>
+				<OpenTournaments />
 			</section>
 			{/*section equipos de torneo */}
 			<section className='border-b  border-[#545458] space-y-4 px-[30px] pb-8'>
