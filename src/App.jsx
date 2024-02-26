@@ -1,12 +1,22 @@
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 function App() {
 	return (
 		<>
-			<div className='bg-primary h-[100vh]'>
-				{/* header */}
-				<main className='px-4 space-y-4 text-base-100'>
-					<div className=''>App sportPlay, hola desde deploy 2</div>
+			<div className='bg-primary text-base-100 min-h-screen flex flex-col'>
+				<Header />
+				<main className=''>
+					<BrowserRouter>
+						<Routes>
+							<Route path='/' element={<Home />} />
+						</Routes>
+					</BrowserRouter>
 				</main>
-				{/* footer */}
+				<Footer />
 			</div>
 		</>
 	);
