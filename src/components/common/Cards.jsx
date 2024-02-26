@@ -9,7 +9,7 @@ const Cards = ({ nombre, vacantes, fecha, equipo }) => {
 						src='/public/icons/trophy.png'
 						alt='Trophy icon'
 						className='w-6 h-6'
-					/>
+					/>  
 				</div>
 			</div>
 			<div>
