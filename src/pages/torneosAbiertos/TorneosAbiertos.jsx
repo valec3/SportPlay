@@ -1,21 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import CardTorneosAbiertos from '../../components/common/CardTorneosAbiertos';
+import { useSelector } from 'react-redux';
 
 const TorneosAbiertos = () => {
-	const navigate = useNavigate();
-	return (
-		<div className='bg-primary h-96 w-full px-[30px]'>
-			<div className='w-full'>
-				<h1 className=' text-3xl'>Torneos Abiertos</h1>
-				<button
-                  onClick={() => {
-                    navigate("/DetalleTorneoAbierto");
-                  }}
-                  className="py-3 px-2 mt-5 text-base-100 transition-colors bg-secondary rounded-sm hover:bg-[#262525]"
-                >Detalle del Torneo (provisorio)</button>
-			</div>
-		</div>
-	);
+    const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+    const torneosToShow = allTournaments.slice(0, 10);
+    return (
+        <div className='bg-primary h-full w-full px-8 py-8'>
+            <div className='w-full max-w-screen-xl mx-auto'>
+                <h1 className='font-roboto font-bold text-2xl text-center'>Torneos Abiertos</h1>
+
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+                    {torneosToShow.map((torneo, index) => (
+                    <CardTorneosAbiertos key={index} {...torneo} />
+                ))}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default TorneosAbiertos;
