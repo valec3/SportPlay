@@ -36,7 +36,7 @@ paths:
                 - players
             summary: List all players
             parameters:
-                - in: query
+                - in: path
                   name: team_id
                   description: Filter by team id
                   required: false

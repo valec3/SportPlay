@@ -39,6 +39,7 @@ export const createPlayerService = async (req, res) => {
 
 export const getPlayersByTeamService = async (req, res) => {
     const { team_id } = req.params;
+    console.log(team_id);
     const [players] = await pool.query(
         'SELECT * FROM players WHERE team_id = ?',
         [team_id],
@@ -54,7 +55,9 @@ export const deletePlayerService = async (req, res) => {
     const [response] = await pool.query('DELETE FROM players WHERE dni = ?', [
         dni,
     ]);
+    console.log(response);
     if (!response) throw new Error('Internal server error');
+    if (response.affectedRows < 1) throw new Error('Player not found');
     return {
         message: 'Player deleted successfully',
     };
