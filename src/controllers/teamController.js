@@ -1,16 +1,29 @@
 import Team from '../models/team.js';
+import { uploadImage } from '../lib/cloudinary.js';
+import fs from 'fs-extra';
 
 const teamController = {
     createTeam: async (req, res) => {
         try {
-            const { creator_id, name, logo_url } = req.body;
+            const { creator_id, name } = req.body;
+            const logo_url = req.files?.logo_url;
+
             if (!creator_id || !name || !logo_url) {
                 return res.status(400).json({
                     message:
                         'Faltan campos obligatorios: creator_id, name, logo_url',
                 });
             }
-            const newTeam = { creator_id, name, logo_url };
+
+            let logoUrl = null;
+            if (logo_url) {
+                const result = await uploadImage(logo_url.tempFilePath); // Sube la imagen a Cloudinary
+                logoUrl = result.secure_url; // Obtiene la URL segura de la imagen
+
+                await fs.unlink(logo_url.tempFilePath); // Elimina el archivo temporal del servidor
+            }
+
+            const newTeam = { creator_id, name, logo_url: logoUrl };
             const createdTeam = await Team.createTeam(newTeam);
             res.status(201).json({
                 message: 'Equipo creado exitosamente',
