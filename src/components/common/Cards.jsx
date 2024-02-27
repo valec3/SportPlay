@@ -6,7 +6,7 @@ const Cards = ({ name, players_count, teams_count, logo, finished}) => {
 			<div className='flex justify-center items-center relative'>
 				<div className='bg-neutral rounded-full w-12 h-12 flex justify-center items-center absolute top-[50%] translate-y-[-50%]'>
 					<img
-						src={logo===(null||'')?'/public/icons/trophy.png':logo}
+						src={logo===(null||'')?'public/icons/trophy.png':logo}
 						alt='Trophy icon'
 						className='w-6 h-6'
 					/>  
@@ -30,12 +30,12 @@ const Cards = ({ name, players_count, teams_count, logo, finished}) => {
 				</a>
 				<a className='flex items-center' href='#'>
 					<img
-						src='/public/icons/exclamation-circle.png'
+						src='/icons/exclamation-circle.png'
 						alt='Exclamation circle icon'
 					/>
 				</a>
 				<a className='flex items-center' href='#'>
-					<img src='/public/icons/Group.png' alt='Group icon' />
+					<img src='icons/Group.png' alt='Group icon' />
 				</a>
 			</div>
 		</div>
