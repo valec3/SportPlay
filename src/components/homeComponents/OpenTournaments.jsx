@@ -65,7 +65,7 @@ const OpenTournaments = () => {
                         className='absolute top-1/2 transform -translate-y-1/2 left-0 bg-white p-2 rounded'
                         onClick={handlePrevClick}
                     >
-                        <img src='public/icons/Vector.png' alt='Previous' />
+                        <img src='icons/Vector.png' alt='Previous' />
                     </button>
                 )}
                 {startIndex + numCardsToShow < allTournaments.length && (
@@ -75,7 +75,7 @@ const OpenTournaments = () => {
                     >
                         <img
                             className='text-base-100'
-                            src='public/icons/Vector derecha.png'
+                            src='icons/Vector derecha.png'
                             alt='Next'
                         />
                     </button>

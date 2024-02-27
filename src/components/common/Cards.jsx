@@ -6,32 +6,32 @@ const Cards = ({ name, players_count, teams_count, logo, finished}) => {
 			<div className='flex justify-center items-center relative'>
 				<div className='bg-neutral rounded-full w-12 h-12 flex justify-center items-center absolute top-[50%] translate-y-[-50%]'>
 					<img
-						src={logo===(null||'')?'public/icons/trophy.png':logo}
-						alt='Trophy icon'
+						src={logo==null||logo==''?'icons/trophy.png':logo}
+						alt='Trophy'
 						className='w-6 h-6'
 					/>  
 				</div>
 			</div>
 			<div>
-				<h1 className='text-primary text-2xl font-bold mt-4'>{name}</h1>
+				<h1 className='text-primary text-2xl font-semibold mt-4'>{name}</h1>
 			</div>
 			<div className='mt-3'>
 				<div className='flex-1'>
-					<p className='text-primary font-bold mb-1.5'>Equipo de {teams_count}</p>
-					<p className='text-primary font-bold mb-1.5'>{finished==0?'Proximo':'Pasado'}</p>
+					<p className='text-primary font-semibold mb-1.5'>Equipo de {teams_count}</p>
+					<p className='text-primary font-semibold mb-1.5'>{finished==0?'Proximo':'Pasado'}</p>
 				</div>
-				<div className='text-warning font-bold'>
+				<div className='text-warning font-semibold'>
 					<p>Vacantes: {teams_count}</p>
 				</div>
 			</div>
 			<div className='flex justify-between items-center w-full h-[34px]  bg-secondary mt-4 px-6'>
 				<a className='flex items-center  ' href='#'>
-					<img src='/public/icons/plus-circle.png' alt='Plus circle icon' />
+					<img src='icons/plus-circle.png' alt='Plus' />
 				</a>
 				<a className='flex items-center' href='#'>
 					<img
-						src='/icons/exclamation-circle.png'
-						alt='Exclamation circle icon'
+						src='icons/exclamation-circle.png'
+						alt='Exclamation'
 					/>
 				</a>
 				<a className='flex items-center' href='#'>
