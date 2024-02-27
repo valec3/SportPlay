@@ -23,3 +23,12 @@ CREATE TABLE player_team(
     FOREIGN KEY (team_id) REFERENCES teams(id)
 )
 
+CREATE TABLE players(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    camiseta INT,
+    dni VARCHAR(10) NOT NULL UNIQUE,
+    team_id BIGINT UNSIGNED,
+    FOREIGN KEY (team_id) REFERENCES teams(id)
+)

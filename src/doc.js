@@ -26,7 +26,11 @@ const swaggerOptions = {
         tags: [
             { name: 'user', description: 'Operations about user' },
             { name: 'teams', description: 'Everything about your Pets' },
-            { name: 'tournaments', description: 'Operations about tournaments', },
+            {
+                name: 'tournaments',
+                description: 'Operations about tournaments',
+            },
+            { name: 'players', description: 'Operations about players' },
         ],
     },
 

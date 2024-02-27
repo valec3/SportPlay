@@ -4,8 +4,8 @@ import {
     deletePlayer,
     updatePlayer,
     getPlayersByTeam,
-} from '../controllers/player.controller';
-import { validatorJwt } from '../middlewares/validatorJwt';
+} from '../controllers/player.controller.js';
+import { validatorJwt } from '../middlewares/validatorJwt.js';
 
 const router = Router();
 
@@ -15,9 +15,9 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', validatorJwt, createPlayer);
-router.get('/:team_id', validatorJwt, getPlayersByTeam);
-router.delete('/:id', validatorJwt, deletePlayer);
-router.put('/:id', validatorJwt, updatePlayer);
+router.post('/create', validatorJwt, createPlayer);
+router.get('/list/:team_id', validatorJwt, getPlayersByTeam);
+router.delete('/delete/:dni', validatorJwt, deletePlayer);
+router.put('/update', validatorJwt, updatePlayer);
 
 export default router;

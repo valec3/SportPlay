@@ -1,20 +1,39 @@
 import { pool } from '../db/index.js';
 
 export const createPlayerService = async (req, res) => {
-    const { camiseta, dni, team_id } = req.body;
-    const [userWithDniExists] = await pool.query(
-        'SELECT id FROM users WHERE dni = ?',
+    const { first_name, last_name, camiseta, dni, team_id } = req.body;
+    const [userExists] = await pool.query('SELECT * FROM users WHERE dni = ?', [
+        dni,
+    ]);
+    const playerVerified = userExists.length > 0;
+    console.log(playerVerified);
+    const [playerExists] = await pool.query(
+        'SELECT * FROM players WHERE dni = ?',
         [dni],
     );
-    if (userWithDniExists.length < 1)
-        throw new Error(`User with dni ${dni} does not exist`);
-    const [response] = await pool.query(
-        'INSERT INTO players (id, camiseta, dni, team_id) VALUES (?, ?, ?, ?)',
-        [id, camiseta, dni, team_id],
-    );
-    if (!response) throw new Error('Internal server error');
+    // update team_id player if exists
+    if (playerExists.length > 0) {
+        const [response] = await pool.query(
+            'UPDATE players SET first_name = ?, last_name = ?, camiseta = ?, team_id = ?, verified = ? WHERE dni = ?',
+            [first_name, last_name, camiseta, team_id, playerVerified, dni],
+        );
+        if (!response) throw new Error('Internal server error');
+    } else {
+        const query = `INSERT INTO players (first_name, last_name, camiseta, dni, team_id,verified) VALUES ('${first_name}', '${last_name}', '${camiseta}', '${dni}', '${team_id}',${playerVerified});`;
+        const [response] = await pool.query(query);
+        if (!response) throw new Error('Internal server error');
+    }
+
     return {
         message: 'Player created successfully',
+        data: {
+            verified: playerVerified,
+            first_name,
+            last_name,
+            camiseta,
+            dni,
+            team_id,
+        },
     };
 };
 
@@ -31,9 +50,9 @@ export const getPlayersByTeamService = async (req, res) => {
 };
 
 export const deletePlayerService = async (req, res) => {
-    const { id } = req.params;
-    const [response] = await pool.query('DELETE FROM players WHERE id = ?', [
-        id,
+    const { dni } = req.params;
+    const [response] = await pool.query('DELETE FROM players WHERE dni = ?', [
+        dni,
     ]);
     if (!response) throw new Error('Internal server error');
     return {
@@ -42,14 +61,23 @@ export const deletePlayerService = async (req, res) => {
 };
 
 export const updatePlayerService = async (req, res) => {
-    const { id } = req.params;
-    const { camiseta, dni, team_id } = req.body;
+    const { first_name, last_name, camiseta, dni, team_id } = req.body;
+    if (!first_name || !last_name || !camiseta || !dni || !team_id) {
+        throw new Error('All fields are required');
+    }
     const [response] = await pool.query(
-        'UPDATE players SET camiseta = ?, dni = ?, team_id = ? WHERE id = ?',
-        [camiseta, dni, team_id, id],
+        'UPDATE players SET first_name = ?, last_name = ?, camiseta = ?, team_id = ? WHERE dni = ?',
+        [first_name, last_name, camiseta, team_id, dni],
     );
     if (!response) throw new Error('Internal server error');
     return {
         message: 'Player updated successfully',
     };
+};
+
+export const verifyPlayerService = async (dni) => {
+    const [response] = await pool.query('SELECT * FROM users WHERE dni = ?', [
+        dni,
+    ]);
+    return response.length > 0;
 };
