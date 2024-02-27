@@ -46,7 +46,7 @@ const IconUser = () => {
 			<>
             <button
                 onClick={isRegister?toggleDropdown:handleOpenModal}
-                className={`${isRegister?'w-[35px] flex':''} `}
+                className={`${isRegister?'w-[35px] flex':'w-30px'} `}
             >                
                 <FaUserLarge
 						className={`${isRegister?'text-accent':'text-base-100'} `}
