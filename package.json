@@ -29,7 +29,6 @@
     "slick-carousel": "^1.8.1",
     "slider": "^1.0.4",
     "typescript": "^5.3.3"
-
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
