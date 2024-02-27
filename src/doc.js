@@ -28,8 +28,9 @@ const swaggerOptions = {
             { name: 'teams', description: 'Everything about your Pets' },
             {
                 name: 'tournaments',
-                description: 'Access to Petstore orders',
+                description: 'Operations about tournaments',
             },
+            { name: 'players', description: 'Operations about players' },
         ],
     },
 
