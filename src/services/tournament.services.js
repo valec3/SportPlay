@@ -20,7 +20,6 @@ export const newTournamentService = async (tournamentData,tournamentImage, creat
         `;
 
         const result = await pool.query(query, [logo, name, players_count, teams_count, type_tournament, creatorId]);
-        // const result = await pool.query(query, [logo, name, players_count, teams_count, type_tournament, creatorId]);
 
         return result;
     } catch (error) {
