@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,8 +57,8 @@ const FormLogIn = ({ handleLogin }) => {
 			}}
 		>
 			{() => (
-				<Form className='w-full sticky top-0 flex flex-col  px-[30px] '>
-					<h1 className='text-[22px] font-Roboto font-medium text-base-100 py-2 text-left'>
+				<Form className='w-full flex flex-col  px-[30px] '>
+					<h1 className='text-left md:text-center text-[22px] md:text-[40px] font-Roboto font-medium text-base-100 py-2 text-left'>
 						¡Hola!
 					</h1>
 					<p className='text-[16px] font-SourceSansPro font-normal text-neutral py-[15px] mx-auto'>

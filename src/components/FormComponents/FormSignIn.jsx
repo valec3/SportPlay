@@ -101,14 +101,14 @@ const FormSignIn = ({ handleLogin }) => {
 		>
 			{({ touched, errors }) => (
 				<Form className='w-full sticky top-0 flex flex-col px-[30px] bg-primary'>
-					<h1 className='text-[22px] font-Roboto font-medium text-left text-base-100 py-2'>
+					<h1 className='text-[32px] md:text-[40px]  text-left md:text-center font-Roboto font-medium text-base-100 py-2'>
 						¿No tienes cuenta?
 					</h1>
 					<p className='text-[16px] font-SourceSansPro font-normal text-neutral py-[15px]'>
 						Regístrate y sumérgete en el mundo de los torneos deportivos
 					</p>
 					<Field
-						className='bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
+						className='text-[16px] md:text-[18px] bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
 						type='text'
 						id='first_name'
 						name='first_name'
@@ -124,7 +124,7 @@ const FormSignIn = ({ handleLogin }) => {
 						)}
 					/>
 					<Field
-						className='bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
+						className='text-[16px] md:text-[18px] bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
 						type='text'
 						id='last_name'
 						name='last_name'
@@ -140,7 +140,7 @@ const FormSignIn = ({ handleLogin }) => {
 						)}
 					/>
 					<Field
-						className='bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
+						className='text-[16px] md:text-[18px] bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
 						type='text'
 						id='dni'
 						name='dni'
@@ -156,7 +156,7 @@ const FormSignIn = ({ handleLogin }) => {
 						)}
 					/>
 					<Field
-						className='bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
+						className='text-[16px] md:text-[18px] bg-secondary h-[50px] w-full rounded-xl px-4 my-3'
 						type='email'
 						id='email'
 						name='email'
@@ -174,7 +174,7 @@ const FormSignIn = ({ handleLogin }) => {
 
 					<div className='relative h-[50px] w-full my-3'>
 						<Field
-							className='bg-secondary w-full h-full rounded-xl px-4  '
+							className='text-[16px] md:text-[18px] bg-secondary w-full h-full rounded-xl px-4  '
 							type={`${showPass ? 'text' : 'password'}`}
 							id='password'
 							name='password'
@@ -208,7 +208,7 @@ const FormSignIn = ({ handleLogin }) => {
 						</div>
 					</div>
 					<div className='mx-auto my-5'>
-						<p className='text-[14px] font-Roboto text-neutral mx-auto'>
+						<p className='text-[14px] md:text-[18px] font-Roboto text-neutral mx-auto'>
 							¿Ya tienes cuenta en SportPlay?{' '}
 							<span
 								className='text-success text-[14px] cursor-pointer'

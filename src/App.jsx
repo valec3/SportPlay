@@ -12,27 +12,28 @@ import Perfil from './pages/perfil/Perfil';
 
 function App() {
 	return (
-		<>
-			<BrowserRouter>		
-				<div className='bg-primary text-base-100 min-h-screen flex flex-col relative'>
-					<Header />
-					<main className=''>					
-							<Routes>
-								<Route path='/' element={<Home />} />
-								<Route path='/TorneosAbiertos' element={<TorneosAbiertos/>} />
-								<Route path='/ResultadosTorneos' element={<ResultadosTorneos/>} />
-								<Route path='/DetalleTorneoAbierto/:id' element={<DetalleTorneoAbierto/>} />
-								<Route path='/Partidos' element={<Partidos/>} />
-								<Route path='/Equipos' element={<Equipos/>} />
-								<Route path='/Perfil' element={<Perfil/>} />
-								{/* <Route path='/Modals' element={<Modals/>} /> */}
-							</Routes>					
-					</main>				
-					<Footer />
-					<Modals/>
-				</div>
-			</BrowserRouter>
-		</>
+		<BrowserRouter>
+			<div className='bg-primary text-base-100 h-screen flex flex-col relative z-0'>
+				<Header />
+				<main className=''>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />
+						<Route path='/ResultadosTorneos' element={<ResultadosTorneos />} />
+						<Route
+							path='/DetalleTorneoAbierto/:id'
+							element={<DetalleTorneoAbierto />}
+						/>
+						<Route path='/Partidos' element={<Partidos />} />
+						<Route path='/Equipos' element={<Equipos />} />
+						<Route path='/Perfil' element={<Perfil />} />
+						{/* <Route path='/Modals' element={<Modals/>} /> */}
+					</Routes>
+				</main>
+				<Footer />
+			</div>
+			<Modals />
+		</BrowserRouter>
 	);
 }
 
