@@ -9,6 +9,7 @@ import ResultadosTorneos from './pages/resultadosTorneos/ResultadosTorneos';
 import Partidos from './pages/partidos/Partidos';
 import Equipos from './pages/equipos/Equipos';
 import Perfil from './pages/perfil/Perfil';
+import Activity from './components/modal/Activity';
 
 function App() {
 	return (
@@ -29,6 +30,7 @@ function App() {
 						<Route path='/Equipos' element={<Equipos />} />
 						<Route path='/Perfil' element={<Perfil />} />
 						<Route path='/Modals' element={<Modals/>} />
+						<Route path='/Activity' element={<Activity/>} />
 					</Routes>
 				</main>
 				<Footer />

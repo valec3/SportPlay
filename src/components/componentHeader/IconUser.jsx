@@ -24,7 +24,6 @@ const IconUser = () => {
 
     const handleOpenModal = () => {
         navigate(`/Modals`);
-		//dispatch(openModal());
 	};
     const handleCloseSesion = () => {
         let initialState = {
@@ -71,7 +70,7 @@ const IconUser = () => {
                         <Link to={'/Perfil'}>Perfil</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <a href='#'>Actividad</a>
+                            <Link to='Activity'>Actividad</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Torneos</a>
