@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createTournament, getAllTournaments, getTournamentsByUserId, closeTournament } from '../controllers/tournament.controller.js';
+import { createTournament, getAllTournaments, getTournamentsByUserId, closeTournament, tournamentTeams, indexTeamToTournament } from '../controllers/tournament.controller.js';
 import { validatorJwt } from '../middlewares/validatorJwt.js';
 
 
@@ -14,8 +14,11 @@ router.get('/', (res) => {
 
 router.post('/create-tournament', createTournament);
 router.get('/all-tournaments', getAllTournaments)
-router.get('/my-tournaments/', validatorJwt, getTournamentsByUserId)
-router.patch('/my-tournaments/', validatorJwt, closeTournament)
+router.get('/my-tournaments', validatorJwt, getTournamentsByUserId)
+router.patch('/my-tournaments', validatorJwt, closeTournament)
+router.get('/tournament-teams', tournamentTeams)
+router.post('/tournament-teams', indexTeamToTournament)
+
 
 
 export default router;

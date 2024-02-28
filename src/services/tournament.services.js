@@ -2,7 +2,7 @@ import { pool } from '../db/index.js';
 import { uploadImage } from '../lib/cloudinary.js';
 import fs from 'fs-extra'
 
-export const newTournamentService = async (tournamentData,tournamentImage, creatorId) => {
+export const newTournamentService = async (tournamentData, tournamentImage, creatorId) => {
     try {
         const { name, players_count, teams_count, type_tournament } = tournamentData;
 
@@ -46,7 +46,7 @@ export const getTournamentsBycreatorIdService = async (creator_id) => {
 
 export const getAllTournamentsService = async () => {
     try {
-        const query = 'SELECT id, logo, creator_id, name, players_count, teams_count, type_tournament, finished FROM tournament';
+        const query = 'SELECT * FROM tournament';
         const tournaments = await pool.query(query);
 
         return tournaments;
@@ -87,6 +87,60 @@ export const closeTournamentService = async (tournamentId) => {
         throw new Error('Error interno del servidor');
     }
 }
+
+export const getTournamentTeamsService = async () => {
+    try {
+        const query = 'SELECT * FROM tournament_teams';
+        const tournament_teams = await pool.query(query);
+
+        return tournament_teams;
+    } catch (error) {
+        console.error('Error al obtener los equipos del torneo:', error);
+        throw new Error('Error interno del servidor');
+    }
+}
+
+export const indexTeamToTournamentService = async (data, logoImage) => {
+    try {
+        if (!data.tournament_id) {
+            throw new Error('El ID del torneo proporcionado no puede estar vacío.');
+        }
+
+        const teamExistsQuery = `SELECT id FROM teams WHERE id = ?`;
+        const [teamExistsResult] = await pool.query(teamExistsQuery, [data.team_id]);
+
+        if (teamExistsResult.length === 0) {
+            let logo_url = null;
+            if (logoImage) {
+                const result = await uploadImage(logoImage.tempFilePath);
+                logo_url = result.secure_url;
+
+                await fs.unlink(logoImage.tempFilePath)
+            }
+            const insertTeamQuery = `INSERT INTO teams (creator_id, name, logo_url) VALUES (?, ?, ?)`;
+            const [results] = await pool.query(insertTeamQuery, [data.creator_id, data.name, logo_url]);
+            const teamId = results.insertId;
+            console.log("Id del nuevo team: ", teamId);
+            
+            return { teamId, message: 'Equipo creado y agregado al torneo exitosamente' };
+        }
+
+        const tournamentExistsQuery = `SELECT id FROM tournament WHERE id = ?`;
+        const [tournamentExistsResult] = await pool.query(tournamentExistsQuery, [data.tournament_id]);
+
+        if (tournamentExistsResult.length === 0) {
+            throw new Error('El ID del torneo proporcionado no existe.');
+        }
+
+        const query = `INSERT INTO tournament_teams (team_id, tournament_id) VALUES (?, ?)`;
+        const result = await pool.query(query, [data.team_id, data.tournament_id]);
+
+        return result;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 
 // Otras funciones para obtener, actualizar o eliminar torneos según sea necesario...
 //logica para poder cerrar un torneo..."finished:bool"

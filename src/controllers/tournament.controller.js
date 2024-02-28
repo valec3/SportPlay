@@ -1,4 +1,4 @@
-import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdService, closeTournamentService } from '../services/tournament.services.js'
+import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdService, closeTournamentService, getTournamentTeamsService, indexTeamToTournamentService } from '../services/tournament.services.js'
 
 
 export const createTournament = async (req, res) => {
@@ -52,3 +52,36 @@ export const closeTournament = async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 }
+
+export const tournamentTeams = async (req, res) => {
+    try {
+        const teamsData = await getTournamentTeamsService();
+        const teamsPerTournament = teamsData[0]
+        res.json(teamsPerTournament);
+    } catch (error) {
+        console.error('Error al obtener judadores por torneo:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
+
+export const indexTeamToTournament = async (req, res) => {
+    try {
+        const data = req.body;
+        const logoImage = req.files?.logo_url
+        const { teamId, message } = await indexTeamToTournamentService(data, logoImage);
+        if (message === 'Equipo creado y agregado al torneo exitosamente') {
+            res.status(201).json({ message: message, team: teamId });
+        } else {
+            res.status(201).json({ message: 'Equipo asignado correctamente' });
+        }
+    } catch (error) {
+        console.error('Error al asignar el equipo al torneo: ', error.message);
+        if (error.message === 'El ID del equipo proporcionado no existe.') {
+            return res.status(400).json({ error: error.message });
+        } else if (error.message === 'El ID del torneo proporcionado no existe.') {
+            return res.status(400).json({ error: error.message });
+        }
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
+
