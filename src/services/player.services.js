@@ -84,3 +84,11 @@ export const verifyPlayerService = async (dni) => {
     ]);
     return response.length > 0;
 };
+
+export const getAlPlayersService = async (req, res) => {
+    const [players] = await pool.query('SELECT * FROM players');
+    if (players.length < 1) throw new Error('No players found');
+    return {
+        players,
+    };
+};
