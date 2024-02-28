@@ -7,12 +7,14 @@ import Swal from 'sweetalert2';
 import { closeModal } from '../../redux/featuresSlice/modalSlice';
 import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
 import { changeData } from '../../redux/featuresSlice/userSlice';
+import { useNavigate } from 'react-router-dom/dist';
 
 const FormLogIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
 	const [submitOk, setSubmitOk] = useState(false);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const isRegister = useSelector(state => state.isRegister.isRegister);
 
 	const handleEyeSlash = () => {
@@ -30,7 +32,7 @@ const FormLogIn = ({ handleLogin }) => {
 					setSubmitOk(false);
 					resetForm();
 					dispatch(initiaSesion());
-					dispatch(closeModal());
+					navigate(`/`);
 				}, 1000);
 			})
 			.catch(er => {
@@ -57,8 +59,8 @@ const FormLogIn = ({ handleLogin }) => {
 			}}
 		>
 			{() => (
-				<Form className='w-full flex flex-col  px-[30px] '>
-					<h1 className=' md:text-center text-[22px] md:text-[40px] font-Roboto font-medium text-base-100 py-2 text-left'>
+				<Form className='w-full flex flex-col h-[800px] px-[30px] '>
+					<h1 className='text-[22px] md:text-[32px] font-Roboto font-medium text-base-100 py-2 text-left'>
 						¡Hola!
 					</h1>
 					<p className='text-[16px] font-SourceSansPro font-normal text-neutral py-[15px] mx-auto'>

@@ -1,15 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../redux/featuresSlice/modalSlice';
+import { useNavigate } from 'react-router-dom/dist';
 
 const Buttons = () => {
 
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
     const isRegister = useSelector((state) => state.isRegister.isRegister);
 
 
 	const handleOpenModal = () => {
-		dispatch(openModal());
+		navigate(`/Modals`);
 	};
 
 	return (

@@ -8,13 +8,14 @@ import Swal from 'sweetalert2';
 import { initiaSesion } from '../../redux/featuresSlice/registerSlice';
 import { closeModal } from '../../redux/featuresSlice/modalSlice';
 import { changeData } from '../../redux/featuresSlice/userSlice';
+import { useNavigate } from 'react-router-dom/dist';
 
 const FormSignIn = ({ handleLogin }) => {
 	const [showPass, setShowPass] = useState(false);
 	const [submitOk, setSubmitOk] = useState(false);
 
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
 	const handleEyeSlash = () => {
 		setShowPass(!showPass);
 	};
@@ -36,7 +37,7 @@ const FormSignIn = ({ handleLogin }) => {
 					resetForm();
 					dispatch(initiaSesion());
 					dispatch(changeData(values));
-					dispatch(closeModal());
+					navigate('/');
 				}, 1000);
 			})
 			.catch(er => {
@@ -100,7 +101,7 @@ const FormSignIn = ({ handleLogin }) => {
 			}}
 		>
 			{({ touched, errors }) => (
-				<Form className='w-full sticky top-0 flex flex-col px-[30px] bg-primary'>
+				<Form className='w-full flex flex-col  px-[30px] bg-primary'>
 					<h1 className='text-[32px] md:text-[40px]  text-left md:text-center font-Roboto font-medium text-base-100 py-2'>
 						¿No tienes cuenta?
 					</h1>
@@ -190,7 +191,7 @@ const FormSignIn = ({ handleLogin }) => {
 					<p
 						className={` ${errors.password && touched.password ? 'text-warning' : 'text-neutral'} text-[12px] font-Roboto mx-auto`}
 					>
-						* La contraseña debe contener entre 4 y 8 digital.
+						* La contraseña debe contener entre 4 y 8 digitos.
 					</p>
 					<div className='p-[30px] mt-5'>
 						<div

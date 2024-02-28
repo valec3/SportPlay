@@ -8,10 +8,11 @@ import { closeModal, openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
 import { Link } from 'react-router-dom';
 import { changeData } from '../../redux/featuresSlice/userSlice';
+import { useNavigate } from 'react-router-dom/dist';
 
 const IconUser = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const isRegister = useSelector((state) => state.isRegister.isRegister);
     const userData = useSelector((state) => state.userData.userData);
@@ -22,7 +23,8 @@ const IconUser = () => {
     const handleModalContainerClick = e => e.stopPropagation();
 
     const handleOpenModal = () => {
-		dispatch(openModal());
+        navigate(`/Modals`);
+		//dispatch(openModal());
 	};
     const handleCloseSesion = () => {
         let initialState = {

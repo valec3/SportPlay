@@ -27,12 +27,12 @@ function App() {
 						<Route path='/Partidos' element={<Partidos />} />
 						<Route path='/Equipos' element={<Equipos />} />
 						<Route path='/Perfil' element={<Perfil />} />
-						{/* <Route path='/Modals' element={<Modals/>} /> */}
+						<Route path='/Modals' element={<Modals/>} />
 					</Routes>
 				</main>
 				<Footer />
 			</div>
-			<Modals />
+			{/* <Modals /> */}
 		</BrowserRouter>
 	);
 }
