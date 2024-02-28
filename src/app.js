@@ -4,6 +4,7 @@ import cors from 'cors';
 import AuthRoutes from './routes/auth.routes.js';
 import PlayerRoutes from './routes/player.routes.js';
 import TournamentRoutes from './routes/tournament.routes.js';
+import GameRoutes from './routes/games.routes.js';
 import fileUpload from 'express-fileupload';
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(
 app.use('/api/auth', AuthRoutes);
 app.use('/api/players', PlayerRoutes);
 app.use('/api/tournament', TournamentRoutes);
+app.use('/api/games', GameRoutes);
 app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to my application',
