@@ -12,6 +12,7 @@ import Perfil from './pages/perfil/Perfil';
 
 function App() {
 	return (
+
 		<BrowserRouter>
 			<div className='bg-primary text-base-100 h-screen flex flex-col relative z-0'>
 				<Header />
@@ -32,7 +33,6 @@ function App() {
 				</main>
 				<Footer />
 			</div>
-			{/* <Modals /> */}
 		</BrowserRouter>
 	);
 }
