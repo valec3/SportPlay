@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import teamController from '../controllers/teamController.js';
+
+const router = Router();
+
+router.post('/create', teamController.createTeam);
+router.get('/list', teamController.getAllTeams);
+router.get('/:id', teamController.getTeamById);
+router.put('/:id/update', teamController.updateTeamById);
+router.delete('/:id/delete', teamController.deleteTeambyId);
+
+export default router;
