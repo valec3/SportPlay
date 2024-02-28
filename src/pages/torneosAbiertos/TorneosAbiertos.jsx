@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardTorneosAbiertos from '../../components/common/CardTorneosAbiertos';
 import { useSelector } from 'react-redux';
 
 const TorneosAbiertos = () => {
+
+    useEffect(() => {	
+        window.scrollTo({
+          top:0,
+          behavior:'smooth'
+        })	
+    }, []);
+
+
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
     const torneosToShow = allTournaments.slice(0, 10);
     return (

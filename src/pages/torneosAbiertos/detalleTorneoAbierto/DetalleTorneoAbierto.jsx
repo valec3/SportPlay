@@ -10,6 +10,13 @@ const DetalleTorneoAbierto = () => {
 	const [showModal, setShowModal] = useState(false);
 	const modalRef = useRef(null);
 
+	useEffect(() => {	
+		window.scrollTo({
+		  top:0,
+		  behavior:'smooth'
+		})	
+	}, []);
+
 	const handleButtonClick = () => {
 		setShowModal(true);
 	};

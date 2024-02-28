@@ -14,7 +14,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>		
-				<div className='bg-primary text-base-100 min-h-screen flex flex-col'>
+				<div className='bg-primary text-base-100 min-h-screen flex flex-col relative'>
 					<Header />
 					<main className=''>					
 							<Routes>
@@ -25,7 +25,7 @@ function App() {
 								<Route path='/Partidos' element={<Partidos/>} />
 								<Route path='/Equipos' element={<Equipos/>} />
 								<Route path='/Perfil' element={<Perfil/>} />
-
+								{/* <Route path='/Modals' element={<Modals/>} /> */}
 							</Routes>					
 					</main>				
 					<Footer />

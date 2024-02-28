@@ -6,6 +6,7 @@ import FormSignIn from "./FormSignIn";
 
 const Modals = () => {
   const [isLogin, setIsLogin] = useState(false)
+  
   const handleLogin = () => {
     setIsLogin(!isLogin);
   }
