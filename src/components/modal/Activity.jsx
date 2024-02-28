@@ -67,7 +67,7 @@ export default function Activity() {
 			nameTeamOne: 'Man City',
 			nameTeamTwo: 'Crystal Pa',
 			date: '2024-07-29',
-			logoTeamOne: 'images/atletico.png',
+			logoTeamOne: 'images/Atletico.png',
 			logoTeamTwo: 'images/albion.png',
 		},
 	];
@@ -107,36 +107,38 @@ export default function Activity() {
 					Próximo Encuentro
 				</h3>
 
-				<div className=' mt-9'>
-					<div className='flex items-center gap-[5px]'>
-						<img src={activeTournaments[0].logo} alt='Logo' />
-						<span className='text-lg font-semibold font-Roboto'>
-							{activeTournaments[0].name}
-						</span>
-					</div>
+				<div>
+					<div className=' mt-9'>
+						<div className='flex items-center gap-[5px]'>
+							<img src={activeTournaments[0].logo} alt='Logo' />
+							<span className='text-lg font-semibold font-Roboto'>
+								{activeTournaments[0].name}
+							</span>
+						</div>
 
-					<div className=' mt-[25px] flex flex-col gap-3'>
-						<div className='flex flex-col gap-3'>
-							{nextAdminTournament.map((adminTournament, index) => (
-								<Match key={index} {...adminTournament} />
-							))}
+						<div className=' mt-[25px] flex flex-col gap-3'>
+							<div className='flex flex-col gap-3'>
+								{nextAdminTournament.map((adminTournament, index) => (
+									<Match key={index} {...adminTournament} />
+								))}
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div className=' mt-[68px]'>
-					<div className='flex items-center gap-[5px]'>
-						<img src={activePlayerTournaments[0].logo} alt='Logo' />
-						<span className='text-lg font-semibold font-Roboto'>
-							{activePlayerTournaments[0].name}
-						</span>
-					</div>
+					<div className=' mt-[68px]'>
+						<div className='flex items-center gap-[5px]'>
+							<img src={activePlayerTournaments[0].logo} alt='Logo' />
+							<span className='text-lg font-semibold font-Roboto'>
+								{activePlayerTournaments[0].name}
+							</span>
+						</div>
 
-					<div className=' mt-[25px] flex flex-col gap-3'>
-						<div className='flex flex-col gap-3'>
-							{nextPlayerTournament.map((playerTournament, index) => (
-								<Match key={index} {...playerTournament} />
-							))}
+						<div className=' mt-[25px] flex flex-col gap-3'>
+							<div className='flex flex-col gap-3'>
+								{nextPlayerTournament.map((playerTournament, index) => (
+									<Match key={index} {...playerTournament} />
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
