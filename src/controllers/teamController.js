@@ -10,7 +10,20 @@ const teamController = {
                         'Faltan campos obligatorios: creator_id, name, logo_url',
                 });
             }
-            const newTeam = { creator_id, name, logo_url };
+
+            // Importando Cloudinary dentro de la funcion
+            const cloudinary = require('cloudinary').v2;
+            cloudinary.config(configCloudinary);
+
+            if (req.file) {
+                const uploadResult = await cloudinary.uploader.upload(
+                    req.file.path,
+                );
+                newTeam.logo_url = uploadResult.secure_url;
+            } else {
+                throw new Error('Image is required for team creation');
+            }
+
             const createdTeam = await Team.createTeam(newTeam);
             res.status(201).json({
                 message: 'Equipo creado exitosamente',
