@@ -1,10 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import trophy from '../../../../public/icons/trophy.png'
 
-const DetalleTorneoAbierto = (msj) => {
+const DetalleTorneoAbierto = () => {
+	const params = useParams()
 	const navigate = useNavigate();
+	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
 	const [showModal, setShowModal] = useState(false);
 	const modalRef = useRef(null);
+
+	useEffect(() => {	
+		window.scrollTo({
+		  top:0,
+		  behavior:'smooth'
+		})	
+	}, []);
 
 	const handleButtonClick = () => {
 		setShowModal(true);
@@ -13,6 +24,7 @@ const DetalleTorneoAbierto = (msj) => {
 	const closeModal = () => {
 		setShowModal(false);
 	};
+	const tournament = allTournaments.find((e)=>e.id==params.id)
 
 	const handleOutsideClick = event => {
 		if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -22,7 +34,7 @@ const DetalleTorneoAbierto = (msj) => {
 
 	useEffect(() => {
 		document.addEventListener('click', handleOutsideClick, true);
-console.log(msj);
+		console.log(tournament);
 		return () => {
 			document.removeEventListener('click', handleOutsideClick, true);
 		};
@@ -53,17 +65,15 @@ console.log(msj);
 				}}
 				className='bg-primary w-full overflow-hidden px-[30px] flex justify-center items-center'
 			>
-				<div>
+				<div className='rounded-full bg-neutral w-[40px] h-[40px]  flex justify-center items-center'>
 					<img
-						className='w-full'
-						src='images\Rectangle 64 (2).png'
-						alt='Real Madrid'
+						className={`${tournament.logo==null||tournament.logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+						src={tournament.logo==null||tournament.logo==''?trophy:tournament.logo}
+						alt='logo'
 					/>
 				</div>
 				<div className='text-left py-4 ml-4'>
-					<h1 className='text-SorceSansPro font-semibold text-2xl'>
-						Copa Los Condes 1
-					</h1>
+					<h1 className='text-SorceSansPro font-semibold text-[20px]'>{tournament.name}</h1>
 				</div>
 			</button>
 

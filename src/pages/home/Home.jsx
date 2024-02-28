@@ -2,15 +2,22 @@ import MyTable from '../../components/common/MyTable';
 import Title2 from '../../components/common/Title2';
 import LastMatch from '../../components/homeComponents/LastMatch';
 import Carrousel from '../../components/homeComponents/Carrousel';
-
 import Slider from '../../components/homeComponents/Slider';
-
 import OpenTournaments from '../../components/homeComponents/OpenTournaments';
+import { useEffect } from 'react';
 
 
 function Home()  {
+
+	useEffect(() => {	
+		  window.scrollTo({
+			top:0,
+			behavior:'smooth'
+		  })	
+	  }, []);
+
 	return (
-		<div className='space-y-8'>
+		<div className='space-y-8 bg-primary'>
 			<section>
 				<Carrousel />
 			</section>

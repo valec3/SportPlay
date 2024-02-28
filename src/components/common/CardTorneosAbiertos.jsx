@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const Card = ({ name, teams_count, logo, finished}) => {
-	
+const Card = ({ id, name, teams_count, logo, finished }) => {
 	const navigate = useNavigate();
+
 	const [isClicked, setIsClicked] = useState(false);
 
 	const handleClick = () => {
 		setIsClicked(true);
-		navigate('/DetalleTorneoAbierto');
+		navigate(`/DetalleTorneoAbierto/${id}`);
 	};
 
 	return (
@@ -20,24 +20,24 @@ const Card = ({ name, teams_count, logo, finished}) => {
 		>
 			<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center'>
 				<img
-					className={`${logo==null||logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
-					src={logo==null||logo==''?'icons/trophy.png':logo}
+					className={`${logo == null || logo == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+					src={logo == null || logo == '' ? 'icons/trophy.png' : logo}
 					alt='Real Madrid'
 				/>
 			</div>
 			<div className='text-left py-4 ml-4'>
 				<h1 className='text-SorceSansPro font-semibold text-xl'>
 					<span>{name}</span>
-					<span className='ml-4 pl-1'> &gt; </span>
+					<span className='ml-9 pl-1'> &gt; </span>
 				</h1>
 				<h2 className='text-Roboto text-SemiBold text-base'>
 					Torneo de <span className='text-accent'>{teams_count}</span> equipos
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base'>
-					Fecha: {finished==0?'Proximo':'Finalizado'}
+					Fecha: {finished == 0 ? 'Proximo' : 'Finalizado'}
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base text-warning '>
-					Vacantes: {finished==1?0:teams_count}
+					Vacantes: {finished == 1 ? 0 : teams_count}
 				</h2>
 			</div>
 		</button>

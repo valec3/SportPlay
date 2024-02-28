@@ -7,12 +7,12 @@ import { getTournaments } from '../../redux/featuresSlice/tournamentSlice';
 const OpenTournaments = () => {
     const dispatch = useDispatch();
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+
     const tournaments = () => {
 		axios
 			.get('https://tournament-sport.onrender.com/api/tournament/all-tournaments'
 			)
 			.then((res) => {
-				console.log(res.data);
 				dispatch(getTournaments(res.data))
 			})
 			.catch((er) =>{
@@ -35,6 +35,7 @@ const OpenTournaments = () => {
     };
 
     useEffect(() => {
+        
         updateNumCardsToShow();
         tournaments();
         window.addEventListener('resize', updateNumCardsToShow);
