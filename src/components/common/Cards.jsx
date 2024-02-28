@@ -13,9 +13,9 @@ const Cards = ({ name, teams_count, logo, finished}) => {
 				</div>
 			</div>
 			<div>
-				<h1 className='text-primary text-2xl font-semibold mt-4'>{name}</h1>
+				<h1 className='text-primary text-2xl font-semibold mt-5'>{name}</h1>
 			</div>
-			<div className='mt-3'>
+			<div className='mt-1.5'>
 				<div className='flex-1'>
 					<p className='text-primary font-semibold mb-1.5'>de {teams_count} equipos</p>
 					<p className='text-primary font-semibold mb-1.5'>{finished==0?'Proximo':'Finalizado'}</p>

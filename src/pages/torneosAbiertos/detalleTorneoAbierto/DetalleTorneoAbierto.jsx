@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
+import trophy from '../../../../public/icons/trophy.png'
 
 const DetalleTorneoAbierto = () => {
 	const params = useParams()
@@ -60,7 +61,7 @@ const DetalleTorneoAbierto = () => {
 				<div className='rounded-full bg-neutral w-[40px] h-[40px]  flex justify-center items-center'>
 					<img
 						className={`${tournament.logo==null||tournament.logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
-						src={tournament.logo==null||tournament.logo==''?'icons/trophy.png':tournament.logo}
+						src={tournament.logo==null||tournament.logo==''?trophy:tournament.logo}
 						alt='logo'
 					/>
 				</div>
