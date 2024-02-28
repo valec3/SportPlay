@@ -21,7 +21,7 @@ const Card = ({ name, teams_count, logo, finished}) => {
 			<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center'>
 				<img
 					className={`${logo==null||logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
-					src={logo==null||logo==''?'./public/icons/trophy.png':logo}
+					src={logo==null||logo==''?'icons/trophy.png':logo}
 					alt='Real Madrid'
 				/>
 			</div>
