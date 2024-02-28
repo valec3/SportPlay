@@ -11,7 +11,6 @@ const Navbar = () => {
 	};
 	const handleModalContainerClick = e => e.stopPropagation();
 
-
 	return (
 		<nav className='bg-primary text-white py-4 px-[30px] flex justify-between items-center sticky top-0 z-10 h-[90px] drop-shadow-[0px_0px_2px_rgba(0,0,0,0.5)] '>
 			{/* Menú hamburguesa */}
@@ -35,19 +34,19 @@ const Navbar = () => {
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
-										<Link to="/" >Inicio</Link>
+										<Link to='/'>Inicio</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-										 <Link to='/TorneosAbiertos'>Torneos</Link>
+										<Link to='/TorneosAbiertos'>Torneos</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-									<Link to='/ResultadosTorneos'>Resultados</Link> 
+										<Link to='/ResultadosTorneos'>Resultados</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
-									<Link to='/Partidos'>Partidos</Link> 
+										<Link to='/Partidos'>Partidos</Link>
 									</li>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
-									<Link to='/Equipos'>Equipos</Link> 
+										<Link to='/Equipos'>Equipos</Link>
 									</li>
 								</ul>
 							</div>
@@ -56,6 +55,7 @@ const Navbar = () => {
 				</div>
 				{/* Logo */}
 				<div className='flex items-center justify-center sm:justify-start w-64'>
+
 				<Link to="/" >
 					<img
 						src='/images/logo-hori-2.png'
@@ -63,24 +63,24 @@ const Navbar = () => {
 						className='h-14 sm:h-16  '
 					/>
 				</Link>					
+
 				</div>
 			
 			{/* Menú de navegación para pantallas grandes */}
 			<div className='hidden sm:flex space-x-4'>
 
-				<Link to="/" >Inicio</Link>
+				<Link to='/'>Inicio</Link>
 
 				<Link to='/TorneosAbiertos'>Torneos</Link>
 
-				<Link to='/ResultadosTorneos'>Resultados</Link> 
+				<Link to='/ResultadosTorneos'>Resultados</Link>
 
-				<Link to='/Partidos'>Partidos</Link> 
+				<Link to='/Partidos'>Partidos</Link>
 
-				<Link to='/Equipos'>Equipos</Link> 
-
+				<Link to='/Equipos'>Equipos</Link>
 			</div>
 			{/* Icono de usuario y menú desplegable */}
-			<IconUser/>			
+			<IconUser />
 		</nav>
 	);
 };

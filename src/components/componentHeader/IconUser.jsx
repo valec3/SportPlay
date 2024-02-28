@@ -46,10 +46,10 @@ const IconUser = () => {
 			<>
             <button
                 onClick={isRegister?toggleDropdown:handleOpenModal}
-                className={`${isRegister?'w-[35px] flex':''} `}
+                className={`${isRegister?'w-[35px] flex':'w-[34px] flex justify-end'} `}
             >                
                 <FaUserLarge
-						className={`${isRegister?'text-accent':'text-base-100'} `}
+						className={`${isRegister?'text-accent':'text-base-100 w-[20px]'} `}
 					/>
 					{isRegister&&<MdKeyboardArrowDown
 						className={` ${isDropdownOpen ? 'rotate-180' : 'rotate-0'} transition-all duration-300 ml-2 text-accent`}
