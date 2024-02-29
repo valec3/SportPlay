@@ -3,20 +3,23 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 function CrearTorneo() {
 	const optionsNumberTeams = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
 	const initialValues = {
-		tournamentName: '',
-		typeTournament: '',
-		numberTeams: '',
-		numberPlayers: '',
+		logo: '',
+		creator_id: 18,
+		name: '',
+		type_tournament: '',
+		teams_count: '',
+		players_count: '',
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
 			const data = JSON.stringify(values, null, 2);
+			console.log('data', data);
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
 				data
 			);
 
-			console.log('Success:', response.data); // Handle successful response data
+			console.log('Success:', response); // Handle successful response data
 			document.getElementById('modal-crear-torneo').showModal();
 			// Handle success here (e.g., display success message, redirect)
 			setSubmitting(false); // Reset submitting state
@@ -44,11 +47,11 @@ function CrearTorneo() {
 				initialValues={initialValues}
 				validate={values => {
 					const errors = {};
-					if (!values.tournamentName) {
-						errors.tournamentName = 'Required';
+					if (!values.name) {
+						errors.name = 'Required';
 					}
-					if (!values.typeTournament) {
-						errors.typeTournament = 'Required';
+					if (!values.type_tournament) {
+						errors.type_tournament = 'Required';
 					}
 
 					return errors;
@@ -60,11 +63,11 @@ function CrearTorneo() {
 					<Form className='flex flex-col gap-4 pb-4'>
 						<Field
 							type='text'
-							name='tournamentName'
+							name='name'
 							className='bg-secondary h-[56px] w-full rounded-xl px-4'
 							required
 						/>
-						<ErrorMessage name='tournamentName' component='div' />
+						<ErrorMessage name='name' component='div' />
 						<p className='text-neutral'>Tipo de torneo</p>
 						<div
 							role='group'
@@ -76,8 +79,8 @@ function CrearTorneo() {
 								Público
 								<Field
 									type='radio'
-									name='typeTournament'
-									value='publico'
+									name='type_tournament'
+									value='0'
 									className='ml-2'
 								/>
 							</label>
@@ -85,21 +88,21 @@ function CrearTorneo() {
 								Privado
 								<Field
 									type='radio'
-									name='typeTournament'
-									value='privado'
+									name='type_tournament'
+									value='1'
 									className='ml-2'
 								/>
 							</label>
 						</div>
-						<ErrorMessage name='typeTournament' component='div' />
+						<ErrorMessage name='type_tournament' component='div' />
 						<div className='container'>
 							<div className='grid sm:grid-cols-1 md:grid-cols-2 gap-4 '>
 								<div>
-									<label htmlFor='numberTeams'>Cantidad de Equipos</label>
+									<label htmlFor='teams_count'>Cantidad de Equipos</label>
 									<Field
 										as='select' // Use the "select" field type
 										id='numberTeams' // Set an ID for accessibility
-										name='numberTeams' // Match the form field name
+										name='teams_count' // Match the form field name
 										//defaultValue='0' // Set an initial empty value
 										className='select select-bordered w-full   bg-secondary'
 										required
@@ -111,14 +114,14 @@ function CrearTorneo() {
 											</option>
 										))}
 									</Field>
-									<ErrorMessage name='numberTeams' component='div' />
+									<ErrorMessage name='teams_count' component='div' />
 								</div>
 								<div>
-									<label htmlFor='numberPlayers'>Cantidad de Jugadores</label>
+									<label htmlFor='players_count'>Cantidad de Jugadores</label>
 									<Field
 										as='select' // Use the "select" field type
-										id='numberPlayers' // Set an ID for accessibility
-										name='numberPlayers' // Match the form field name
+										id='players_count' // Set an ID for accessibility
+										name='players_count' // Match the form field name
 										//defaultValue='' // Set an initial empty value
 
 										className='select select-bordered w-full   bg-secondary'
@@ -131,7 +134,7 @@ function CrearTorneo() {
 											</option>
 										))}
 									</Field>
-									<ErrorMessage name='numberPlayers' component='div' />
+									<ErrorMessage name='players_count' component='div' />
 								</div>
 							</div>
 						</div>
