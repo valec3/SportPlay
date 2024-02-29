@@ -1,41 +1,26 @@
 import React, { useState } from 'react';
-import { FiMenu, FiUser, FiX } from 'react-icons/fi';
-
+import { FiMenu } from 'react-icons/fi';
 import IconUser from './componentHeader/IconUser';
-
-import { FaUserLarge } from 'react-icons/fa6';
-import { FaRegUser } from 'react-icons/fa';
-import { MdKeyboardArrowDown } from 'react-icons/md';
-import { RxExit } from 'react-icons/rx';
-
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
 	const handleModalContainerClick = e => e.stopPropagation();
 
-	const toggleDropdown = () => {
-		setIsDropdownOpen(!isDropdownOpen);
-	};
-
-	const closeMenu = () => {
-		setIsOpen(false);
-	};
-
 	return (
-		<nav className='bg-primary text-white p-4 flex justify-between items-center sticky top-0 z-10 h-[90px]'>
+		<nav className='bg-primary text-white py-4 px-[30px] flex justify-between items-center sticky top-0 z-10 h-[90px] drop-shadow-[0px_0px_2px_rgba(0,0,0,0.5)] '>
 			{/* Menú hamburguesa */}
-			<div className='flex items-center'>
-				<div className='sm:hidden '>
+			
+				<div className='sm:hidden flex items-center'>
 					<button
 						onClick={toggleMenu}
-						className='text-white focus:outline-none'
+						className='text-white focus:outline-none w-full'
 					>
-						<FiMenu className='h-6 w-10' />
+						<FiMenu className='h-[30px] w-[34px]' />
 					</button>
 					{/* Menú hamburguesa desplegable */}
 					{isOpen && (
@@ -48,63 +33,54 @@ const Navbar = () => {
 								className='absolute top-[90px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
-										{' '}
-										<a>Inicio</a>
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
+										<Link to='/'>Inicio</Link>
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
-										Resultados 
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
+										<Link to='/TorneosAbiertos'>Torneos</Link>
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
-										Torneos 
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
+										<Link to='/ResultadosTorneos'>Resultados</Link>
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px] '>
-										Partidos
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px] '>
+										<Link to='/Partidos'>Partidos</Link>
 									</li>
-									<li className='flex items-center hover:bg-gray-700 w-full pl-[30px] h-[47px]'>
-										Equipo
+									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
+										<Link to='/Equipos'>Equipos</Link>
 									</li>
 								</ul>
 							</div>
 						</div>
 					)}
 				</div>
-
 				{/* Logo */}
 				<div className='flex items-center justify-center sm:justify-start w-64'>
+
+				<Link to="/" >
 					<img
 						src='/images/logo-hori-2.png'
 						alt='Logo'
-						className='h-14 sm:h-16 ml-10 '
+						className='h-14 sm:h-16  '
 					/>
-				</div>
-			</div>
+				</Link>					
 
+				</div>
+			
 			{/* Menú de navegación para pantallas grandes */}
 			<div className='hidden sm:flex space-x-4'>
-				<a href='#' className='hover:text-gray-400'>
-					Inicio
-				</a>
-				<a href='#' className='hover:text-gray-400'>
-					Torneos 
-				</a>
-				<a href='#' className='hover:text-gray-400'>
-					Resultados 
-				</a>
-				<a href='#' className='hover:text-gray-400'>
-					Partidos
-				</a>
-				<a href='#' className='hover:text-gray-400'>
-					Equipo
-				</a>
+
+				<Link to='/'>Inicio</Link>
+
+				<Link to='/TorneosAbiertos'>Torneos</Link>
+
+				<Link to='/ResultadosTorneos'>Resultados</Link>
+
+				<Link to='/Partidos'>Partidos</Link>
+
+				<Link to='/Equipos'>Equipos</Link>
 			</div>
-
-
 			{/* Icono de usuario y menú desplegable */}
-			<IconUser/>
-
-
-			
+			<IconUser />
 		</nav>
 	);
 };

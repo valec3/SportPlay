@@ -103,7 +103,7 @@ function CrearTorneo() {
 										className='select select-bordered w-full   bg-secondary'
 										required
 									>
-										<option value=''>-- Select an option --</option>
+										<option value=''>-- Selecciona una opción --</option>
 										{optionsNumberTeams.map((option, index) => (
 											<option key={index} value={option}>
 												{option}
@@ -123,7 +123,7 @@ function CrearTorneo() {
 										className='select select-bordered w-full   bg-secondary'
 										required
 									>
-										<option value=''>-- Select an option --</option>
+										<option value=''>-- Selecciona una opción --</option>
 										{optionsNumberTeams.map((option, index) => (
 											<option key={index} value={option}>
 												{option}
@@ -139,7 +139,7 @@ function CrearTorneo() {
 							className='bg-accent btn btn-sm border-accent text-base-100 '
 							disabled={isSubmitting}
 						>
-							Submit
+							Crear torneo
 						</button>
 					</Form>
 				)}

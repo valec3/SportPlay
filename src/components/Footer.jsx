@@ -7,13 +7,13 @@ export default function Footer() {
 		<footer className=' mt-auto bg-secondary flex flex-col items-center py-[14px] gap-y-2'>
 			<div className=' flex items-center gap-[60px]'>
 				<a href='#'>
-					<FaYoutube className=' w-9 h-8 text-neutral' />
+					<FaYoutube className='h-8  w-9 text-neutral' />
 				</a>
 				<a href='#'>
-					<FaFacebook className=' w-8 h-8 text-neutral' />
+					<FaFacebook className='w-8 h-8  text-neutral' />
 				</a>
 				<a href='#'>
-					<FaInstagram className=' w-7 h-8 text-neutral' />
+					<FaInstagram className='h-8  w-7 text-neutral' />
 				</a>
 			</div>
 			<div className='bg-[#545458] w-full h-[0.5px]'>
