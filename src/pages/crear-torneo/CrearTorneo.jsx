@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 function CrearTorneo() {
-	const optionsNumberTeams = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
+	const optionsNumberTeams = ['4',  '8',  '16'];
+	const optionsNumberPlayers = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
 	const initialValues = {
 		logo: '',
 		creator_id: 18,
@@ -32,14 +33,14 @@ function CrearTorneo() {
 	};
 	return (
 		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
-			<h2 className='text-[32px] md:text-[40px] text-base-100 text-center font-bold'>
+			<h2 className='text-[22px] md:text-[32px] text-base-100 mt-1 text-center font-bold'>
 				Torneo nuevo
 			</h2>
 			<div className='w-full flex flex-col  items-center'>
 				<img
 					src='/images/torneo-nuevo.svg'
 					alt='imagen que representa al texto torneo nuevo'
-					className='w-[144px] h-[144px]'
+					className='w-[134px] h-[134px]'
 				/>
 			</div>
 
@@ -65,6 +66,7 @@ function CrearTorneo() {
 							type='text'
 							name='name'
 							className='bg-secondary h-[56px] w-full rounded-xl px-4'
+							placeholder='Nombre del Torneo'
 							required
 						/>
 						<ErrorMessage name='name' component='div' />
@@ -128,7 +130,7 @@ function CrearTorneo() {
 										required
 									>
 										<option value=''>-- Selecciona una opción --</option>
-										{optionsNumberTeams.map((option, index) => (
+										{optionsNumberPlayers.map((option, index) => (
 											<option key={index} value={option}>
 												{option}
 											</option>

@@ -30,7 +30,7 @@ const Navbar = () => {
 						>
 							<div
 								onClick={handleModalContainerClick}
-								className='absolute top-[90px] bg-secondary text-white w-1/2 h-[423px]   '
+								className='absolute top-[88px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
 								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>

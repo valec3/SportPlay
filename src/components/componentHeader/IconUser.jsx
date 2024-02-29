@@ -36,7 +36,7 @@ const IconUser = () => {
             },
         };
         dispatch(changeData(initialState))
-        dispatch(closeModal());
+        navigate('/')
 		dispatch(closeSesion());
 	};
     
@@ -60,7 +60,7 @@ const IconUser = () => {
             { isDropdownOpen && isRegister && (
                 <div className='w-full h-screen absolute top-0 left-0 bg-black/75'
                     onClick={toggleDropdown}>
-                   <div className='absolute right-0 top-[90px]  w-[50%] bg-secondary  shadow-lg'
+                   <div className='absolute right-0 top-[88px]  w-[50%] bg-secondary  shadow-lg'
                     onClick={handleModalContainerClick}>
                     <ul className='h-[376px]'>
                     <div className=' w-full  h-[47px] flex justify-start items-center'  ><FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' /><h3>¡Hola, {userData.first_name}!</h3>  
@@ -73,7 +73,7 @@ const IconUser = () => {
                             <Link to='Activity'>Actividad</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <a href='#'>Torneos</a>
+                            <Link to='/crear-torneo'>Crear torneo</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Jugador</a>

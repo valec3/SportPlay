@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom/dist";
+
 const Tournament = ({ logo, name, role }) => (
 	<div className='w-full bg-secondary rounded-[14px] px-5 flex items-center justify-between py-[13px]'>
 		<div className='flex items-center gap-[6px]'>
@@ -31,6 +33,7 @@ const Match = ({
 );
 
 export default function Activity() {
+	const navigate = useNavigate();
 	// Data for active tournaments
 	const activeTournaments = [
 		{
@@ -72,6 +75,10 @@ export default function Activity() {
 		},
 	];
 
+	const handleCrearTorneo = () => {
+		navigate(`/crear-torneo`);
+	};
+
 	return (
 		<section className='pt-[108px] pb-[119px] bg-primary text-base-100'>
 			<div className='px-[30px]'>
@@ -80,7 +87,7 @@ export default function Activity() {
 					<h2 className='font-bold text-[22px] font-Roboto leading-[24.53px] tracking-[0.263px]'>
 						Torneos Activos
 					</h2>
-					<span className='font-bold text-success font-Roboto'>
+					<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto'>
 						Crear Torneo
 					</span>
 				</div>
