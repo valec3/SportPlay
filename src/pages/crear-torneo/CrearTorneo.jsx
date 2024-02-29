@@ -1,6 +1,32 @@
-import RadioButton from '../../components/common/RadioButton';
-
+import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 function CrearTorneo() {
+	const optionsNumberTeams = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
+	const initialValues = {
+		tournamentName: '',
+		typeTournament: '',
+		numberTeams: '',
+		numberPlayers: '',
+	};
+	const handleSubmit = async (values, { setSubmitting }) => {
+		try {
+			const data = JSON.stringify(values, null, 2);
+			const response = await axios.post(
+				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
+				data
+			);
+
+			console.log('Success:', response.data); // Handle successful response data
+			document.getElementById('modal-crear-torneo').showModal();
+			// Handle success here (e.g., display success message, redirect)
+			setSubmitting(false); // Reset submitting state
+		} catch (error) {
+			console.error('Error:', error.response.data); // Handle error response
+
+			// Handle errors here (e.g., display error message)
+			setSubmitting(false); // Reset submitting state in case of error
+		}
+	};
 	return (
 		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
 			<h2 className='text-[32px] md:text-[40px] text-base-100 text-center font-bold'>
@@ -14,69 +40,111 @@ function CrearTorneo() {
 				/>
 			</div>
 
-			<form className='flex flex-col gap-4'>
-				<input
-					className='bg-secondary h-[56px] w-full rounded-xl px-4'
-					type='text'
-					id=''
-					placeholder='Nombre del torneo'
-					// value={}
-					// onChange={}
-					// onKeyUp={}
-					required
-				/>
-				<div className='space-y-4'>
-					<p className='text-neutral'>Tipo de torneo</p>
-					<div className='form-control bg-secondary h-[56px] w-full rounded-xl px-4 flex flex-row justify-between'>
-						<RadioButton
-							label='Público'
-							name='type-tournament'
-							value='public'
-							checked={false}
-						/>
-						<RadioButton
-							label='Privado'
-							name='type-tournament'
-							value='private'
-							checked={false}
-						/>
-					</div>
-				</div>
-				<div className='container'>
-					<div className='grid sm:grid-cols-1 md:grid-cols-2 gap-4 '>
-						<div>
-							{/* <label htmlFor=''>Número de equipos</label> */}
-							<select className='select select-bordered w-full   bg-secondary'>
-								<option disabled selected>
-									Cantidad de equipos
-								</option>
-								<option>Normal Apple</option>
-								<option>Normal Orange</option>
-								<option>Normal Tomato</option>
-							</select>
-						</div>
-						<div>
-							{/* <label htmlFor=''>Cantidad de jugadores</label> */}
-							<select className='select select-bordered w-full   bg-secondary'>
-								<option disabled selected>
-									Cantidad de jugadores
-								</option>
-								<option>Normal Apple</option>
-								<option>Normal Orange</option>
-								<option>Normal Tomato</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<button
-					className='bg-accent btn btn-sm border-accent text-base-100 '
-					onClick={() =>
-						document.getElementById('modal-crear-torneo').showModal()
+			<Formik
+				initialValues={initialValues}
+				validate={values => {
+					const errors = {};
+					if (!values.tournamentName) {
+						errors.tournamentName = 'Required';
 					}
-				>
-					Crear torneo
-				</button>
-			</form>
+					if (!values.typeTournament) {
+						errors.typeTournament = 'Required';
+					}
+
+					return errors;
+				}}
+				onSubmit={handleSubmit}
+			>
+				{({ isSubmitting }) => (
+					<Form className='flex flex-col gap-4'>
+						<Field
+							type='text'
+							name='tournamentName'
+							className='bg-secondary h-[56px] w-full rounded-xl px-4'
+							required
+						/>
+						<ErrorMessage name='tournamentName' component='div' />
+						<p className='text-neutral'>Tipo de torneo</p>
+						<div
+							role='group'
+							aria-labelledby='my-radio-group'
+							className='form-control bg-secondary h-[56px] w-full rounded-xl px-4 flex flex-row justify-between items-center'
+							required
+						>
+							<label>
+								Público
+								<Field
+									type='radio'
+									name='typeTournament'
+									value='publico'
+									className='ml-2'
+								/>
+							</label>
+							<label>
+								Privado
+								<Field
+									type='radio'
+									name='typeTournament'
+									value='privado'
+									className='ml-2'
+								/>
+							</label>
+						</div>
+						<ErrorMessage name='typeTournament' component='div' />
+						<div className='container'>
+							<div className='grid sm:grid-cols-1 md:grid-cols-2 gap-4 '>
+								<div>
+									<label htmlFor='numberTeams'>Cantidad de Equipos</label>
+									<Field
+										as='select' // Use the "select" field type
+										id='numberTeams' // Set an ID for accessibility
+										name='numberTeams' // Match the form field name
+										//defaultValue='0' // Set an initial empty value
+										className='select select-bordered w-full   bg-secondary'
+										required
+									>
+										<option value=''>-- Select an option --</option>
+										{optionsNumberTeams.map((option, index) => (
+											<option key={index} value={option}>
+												{option}
+											</option>
+										))}
+									</Field>
+									<ErrorMessage name='numberTeams' component='div' />
+								</div>
+								<div>
+									<label htmlFor='numberPlayers'>Cantidad de Jugadores</label>
+									<Field
+										as='select' // Use the "select" field type
+										id='numberPlayers' // Set an ID for accessibility
+										name='numberPlayers' // Match the form field name
+										//defaultValue='' // Set an initial empty value
+
+										className='select select-bordered w-full   bg-secondary'
+										required
+									>
+										<option value=''>-- Select an option --</option>
+										{optionsNumberTeams.map((option, index) => (
+											<option key={index} value={option}>
+												{option}
+											</option>
+										))}
+									</Field>
+									<ErrorMessage name='numberPlayers' component='div' />
+								</div>
+							</div>
+						</div>
+						<button
+							type='submit'
+							className='bg-accent btn btn-sm border-accent text-base-100 '
+							disabled={isSubmitting}
+						>
+							Submit
+						</button>
+					</Form>
+				)}
+			</Formik>
+
 			{/* Open the modal using document.getElementById('ID').showModal() method */}
 
 			<dialog id='modal-crear-torneo' className='modal px-6'>
