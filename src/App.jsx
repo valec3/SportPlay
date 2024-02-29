@@ -17,7 +17,7 @@ function App() {
 		<BrowserRouter>
 			<div className='bg-primary text-base-100 h-screen flex flex-col relative z-0'>
 				<Header />
-				<main className=''>
+				<main className='bg-primary'>
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />

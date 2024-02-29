@@ -28,7 +28,7 @@ function CrearTorneo() {
 		}
 	};
 	return (
-		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
+		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
 			<h2 className='text-[32px] md:text-[40px] text-base-100 text-center font-bold'>
 				Torneo nuevo
 			</h2>
@@ -54,9 +54,10 @@ function CrearTorneo() {
 					return errors;
 				}}
 				onSubmit={handleSubmit}
+				className=''
 			>
 				{({ isSubmitting }) => (
-					<Form className='flex flex-col gap-4'>
+					<Form className='flex flex-col gap-4 pb-4'>
 						<Field
 							type='text'
 							name='tournamentName'
