@@ -4,16 +4,16 @@ const Cards = ({ nombre, vacantes, fecha, equipo }) => {
 	return (
 		<div className='bg-base-100 rounded-lg shadow-md p-0 text-center mt-6'>
 			<div className='flex justify-center items-center relative'>
-				<div className='bg-neutral rounded-full w-12 h-12 flex justify-center items-center absolute top-[50%] translate-y-[-50%]'>
+				<div className='bg-neutral rounded-full w-14 h-14 flex justify-center items-center absolute top-[50%] translate-y-[-50%]'>
 					<img
 						src='/public/icons/trophy.png'
 						alt='Trophy icon'
-						className='w-6 h-6'
+						className='w-7 h-7'
 					/>  
 				</div>
 			</div>
 			<div>
-				<h1 className='text-primary text-2xl font-bold mt-4'>{nombre}</h1>
+				<h1 className='text-primary text-2xl font-bold mt-5'>{nombre}</h1>
 			</div>
 			<div className='mt-4'>
 				<div className='flex-1'>
