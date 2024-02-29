@@ -6,7 +6,7 @@ const router = Router();
 router.post('/create', teamController.createTeam);
 router.get('/list', teamController.getAllTeams);
 router.get('/:id', teamController.getTeamById);
-router.put('/:id/update', teamController.updateTeamById);
-router.delete('/:id/delete', teamController.deleteTeambyId);
+router.put('/update/:id', teamController.updateTeamById);
+router.delete('/delete/:id', teamController.deleteTeambyId);
 
 export default router;
