@@ -6,17 +6,17 @@ function CrearTorneo() {
 		logo: '',
 		creator_id: 18,
 		name: '',
-		type_tournament: '',
-		teams_count: '',
-		players_count: '',
+		type_tournament: 0,
+		teams_count: 0,
+		players_count: 0,
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			const data = JSON.stringify(values, null, 2);
-			console.log('data', data);
+			//const data = JSON.stringify(values, null, 2);
+			console.log('data', values);
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
-				data
+				values
 			);
 
 			console.log('Success:', response); // Handle successful response data
