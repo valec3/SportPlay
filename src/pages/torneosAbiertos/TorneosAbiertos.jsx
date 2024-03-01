@@ -13,7 +13,7 @@ const TorneosAbiertos = () => {
 
 
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
-    const torneosToShow = allTournaments.slice(0, 10);
+    const torneosToShow = allTournaments.slice(-10);
     return (
         <div className='bg-primary h-full w-full px-8 py-8'>
             <div className='w-full max-w-screen-xl mx-auto'>

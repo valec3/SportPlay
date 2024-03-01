@@ -6,12 +6,12 @@ const Perfil = () => {
 
   return (
 <div className='bg-primary h-96 w-full px-[30px]'>
-			<div className='w-full'>
-				<h1 className=' text-3xl'>Perfil</h1>
-                <div>Nombre: {userData.first_name}</div>
-                <div>Apellido: {userData.last_name}</div>
-                <div>DNI: {userData.dni}</div>
-                <div>Email: {userData.email}</div>
+			<div className='w-full space-y-4'>
+				<h1 className=' text-3xl mt-5'>Perfil</h1>
+                <div className='font-Roboto '>Nombre: {userData.first_name}</div>
+                <div className='font-Roboto '>Apellido: {userData.last_name}</div>
+                <div className='font-Roboto '>DNI: {userData.dni}</div>
+                <div className='font-Roboto '>Email: {userData.email}</div>
 				
 			</div>
 		</div> 
