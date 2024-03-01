@@ -10,10 +10,10 @@ import Partidos from './pages/partidos/Partidos';
 import Equipos from './pages/equipos/Equipos';
 import Perfil from './pages/perfil/Perfil';
 import Activity from './components/modal/Activity';
+import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
 
 function App() {
 	return (
-
 		<BrowserRouter>
 			<div className='bg-primary text-base-100 h-screen flex flex-col relative z-0'>
 				<Header />
@@ -29,8 +29,9 @@ function App() {
 						<Route path='/Partidos' element={<Partidos />} />
 						<Route path='/Equipos' element={<Equipos />} />
 						<Route path='/Perfil' element={<Perfil />} />
-						<Route path='/Modals' element={<Modals/>} />
-						<Route path='/Activity' element={<Activity/>} />
+						<Route path='/Modals' element={<Modals />} />
+						<Route path='/Activity' element={<Activity />} />
+						<Route path='/administrar-torneo' element={<AdminTorneo />} />
 					</Routes>
 				</main>
 				<Footer />
