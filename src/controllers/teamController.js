@@ -1,6 +1,7 @@
 import Team from '../models/team.js';
 import { uploadImage } from '../lib/cloudinary.js';
 import fs from 'fs-extra';
+import { configCloudinary } from '../config/envs.js';
 
 const teamController = {
     createTeam: async (req, res) => {
