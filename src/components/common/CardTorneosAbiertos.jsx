@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const Card = ({ id, name, teams_count, logo, finished }) => {
+const Card = ({ id, name, teams_count, logo, status }) => {
 	const navigate = useNavigate();
 
 	const [isClicked, setIsClicked] = useState(false);
@@ -34,10 +34,10 @@ const Card = ({ id, name, teams_count, logo, finished }) => {
 					Torneo de <span className='text-accent'>{teams_count}</span> equipos
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base'>
-					Fecha: {finished == 0 ? 'Proximo' : 'Finalizado'}
+					Fecha: {status == ongoing ? 'Proximo' : 'Finalizado'}
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base text-warning '>
-					Vacantes: {finished == 1 ? 0 : teams_count}
+					Vacantes: {status == finished ? 0 : teams_count}
 				</h2>
 			</div>
 		</button>

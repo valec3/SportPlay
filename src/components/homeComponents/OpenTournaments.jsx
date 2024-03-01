@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTournaments } from '../../redux/featuresSlice/tournamentSlice';
 
 const OpenTournaments = () => {
+
     const dispatch = useDispatch();
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
 
@@ -19,35 +20,33 @@ const OpenTournaments = () => {
 				console.log(er);
 			})
 	}
-    
 
-    const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
-    const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
+	const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
+	const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
 
-    const updateNumCardsToShow = () => {
-        if (window.innerWidth < 640) {
-            setNumCardsToShow(2);
-        } else if (window.innerWidth < 1024) {
-            setNumCardsToShow(3);
-        } else {
-            setNumCardsToShow(4);
-        }
-    };
+	const updateNumCardsToShow = () => {
+		if (window.innerWidth < 640) {
+			setNumCardsToShow(2);
+		} else if (window.innerWidth < 1024) {
+			setNumCardsToShow(3);
+		} else {
+			setNumCardsToShow(4);
+		}
+	};
 
     useEffect(() => {
         
         updateNumCardsToShow();
         tournaments();
         window.addEventListener('resize', updateNumCardsToShow);
+		return () => {
+			window.removeEventListener('resize', updateNumCardsToShow);
+		};
+	}, []);
 
-        return () => {
-            window.removeEventListener('resize', updateNumCardsToShow);
-        };
-    }, []);
-
-    const handlePrevClick = () => {
-        setStartIndex(Math.max(startIndex - 1, 0));
-    };
+	const handlePrevClick = () => {
+		setStartIndex(Math.max(startIndex - 1, 0));
+	};
 
     const handleNextClick = () => {
         setStartIndex(Math.min(startIndex + 1, allTournaments.length - numCardsToShow));
@@ -85,6 +84,7 @@ const OpenTournaments = () => {
             </div>
         </div>
     );
+
 };
 
 export default OpenTournaments;

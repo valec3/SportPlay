@@ -4,16 +4,20 @@ const Cards = ({ name, teams_count, logo, finished}) => {
 	return (
 		<div className='bg-base-100 rounded-lg shadow-md p-0 text-center mt-6 h-[210px]'>
 			<div className='flex justify-center items-center relative'>
+
 				<div className='bg-neutral rounded-full w-12 h-12 p-1 flex justify-center items-center absolute top-[50%] translate-y-[-50%]'>
 					<img
 						src={logo==null||logo==''?'icons/trophy.png':logo}
 						alt='Trophy'
 						className={`${logo==null||logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+
 					/>  
 				</div>
 			</div>
 			<div>
+
 				<h1 className='text-primary text-2xl font-semibold mt-5'>{name}</h1>
+
 			</div>
 			<div className='mt-1.5'>
 				<div className='flex-1'>
