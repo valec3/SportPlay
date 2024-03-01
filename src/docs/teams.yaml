@@ -1,6 +1,8 @@
 paths:
     /api/teams/create:
         post:
+            tags:
+                - teams
             summary: Crear un nuevo equipo
             description: Crea un nuevo equipo con los detalles proporcionados.
             requestBody:
@@ -45,6 +47,8 @@ paths:
                                         description: Mensaje de error.
     /api/teams/list:
         get:
+            tags:
+                - teams
             summary: Obtener todos los equipos
             description: Obtiene una lista de todos los equipos existentes.
             responses:
@@ -68,6 +72,8 @@ paths:
                                         description: Mensaje de error.
     /api/teams/{id}:
         get:
+            tags:
+                - teams
             summary: Obtener equipo por ID
             description: Obtiene un equipo específico por su ID.
             parameters:
@@ -106,6 +112,8 @@ paths:
                                         description: Mensaje de error.
     /api/teams/update/{id}:
         put:
+            tags:
+                - teams
             summary: Actualizar equipo por ID
             description: Actualiza los detalles de un equipo específico por su ID.
             parameters:
@@ -154,6 +162,8 @@ paths:
                                         description: Mensaje de error.
     /api/teams/delete/{id}:
         delete:
+            tags:
+                - teams
             summary: Eliminar equipo por ID
             description: Elimina un equipo específico por su ID.
             parameters:
