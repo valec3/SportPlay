@@ -33,7 +33,7 @@ export const registerService = async (user) => {
     const [response] = await pool.query(query);
     if (!response) throw new Error('Internal server error');
     const [userCreated] = await pool.query(
-        'SELECT id FROM users WHERE email = ?',
+        'SELECT * FROM users WHERE email = ?',
         [email],
     );
     const token = await createAccessToken({ id: userCreated[0].id });
@@ -41,6 +41,8 @@ export const registerService = async (user) => {
         message: 'User registered successfully',
         data: {
             token,
+            ...userCreated[0],
+            password: 'hidden',
         },
     };
 };
