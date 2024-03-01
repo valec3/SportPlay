@@ -10,11 +10,8 @@ import Partidos from './pages/partidos/Partidos';
 import Equipos from './pages/equipos/Equipos';
 import Perfil from './pages/perfil/Perfil';
 import Activity from './components/modal/Activity';
-<<<<<<< HEAD
 import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
-=======
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
->>>>>>> dev-front
 
 function App() {
 	return (
