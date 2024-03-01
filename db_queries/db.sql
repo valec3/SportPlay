@@ -281,3 +281,47 @@ LEFT JOIN (
     FROM injuries
     GROUP BY player_id, game_id
 ) AS injuries ON p.id = injuries.player_id AND g.id = injuries.game_id;
+
+
+
+
+
+-- // {
+-- //     "home_team": {
+-- //         "id": "1",
+-- //         "score": "2",
+-- //         "players": [
+-- //             {
+-- //                 "id": "1",
+-- //                 "type": "goal"
+-- //             },
+-- //             {
+-- //                 "id": "2",
+-- //                 "type": "yellow"
+-- //             },
+-- //             {
+-- //                 "id": "3",
+-- //                 "type": "red"
+-- //             }
+-- //         ]
+-- //     },
+-- //     "away_team": {
+-- //         "id": "2",
+-- //         "score": "1",
+-- //         "players": [
+-- //             {
+-- //                 "id": "4",
+-- //                 "type": "goal"
+-- //             },
+-- //             {
+-- //                 "id": "5",
+-- //                 "type": "yellow"
+-- //             },
+-- //             {
+-- //                 "id": "6",
+-- //                 "type": "injury"
+-- //             }
+-- //         ]
+-- //     },
+-- //     "game_id": "1"
+-- // }

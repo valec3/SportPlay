@@ -2,6 +2,8 @@ import { pool } from '../db/index.js';
 
 export const createPlayerService = async (req, res) => {
     const { first_name, last_name, camiseta, dni, team_id } = req.body;
+    if (!first_name || !last_name || !camiseta || !dni || !team_id)
+        throw new Error('All fields are required');
     const [userExists] = await pool.query('SELECT * FROM users WHERE dni = ?', [
         dni,
     ]);
