@@ -113,7 +113,45 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "home_team": {
+                                        "id": 1,
+                                        "score": 0,
+                                        "players": [
+                                            {
+                                                "id": 1,
+                                                "type": "injury"
+                                            },
+                                            {
+                                                "id": 2,
+                                                "type": "goal"
+                                            }
+                                        ]
+                                    },
+                                    "away_team": {
+                                        "id": 2,
+                                        "score": 0,
+                                        "players": [
+                                            {
+                                                "id": 2,
+                                                "type": "red"
+                                            },
+                                            {
+                                                "id": 3,
+                                                "type": "yellow"
+                                            }
+                                        ]
+                                    },
+                                    "game_id": 1
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "All fields are required"
                     }
                 }
             }
