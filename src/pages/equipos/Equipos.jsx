@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-const Equipos = () => {
+
+const Partidos= () => {
   return (
 <div className='bg-primary h-96 w-full px-[30px]'>
 			<div className='w-full'>
@@ -10,4 +11,4 @@ const Equipos = () => {
 		</div>   )
 }
 
-export default Equipos
+export default Partidos
