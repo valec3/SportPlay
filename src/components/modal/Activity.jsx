@@ -1,14 +1,33 @@
-import { useNavigate } from "react-router-dom/dist";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom/dist";
+import PeticionAllTournaments from "../common/PeticionAllTournaments";
+
+const roleActivity =(role)=>{
+	let roleUser = ''
+	if(role=='Administrador'){
+	roleUser='/administrar-torneo'
+}else if(role=='Jugador'){
+	roleUser='/Jugador'
+}
+return roleUser
+}
 
 const Tournament = ({ logo, name, role }) => (
+	
 	<div className='w-full bg-secondary rounded-[14px] px-5 flex items-center justify-between py-[13px]'>
 		<div className='flex items-center gap-[6px]'>
-			<img src={logo} alt='Logo' />
-			<span className='text-xl font-semibold font-SourceSansPro'>{name}</span>
+		<div className='rounded-full bg-neutral w-[40px] h-[40px] flex justify-center items-center'>
+								<img 
+							src={logo == null || logo == '' ? 'icons/trophy.png' : logo}
+							alt='Logo'
+							className={`${logo == null || logo == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+							/>
+							</div>
+			<span className='text-lg font-semibold font-SourceSansPro'>{name}</span>
 		</div>
-		<span className='text-accent font-SourceSansPro leading-[19.2px]'>
+		<Link to={roleActivity(role)} className='text-accent font-SourceSansPro leading-[19.2px]'>
 			{role}
-		</span>
+		</Link>
 	</div>
 );
 
@@ -34,14 +53,10 @@ const Match = ({
 
 export default function Activity() {
 	const navigate = useNavigate();
-	// Data for active tournaments
-	const activeTournaments = [
-		{
-			name: 'Copa Las Condes',
-			role: 'Administrador',
-			logo: 'images/AdminCopaLogo.png',
-		},
-	];
+	PeticionAllTournaments();
+	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+	const userId = useSelector((state) => state.userData.userData.id);
+	const activeTournaments = allTournaments.filter((obj)=>obj.creator_id===userId)
 
 	const activePlayerTournaments = [
 		{ name: 'Torneo A', role: 'Jugador', logo: 'images/cup.png' },
@@ -80,7 +95,7 @@ export default function Activity() {
 	};
 
 	return (
-		<section className='pt-[108px] pb-[119px] bg-primary text-base-100'>
+		<section className='pt-[30px] pb-[119px] bg-primary text-base-100'>
 			<div className='px-[30px]'>
 				<h1 className='font-Roboto font-bold text-[32px]'>Actividad</h1>
 				<div className='flex justify-between mt-[43px]'>
@@ -96,7 +111,7 @@ export default function Activity() {
 			<div className=' mt-[25px] flex flex-col gap-3'>
 				<div className='px-[30px] flex flex-col gap-3'>
 					{activeTournaments.map((tournament, index) => (
-						<Tournament key={index} {...tournament} />
+						<Tournament key={index} {...tournament} role={'Administrador'} />
 					))}
 				</div>
 

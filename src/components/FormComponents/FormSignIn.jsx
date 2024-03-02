@@ -30,13 +30,11 @@ const FormSignIn = ({ handleLogin }) => {
 		axios
 			.post('https://tournament-sport.onrender.com/api/auth/register', values)
 			.then(res => {
-				//console.log(res.data);
-
 				setTimeout(() => {
 					setSubmitOk(false);
 					resetForm();
 					dispatch(initiaSesion());
-					dispatch(changeData(values));
+					dispatch(changeData(res.data.data));
 					navigate('/');
 				}, 1000);
 			})

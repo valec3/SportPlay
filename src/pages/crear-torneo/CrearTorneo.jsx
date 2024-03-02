@@ -1,11 +1,14 @@
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useSelector } from 'react-redux';
+
 function CrearTorneo() {
 	const optionsNumberTeams = ['4',  '8',  '16'];
 	const optionsNumberPlayers = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
+	const userData = useSelector((state) => state.userData.userData);
 	const initialValues = {
 		logo: '',
-		creator_id: 18,
+		creator_id: null,
 		name: '',
 		type_tournament: 0,
 		teams_count: 0,
@@ -13,11 +16,10 @@ function CrearTorneo() {
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			//const data = JSON.stringify(values, null, 2);
-			console.log('data', values);
+			const data = {...values, creator_id: userData.id}
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
-				values
+				data
 			);
 
 			console.log('Success:', response); // Handle successful response data
@@ -46,6 +48,7 @@ function CrearTorneo() {
 
 			<Formik
 				initialValues={initialValues}
+				
 				validate={values => {
 					const errors = {};
 					if (!values.name) {

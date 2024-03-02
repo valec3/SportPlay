@@ -68,12 +68,12 @@ function AdminTorneo() {
 					<h1 className='text-[2rem] text-base-100 mb-8'>
 						Administrador del Torneo
 					</h1>
-					<button
-						type='button'
+					<Link 
+						to='/crear-torneo'
 						className='bg-accent btn btn-sm border-accent text-base-100 '
 					>
 						Crear torneo
-					</button>
+					</Link>
 				</div>
 			</div>
 			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
