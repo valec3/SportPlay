@@ -15,26 +15,29 @@ import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 function App() {
 	return (
 		<BrowserRouter>
-			<div className='bg-primary text-base-100 h-screen flex flex-col relative z-0'>
-				<Header />
-				<main className='bg-primary'>
-					<Routes>
-						<Route path='/' element={<Home />} />
-						<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />
-						<Route path='/ResultadosTorneos' element={<ResultadosTorneos />} />
-						<Route
-							path='/DetalleTorneoAbierto/:id'
-							element={<DetalleTorneoAbierto />}
-						/>
-						<Route path='/Partidos' element={<Partidos />} />
-						<Route path='/Equipos' element={<Equipos />} />
-						<Route path='/Perfil' element={<Perfil />} />
-						<Route path='/Modals' element={<Modals />} />
-						<Route path='/Activity' element={<Activity />} />
-						<Route path='crear-torneo' element={<CrearTorneo />} />
-					</Routes>
-				</main>
-				<Footer />
+		  
+			<div className='text-base-100 h-screen flex flex-col relative z-0 lg:bg-hero lg:bg-[#2F2F42] lg:bg-cover lg:overflow-y-auto'>
+			    <div className='lg:w-[1224px] lg:mx-auto lg:h-screen bg-white'>	
+					<Header />
+					<main className=''>
+						<Routes>
+							<Route path='/' element={<Home />} />
+							<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />
+							<Route path='/ResultadosTorneos' element={<ResultadosTorneos />} />
+							<Route
+								path='/DetalleTorneoAbierto/:id'
+								element={<DetalleTorneoAbierto />}
+							/>
+							<Route path='/Partidos' element={<Partidos />} />
+							<Route path='/Equipos' element={<Equipos />} />
+							<Route path='/Perfil' element={<Perfil />} />
+							<Route path='/Modals' element={<Modals />} />
+							<Route path='/Activity' element={<Activity />} />
+							<Route path='crear-torneo' element={<CrearTorneo />} />
+						</Routes>
+					</main>
+					<Footer />
+				</div>	
 			</div>
 		</BrowserRouter>
 	);
