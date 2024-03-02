@@ -2,6 +2,8 @@ import { pool } from '../db/index.js';
 
 export const createGameService = async (req, res) => {
     const { date, time, home_team_id, away_team_id, location } = req.body;
+    if (!date || !time || !home_team_id || !away_team_id || !location)
+        throw new Error('All fields are required');
     const query = `INSERT INTO games (date, time, home_team_id, away_team_id, location) VALUES ('${date}', '${time}', '${home_team_id}', '${away_team_id}', '${location}');`;
     const [response] = await pool.query(query);
     if (!response) throw new Error('Internal server error');
@@ -84,6 +86,7 @@ export const addGameStatsService = async (req, res) => {
 
 export const getGamesByTeamService = async (req, res) => {
     const { team_id } = req.params;
+    if (!team_id) throw new Error('Team id is required');
     const query = `SELECT * FROM games WHERE home_team_id = '${team_id}' OR away_team_id = '${team_id}';`;
     const [games] = await pool.query(query);
     if (!games) throw new Error('Internal server error');
@@ -95,6 +98,7 @@ export const getGamesByTeamService = async (req, res) => {
 
 export const getDataGameByIdService = async (req, res) => {
     const { game_id } = req.params;
+    if (!game_id) throw new Error('Game id is required');
     const [gameStats] = await pool.query(
         `SELECT * FROM game_team_player_stats WHERE game_id = '${game_id}';`,
     );

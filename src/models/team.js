@@ -22,6 +22,9 @@ Team.getAllTeams = async () => {
 Team.createTeam = async (newTeam) => {
     try {
         const { creator_id, name, logo_url } = newTeam;
+        if (!creator_id || !name || !logo_url) {
+            throw new Error('All fields are required');
+        }
         const [results] = await connection.query(
             'INSERT INTO teams (creator_id, name, logo_url) VALUES (?, ?, ?)',
             [creator_id, name, logo_url],
@@ -50,6 +53,7 @@ Team.getTeamById = async (teamId) => {
 // Método para actualizar un equipo por su ID
 Team.updateTeamById = async (teamId, updatedTeam) => {
     try {
+        if (!teamId) throw new Error('Team ID is required');
         const [results] = await connection.query(
             'UPDATE teams SET ? WHERE id = ?',
             [updatedTeam, teamId],
