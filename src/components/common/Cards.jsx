@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cards = ({ name, teams_count, logo, finished}) => {
+const Cards = ({ name, teams_count, logo, status}) => {
 	return (
 		<div className='bg-base-100 rounded-lg shadow-md p-0 text-center mt-6 h-[210px]'>
 			<div className='flex justify-center items-center relative'>
@@ -22,10 +22,10 @@ const Cards = ({ name, teams_count, logo, finished}) => {
 			<div className='mt-1.5'>
 				<div className='flex-1'>
 					<p className='text-primary font-semibold mb-1.5'>de {teams_count} equipos</p>
-					<p className='text-primary font-semibold mb-1.5'>{finished==0?'Proximo':'Finalizado'}</p>
+					<p className='text-primary font-semibold mb-1.5'>{status==ongoing?'Proximo':'Finalizado'}</p>
 				</div>
 				<div className='text-warning font-semibold'>
-					<p>Vacantes: {finished==1?0:teams_count}</p>
+					<p>Vacantes: {status==finished?0:teams_count}</p>
 				</div>
 			</div>
 			<div className='flex justify-between items-center w-full h-[34px]  bg-secondary mt-4 px-6'>

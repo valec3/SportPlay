@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Cards from '../common/Cards';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { getTournaments } from '../../redux/featuresSlice/tournamentSlice';
+import { useSelector } from 'react-redux';
+import PeticionAllTournaments from '../common/PeticionAllTournaments';
 
 const OpenTournaments = () => {
 
-    const dispatch = useDispatch();
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
-
-    const tournaments = () => {
-		axios
-			.get('https://tournament-sport.onrender.com/api/tournament/all-tournaments'
-			)
-			.then((res) => {
-				dispatch(getTournaments(res.data))
-			})
-			.catch((er) =>{
-				console.log(er);
-			})
-	}
 
 	const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
 	const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
@@ -33,11 +19,11 @@ const OpenTournaments = () => {
 			setNumCardsToShow(4);
 		}
 	};
-
+    PeticionAllTournaments();
     useEffect(() => {
         
         updateNumCardsToShow();
-        tournaments();
+        
         window.addEventListener('resize', updateNumCardsToShow);
 		return () => {
 			window.removeEventListener('resize', updateNumCardsToShow);

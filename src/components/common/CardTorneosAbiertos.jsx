@@ -34,10 +34,10 @@ const Card = ({ id, name, teams_count, logo, status }) => {
 					Torneo de <span className='text-accent'>{teams_count}</span> equipos
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base'>
-					Fecha: {status == ongoing ? 'Proximo' : 'Finalizado'}
+					Fecha: {status == 'ongoing' ? 'Proximo' : 'Finalizado'}
 				</h2>
 				<h2 className='text-Roboto text-SemiBold text-base text-warning '>
-					Vacantes: {status == finished ? 0 : teams_count}
+					Vacantes: {status == 'finished' ? 0 : teams_count}
 				</h2>
 			</div>
 		</button>
