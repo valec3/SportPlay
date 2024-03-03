@@ -65,20 +65,20 @@ function CrearTorneo() {
 				Torneo nuevo
 			</h2>
 			
-			<div className=' flex flex-col bg-neutral relative mx-auto w-[134px] h-[134px] rounded-full'>
-				<input 
-					type="file" 
-					className="file-input-ghost absolute w-[134px] h-[134px] rounded-full opacity-100"
-					onChange={handleImageChange}
-				/>
-				<div className='w-[134px] h-[134px] flex items-center'>
+			<div className=' flex flex-col items-center  mx-auto w-full '>
+				
+				<div className='w-[134px] h-[134px] flex items-center rounded-full z-[2] bg-neutral'>
 					<img
 						src={`${imageUrl?imageUrl:'/images/torneo-nuevo.svg'} `}
 						alt='logo tornep'
-						className='mx-auto'
+						className='mx-auto w-[134px] h-[134px] rounded-full z-0'
 					/>
 				</div>
-				
+				<input 
+					type="file" 
+					className="file-input bg-secondary h-[56px] w-full rounded-xl mt-5"
+					onChange={handleImageChange}
+				/>
 			</div>
 
 			<Formik
