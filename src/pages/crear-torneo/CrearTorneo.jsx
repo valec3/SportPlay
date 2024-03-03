@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom/dist';
 
 function CrearTorneo() {
 	const optionsNumberTeams = ['4',  '8',  '16'];
 	const optionsNumberPlayers = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
 	const userData = useSelector((state) => state.userData.userData);
+	const [fileImg, setFileImg] = useState();
+	const [imageUrl, setImageUrl] = useState(null);
 	const initialValues = {
 		logo: '',
 		creator_id: null,
@@ -16,7 +20,16 @@ function CrearTorneo() {
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			const data = {...values, creator_id: userData.id}
+			
+			// const jsonString = JSON.stringify();
+			// console.log(jsonString);
+			console.log(fileImg);
+			const file = new FormData();
+			file.append('logo', fileImg)
+			
+			const data = {...values, creator_id: userData.id, logo: file}
+			console.log(file);
+
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
 				data
@@ -33,17 +46,41 @@ function CrearTorneo() {
 			setSubmitting(false); // Reset submitting state in case of error
 		}
 	};
+	const handleImageChange = (e) =>{
+			
+			const file = (e.target.files[0].File);
+			setFileImg(file);
+			const reader = new FileReader();		
+			reader.onload = () => {
+			  const url = reader.result;
+
+			  setImageUrl(url);
+			};
+			if (file) {
+			  reader.readAsDataURL(file);
+			}  
+	}
+
 	return (
 		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
 			<h2 className='text-[22px] md:text-[32px] text-base-100 mt-1 text-center font-bold'>
 				Torneo nuevo
 			</h2>
-			<div className='w-full flex flex-col  items-center'>
-				<img
-					src='/images/torneo-nuevo.svg'
-					alt='imagen que representa al texto torneo nuevo'
-					className='w-[134px] h-[134px]'
+			
+			<div className=' flex flex-col bg-neutral relative mx-auto w-[134px] h-[134px] rounded-full'>
+				<input 
+					type="file" 
+					className="file-input-ghost absolute w-[134px] h-[134px] rounded-full opacity-100"
+					onChange={handleImageChange}
 				/>
+				<div className='w-[134px] h-[134px] flex items-center'>
+					<img
+						src={`${imageUrl?imageUrl:'/images/torneo-nuevo.svg'} `}
+						alt='logo tornep'
+						className='mx-auto'
+					/>
+				</div>
+				
 			</div>
 
 			<Formik
@@ -165,7 +202,7 @@ function CrearTorneo() {
 					</p>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
-					<button>close</button>
+					<Link to='/administrar-torneo' className='bg-black'>close</Link>
 				</form>
 			</dialog>
 		</div>

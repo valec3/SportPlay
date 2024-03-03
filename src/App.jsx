@@ -34,7 +34,7 @@ function App() {
 						<Route path='/Modals' element={<Modals />} />
 						<Route path='/Activity' element={<Activity />} />
 						<Route path='/administrar-torneo' element={<AdminTorneo />} />
-						<Route path='crear-torneo' element={<CrearTorneo/>} />
+						<Route path='/crear-torneo' element={<CrearTorneo/>} />
 						<Route path='/jugador' element={<Jugador/>} />
 					</Routes>
 				</main>

@@ -109,11 +109,11 @@ export default function Activity() {
 			</div>
 
 			<div className=' mt-[25px] flex flex-col gap-3'>
-				<div className='px-[30px] flex flex-col gap-3'>
+				{activeTournaments&&<div className='px-[30px] flex flex-col gap-3'>
 					{activeTournaments.map((tournament, index) => (
 						<Tournament key={index} {...tournament} role={'Administrador'} />
 					))}
-				</div>
+				</div>}
 
 				<div className='px-[30px] flex flex-col gap-3'>
 					{activePlayerTournaments.map((tournament, index) => (
@@ -131,12 +131,16 @@ export default function Activity() {
 
 				<div>
 					<div className=' mt-9'>
-						<div className='flex items-center gap-[5px]'>
-							<img src={activeTournaments[0].logo} alt='Logo' />
-							<span className='text-lg font-semibold font-Roboto'>
-								{activeTournaments[0].name}
-							</span>
-						</div>
+						
+						{
+							activeTournaments.map((obj, index) => (
+							<div key={index} className='flex items-center gap-[5px]'>
+								<img src={obj.logo} alt='Logo' />
+								<span className='text-lg font-semibold font-Roboto'>
+								{obj.name}
+								</span>
+						    </div>))
+						}
 
 						<div className=' mt-[25px] flex flex-col gap-3'>
 							<div className='flex flex-col gap-3'>

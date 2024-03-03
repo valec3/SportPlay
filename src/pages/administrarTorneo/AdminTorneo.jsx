@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { FaAngleDown } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
+import { useSelector } from 'react-redux';
 
 function AdminTorneo() {
 	const currentTournament = (
@@ -9,7 +11,7 @@ function AdminTorneo() {
 			<summary className='m-1 btn bg-secondary border-secondary'>
 				<FaAngleDown className='text-base-100 ' />
 			</summary>
-			<ul className='p-2 shadow menu dropdown-content z-[1] bg-secondary rounded-box w-52'>
+			<ul className='p-2 shadow menu dropdown-content z-[1] bg-primary border border-secondary w-52'>
 				<li className=''>
 					<Link className='text-right block'>Compartir Administración</Link>
 				</li>
@@ -44,23 +46,14 @@ function AdminTorneo() {
 	const wonTournament = (
 		<img src='/icons/trophyGreen.svg' alt='icono de calcelar' />
 	);
-	const [tournaments, setTournaments] = useState([]); // State to store fetched data
-	const [error, setError] = useState(null); // State to store any errors
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios.get(
-					'https://tournament-sport.onrender.com/api/tournament/all-tournaments'
-				);
-				setTournaments(response.data);
-			} catch (error) {
-				setError(error);
-			}
-		};
-
-		fetchData();
-	}, [tournaments]);
+	const handleTournamentCancel = ()=>{
+		
+	}
+	PeticionAllTournaments();
+	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+    const userId = useSelector((state) => state.userData.userData.id);
+	const activeTournaments = allTournaments.filter((obj)=>obj.creator_id===userId).slice(-15).reverse();
+	
 	return (
 		<div className='space-y-4'>
 			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
@@ -77,9 +70,9 @@ function AdminTorneo() {
 				</div>
 			</div>
 			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
-			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
+			<div className='m-auto pb-60 w-[327px] md:w-[400px] space-y-4 text-neutral'>
 				<h2>Torneos creados</h2>
-				{tournaments.map((tournament, index) => {
+				{activeTournaments.map((tournament, index) => {
 					return (
 						<div
 							className='flex flex-row items-center justify-between bg-secondary h-[61px] p-4 rounded-[14px]'
