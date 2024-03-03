@@ -3,14 +3,16 @@ import { useDispatch } from 'react-redux';
 import { getTournaments } from '../../redux/featuresSlice/tournamentSlice';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { getTeams } from '../../redux/featuresSlice/teamSlice';
 
 const PeticionAllTournaments = () => {
   
     const dispatch = useDispatch();
     const apiURL = 'https://tournament-sport.onrender.com/api/tournament/all-tournaments';
+	const apiTeamsURL = 'https://tournament-sport.onrender.com/api/teams/list';
 
 			useEffect(() => {
-				const fetchData = async () => {
+				const fetchDataTournaments = async () => {
 				  try {
 					const res = await axios.get(apiURL);
 					console.log(res.data);
@@ -19,8 +21,17 @@ const PeticionAllTournaments = () => {
 					console.log(er);
 				  }
 				};
-			
-				fetchData();
+				const fetchDataTeams = async () => {
+					try {
+					  const res = await axios.get(apiTeamsURL);
+					  console.log(res.data);
+					  dispatch(getTeams(res.data))
+					} catch (er) {
+					  console.log(er);
+					}
+				  };
+				fetchDataTeams();
+				fetchDataTournaments();
 			  }, []);
 	return null
 }
