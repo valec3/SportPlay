@@ -20,13 +20,11 @@ function CrearTorneo() {
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			
 			// const jsonString = JSON.stringify();
 			// console.log(jsonString);
 			console.log(fileImg);
 			const file = new FormData();
 			file.append('logo', fileImg)
-			
 			const data = {...values, creator_id: userData.id, logo: file}
 			console.log(file);
 
@@ -48,7 +46,7 @@ function CrearTorneo() {
 	};
 	const handleImageChange = (e) =>{
 			
-			const file = (e.target.files[0].File);
+			const file = (e.target.files[0]);
 			setFileImg(file);
 			const reader = new FileReader();		
 			reader.onload = () => {
