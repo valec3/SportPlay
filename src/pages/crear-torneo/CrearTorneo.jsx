@@ -20,17 +20,17 @@ function CrearTorneo() {
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			// const jsonString = JSON.stringify();
-			// console.log(jsonString);
-			console.log(fileImg);
-			const file = new FormData();
-			file.append('logo', fileImg)
-			const data = {...values, creator_id: userData.id, logo: file}
-			console.log(file);
+			var fileFormData = new FormData();			
+			fileFormData.append('logo', fileImg );
+			fileFormData.append('name', values.name );
+			fileFormData.append('type_tournament', values.type_tournament );
+			fileFormData.append('teams_count', values.teams_count );
+			fileFormData.append('players_count', values.players_count );
+			fileFormData.append('creator_id', userData.id );
 
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
-				data
+				fileFormData
 			);
 
 			console.log('Success:', response); // Handle successful response data
@@ -51,12 +51,11 @@ function CrearTorneo() {
 			const reader = new FileReader();		
 			reader.onload = () => {
 			  const url = reader.result;
-
 			  setImageUrl(url);
 			};
 			if (file) {
 			  reader.readAsDataURL(file);
-			}  
+			} 
 	}
 
 	return (
@@ -74,11 +73,15 @@ function CrearTorneo() {
 						className='mx-auto w-[134px] h-[134px] rounded-full z-0'
 					/>
 				</div>
-				<input 
-					type="file" 
-					className="file-input bg-secondary h-[56px] w-full rounded-xl mt-5"
-					onChange={handleImageChange}
-				/>
+				<form encType='multipart/form-data' name='fileinfo' method='post'>
+					<input 
+						type="file" 
+						name='file'
+						className="file-input bg-secondary h-[56px] w-full rounded-xl mt-5"
+						onChange={handleImageChange}
+					/>
+				</form>
+				
 			</div>
 
 			<Formik
