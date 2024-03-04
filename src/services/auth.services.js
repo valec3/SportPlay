@@ -5,6 +5,7 @@ import { pool } from '../db/index.js';
 export const loginService = async (user) => {
     const query = 'SELECT * FROM users WHERE email = ?;';
     const { email, password } = user;
+    if (!email || !password) throw new Error('All fields are required');
     const [userFind] = await pool.query(query, [email]);
     if (!userFind) return res.json({ message: 'User does not exist' });
     const matchPassword = comparePassword(password, userFind[0].password);
@@ -23,6 +24,8 @@ export const loginService = async (user) => {
 
 export const registerService = async (user) => {
     const { email, password, dni, first_name, last_name } = user;
+    if (!email || !password || !dni || !first_name || !last_name)
+        throw new Error('All fields are required');
     const [userExists] = await pool.query(
         'SELECT * FROM users WHERE email = ?',
         [email],
@@ -33,7 +36,7 @@ export const registerService = async (user) => {
     const [response] = await pool.query(query);
     if (!response) throw new Error('Internal server error');
     const [userCreated] = await pool.query(
-        'SELECT id FROM users WHERE email = ?',
+        'SELECT * FROM users WHERE email = ?',
         [email],
     );
     const token = await createAccessToken({ id: userCreated[0].id });
@@ -41,6 +44,8 @@ export const registerService = async (user) => {
         message: 'User registered successfully',
         data: {
             token,
+            ...userCreated[0],
+            password: 'hidden',
         },
     };
 };

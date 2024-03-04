@@ -32,6 +32,129 @@
                     }
                 }
             }
+        },
+        "/api/games/add": {
+            "post": {
+                "tags": ["games"],
+                "summary": "Add a new game",
+                "description": "",
+                "operationId": "addGame",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "home_team": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "format": "int64"
+                                            },
+                                            "score": {
+                                                "type": "integer",
+                                                "format": "int64"
+                                            },
+                                            "players": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "format": "int64"
+                                                        },
+                                                        "type": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "away_team": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "format": "int64"
+                                            },
+                                            "score": {
+                                                "type": "integer",
+                                                "format": "int64"
+                                            },
+                                            "players": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "format": "int64"
+                                                        },
+                                                        "type": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "game_id": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "home_team": {
+                                        "id": 1,
+                                        "score": 0,
+                                        "players": [
+                                            {
+                                                "id": 1,
+                                                "type": "injury"
+                                            },
+                                            {
+                                                "id": 2,
+                                                "type": "goal"
+                                            }
+                                        ]
+                                    },
+                                    "away_team": {
+                                        "id": 2,
+                                        "score": 0,
+                                        "players": [
+                                            {
+                                                "id": 2,
+                                                "type": "red"
+                                            },
+                                            {
+                                                "id": 3,
+                                                "type": "yellow"
+                                            }
+                                        ]
+                                    },
+                                    "game_id": 1
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "All fields are required"
+                    }
+                }
+            }
         }
     }
 }

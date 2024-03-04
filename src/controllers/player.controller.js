@@ -3,7 +3,8 @@ import {
     deletePlayerService,
     getPlayersByTeamService,
     updatePlayerService,
-    getAlPlayersService,
+    getAllPlayersService,
+    getProfileService,
 } from '../services/player.services.js';
 export const createPlayer = async (req, res) => {
     try {
@@ -46,6 +47,16 @@ export const updatePlayer = async (req, res) => {
 export const getAllPlayers = async (req, res) => {
     try {
         const data = await getAllPlayersService(req, res);
+        res.json({ ...data });
+    } catch (error) {
+        console.error('Error en la consulta:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getProfile = async (req, res) => {
+    try {
+        const data = await getProfileService(req, res);
         res.json({ ...data });
     } catch (error) {
         console.error('Error en la consulta:', error);

@@ -281,3 +281,86 @@ LEFT JOIN (
     FROM injuries
     GROUP BY player_id, game_id
 ) AS injuries ON p.id = injuries.player_id AND g.id = injuries.game_id;
+
+
+DROP VIEW game_team_stats IF EXISTS;
+CREATE VIEW game_team_stats AS
+SELECT
+    g.id AS game_id,
+    g.date,
+    g.time,
+    g.location,
+    t.id AS team_id,
+    t.name AS team_name,
+    COALESCE(home_goals.goals_count, 0) AS goals,
+    COALESCE(home_red_cards.red_cards_count, 0) AS red_cards,
+    COALESCE(home_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
+    COALESCE(home_injuries.injuries_count, 0) AS injuries
+FROM games g
+INNER JOIN teams t ON g.home_team_id = t.id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS goals_count
+    FROM goals
+    GROUP BY game_id
+) AS home_goals ON g.id = home_goals.game_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS red_cards_count
+    FROM red_cards
+    GROUP BY game_id
+) AS home_red_cards ON g.id = home_red_cards.game_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS yellow_cards_count
+    FROM yellow_cards
+    GROUP BY game_id
+) AS home_yellow_cards ON g.id = home_yellow_cards.game_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS injuries_count
+    FROM injuries
+    GROUP BY game_id
+) AS home_injuries ON g.id = home_injuries.game_id;
+
+
+
+
+
+
+
+-- // {
+-- //     "home_team": {
+-- //         "id": "1",
+-- //         "score": "2",
+-- //         "players": [
+-- //             {
+-- //                 "id": "1",
+-- //                 "type": "goal"
+-- //             },
+-- //             {
+-- //                 "id": "2",
+-- //                 "type": "yellow"
+-- //             },
+-- //             {
+-- //                 "id": "3",
+-- //                 "type": "red"
+-- //             }
+-- //         ]
+-- //     },
+-- //     "away_team": {
+-- //         "id": "2",
+-- //         "score": "1",
+-- //         "players": [
+-- //             {
+-- //                 "id": "4",
+-- //                 "type": "goal"
+-- //             },
+-- //             {
+-- //                 "id": "5",
+-- //                 "type": "yellow"
+-- //             },
+-- //             {
+-- //                 "id": "6",
+-- //                 "type": "injury"
+-- //             }
+-- //         ]
+-- //     },
+-- //     "game_id": "1"
+-- // }

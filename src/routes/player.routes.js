@@ -5,6 +5,7 @@ import {
     updatePlayer,
     getPlayersByTeam,
     getAllPlayers,
+    getProfile,
 } from '../controllers/player.controller.js';
 import { validatorJwt } from '../middlewares/validatorJwt.js';
 
@@ -21,5 +22,6 @@ router.get('/list/:team_id', validatorJwt, getPlayersByTeam);
 router.delete('/delete/:dni', validatorJwt, deletePlayer);
 router.put('/update', validatorJwt, updatePlayer);
 router.get('/all', validatorJwt, getAllPlayers);
+router.get('/profile', validatorJwt, getProfile);
 
 export default router;

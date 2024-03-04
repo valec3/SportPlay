@@ -2,6 +2,8 @@ import { pool } from '../db/index.js';
 
 export const createPlayerService = async (req, res) => {
     const { first_name, last_name, camiseta, dni, team_id } = req.body;
+    if (!first_name || !last_name || !camiseta || !dni || !team_id)
+        throw new Error('All fields are required');
     const [userExists] = await pool.query('SELECT * FROM users WHERE dni = ?', [
         dni,
     ]);
@@ -85,10 +87,32 @@ export const verifyPlayerService = async (dni) => {
     return response.length > 0;
 };
 
-export const getAlPlayersService = async (req, res) => {
+export const getAllPlayersService = async (req, res) => {
     const [players] = await pool.query('SELECT * FROM players');
     if (players.length < 1) throw new Error('No players found');
     return {
         players,
+    };
+};
+
+export const getProfileService = async (req, res) => {
+    const { dni } = req.params;
+    const [profile] = await pool.query('SELECT * FROM players WHERE dni = ?', [
+        dni,
+    ]);
+    if (profile.length < 1) throw new Error('No profile found');
+    // get team name
+    const [team] = await pool.query('SELECT * FROM teams WHERE id = ?', [
+        profile[0].team_id,
+    ]);
+    // get members of the team
+    const [members] = await pool.query(
+        'SELECT * FROM players WHERE team_id = ?',
+        [profile[0].team_id],
+    );
+    return {
+        profile,
+        team: team[0],
+        members,
     };
 };
