@@ -56,7 +56,7 @@ const Result = ({  name, teams_count, logo, status }) => {
             className={`${logo == null || logo == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
           />
         </div>
-        <h1 className='text-lg font-Sans Pro  ml-4'>{name}</h1>
+        <h1 className='text-lg font-Sans Pro truncate ml-4'>{name}</h1>
         <p className='text-warning  font-SourceSansPro text-[14px] mt-2 ml-10'>
           {startDate}
         </p>

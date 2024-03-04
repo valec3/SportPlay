@@ -1,12 +1,12 @@
 export default function MyTable() {
 	return (
-		<div className='p-1 pt-0 w-full bg-secondary rounded-[16px] mb-4'>
-			<table className='w-full  '>
+		<div className='p-1 pt-0 w-full bg-secondary rounded-[16px] mb-4 lg:mx-4 lg:w-[87%]'>
+			<table className='w-full mb-5'>
 				{/* head */}
 				<thead className=''>
-					<tr className='text-base-100 text-left  '>
-						<th className='p-1.5'>#</th>
-						<th className='p-1.5'>Equipos</th>
+					<tr className='text-base-100 text-left   '>
+						<th className='p-1.5'></th>
+						<th className='p-1.5 py-5'>Equipos</th>
 						<th className='p-1.5 border-b border-primary'>TA</th>
 						<th className='p-1.5 border-b border-primary'>TR</th>
 						<th className='p-1.5 border-b border-primary'>L</th>

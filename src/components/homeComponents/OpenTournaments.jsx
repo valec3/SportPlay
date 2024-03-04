@@ -16,7 +16,7 @@ const OpenTournaments = () => {
 		} else if (window.innerWidth < 1024) {
 			setNumCardsToShow(3);
 		} else {
-			setNumCardsToShow(4);
+			setNumCardsToShow(5);
 		}
 	};
     PeticionAllTournaments();
@@ -42,7 +42,7 @@ const OpenTournaments = () => {
 
     return (
         <div className='w-full'>
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4 relative  mx-auto'>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3  gap-3 mt-4 relative  mx-auto lg:mx-5 lg:flex lg:justify-center lg:gap-6'>
                 {torneosToShow.map((torneo, index) => (
                     <Cards key={index} {...torneo} />
                 ))}
