@@ -12,7 +12,7 @@ const initialState = {
         type_tournament:0,
         teams_count: 0,
         creator_id: null,
-        finished: 0
+        status: ''
         },
     ]
 };

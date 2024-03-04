@@ -11,7 +11,8 @@ const Perfil = () => {
                 <div className='font-Roboto '>Nombre: {userData.first_name}</div>
                 <div className='font-Roboto '>Apellido: {userData.last_name}</div>
                 <div className='font-Roboto '>DNI: {userData.dni}</div>
-                <div className='font-Roboto '>Email: {userData.email}</div>				
+                <div className='font-Roboto '>Email: {userData.email}</div>
+                <div className='font-Roboto '>Id: {userData.id}</div>				
 			</div>
 		</div> 
           )

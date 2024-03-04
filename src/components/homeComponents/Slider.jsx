@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
 
 function AutoPlay() {
   const settings = {
@@ -14,33 +15,20 @@ function AutoPlay() {
     autoplaySpeed: 2000,
     cssEase: "linear"
   };
+  const allTeams = useSelector((state) => state.allTeams.allTeams);
   return (
     <div className="slider-container  ">
-      <Slider {...settings} className='w-[90%] mx-auto'>
-      <div className="">
-				<img className="m-auto" src='images\real-madrid (1).png' alt='slide1' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (2).png' alt='slide2' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (3).png' alt='slide3' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (4).png' alt='slide4' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (4).png' alt='slide5' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (3).png' alt='slide6' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (2).png' alt='slide7' />
-			</div>
-			<div className="">
-				<img className="m-auto" src='images\real-madrid (1).png' alt='slide8' />
-			</div>
+      <Slider {...settings} className='w-[90%] mx-auto pb-5'>
+            {allTeams.map((team)=>(
+			<div key={team.id} className='rounded-md bg-secondary w-[40px] h-[60px]  flex justify-center items-center'>
+			<img
+				className={`${team.logo_url==null||team.logo_url==''?'w-[40px] h-[45px]':'p-0.5 w-full h-full '}`}
+				src={team.logo_url==null||team.logo_url==''?'icon/trophy.png':team.logo_url}
+				alt='logo'
+			/>
+		</div>
+			))}
+			
       </Slider>
     </div>
   );

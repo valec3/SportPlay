@@ -76,7 +76,7 @@ const IconUser = () => {
                             <Link to='/crear-torneo'>Crear torneo</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <a href='#'>Jugador</a>
+                            <Link to='/jugador'>Jugador</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Resultados</a>

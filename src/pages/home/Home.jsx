@@ -32,7 +32,7 @@ function Home()  {
 			</section>
 			{/*section equipos de torneo */}
 			<section className='border-b  border-[#545458] space-y-4 px-[30px] pb-8'>
-				<Title2 title='Resultado de torneos' link='ResultadosTorneos'></Title2>
+				<Title2 title='Resultado del ultimo torneo' link='ResultadosTorneos'></Title2>
 				<div className='flex justify-center w-full '>
 					<MyTable/>
 				</div>
