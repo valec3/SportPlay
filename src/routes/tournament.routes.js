@@ -4,10 +4,11 @@ import {
     getAllTournaments,
     getTournamentsByUserId,
     closeTournament,
-    tournamentTeams,
+    allTeamsPerTournament,
     indexTeamToTournament,
     getInfoTournament,
-    teamsPerTournament
+    teamsPerTournament,
+    deleteTeamPerTournament
 } from '../controllers/tournament.controller.js';
 import { validatorJwt } from '../middlewares/validatorJwt.js';
 
@@ -22,9 +23,10 @@ router.post('/create-tournament', createTournament);
 router.get('/all-tournaments', getAllTournaments);
 router.get('/my-tournaments', validatorJwt, getTournamentsByUserId);
 router.patch('/my-tournaments', validatorJwt, closeTournament);
-router.get('/tournament-teams', tournamentTeams);
+router.get('/all-tournament-teams', allTeamsPerTournament);
+router.get('/tournament-teams', teamsPerTournament);
 router.post('/tournament-teams', indexTeamToTournament);
-router.get('/tournament-teams/:id', teamsPerTournament)
+router.delete('/tournament-teams', deleteTeamPerTournament);
 router.get('/info-tournament', getInfoTournament);
 
 export default router;

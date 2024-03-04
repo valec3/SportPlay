@@ -1,4 +1,15 @@
 paths:
+    /api/tournament/all-tournament-teams:
+    get:
+      tags:
+        - teams per tournament
+      summary: Get all teams per tournament
+      operationId: getAllTeamsPerTournament
+      responses:
+        "200":
+          description: Successful operation
+        "500":
+          description: Internal server error
     /api/tournament/tournament-teams:
         post:
             tags:
@@ -88,24 +99,12 @@ paths:
                     description: Unauthorized
                 "404":
                     description: User not found
-        patch:
+        delete:
             tags:
-                - tournaments
-            summary: Close a tournament.
-            description: |
-                Cierra un torneo con el ID de usuario especificado. El ID de usuario debe proporcionarse como un parámetro de consulta denominado "id" en la URL. Ejemplo:
-
-                http://localhost:3100/api/tournament/my-tournaments?id=18
-
-                *Requiere autenticación JWT. Por favor, proporcione un token JWT válido en el encabezado 'Authorization' para acceder a este endpoint.
-            operationId: CloseATournament
-            parameters:
-                - in: query
-                  name: id
-                  required: true
-                  schema:
-                      type: string
-                  description: The user ID to close a tournament.
+                - teams per tournament
+            summary: Eliminar un equipo de un torneo
+            description: Elimina un equipo de un torneo especificado. Se espera que los ID del torneo y del equipo se proporcionen en el cuerpo de la solicitud como un objeto JSON.
+            operationId: deleteTeamFromTournament
             requestBody:
                 required: true
                 content:
@@ -113,45 +112,26 @@ paths:
                         schema:
                             type: object
                             properties:
-                                id:
+                                tournament_id:
                                     type: integer
-            security:
-                - bearerAuth:
-                      [
-                          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTcwODkwNzUxNSwiZXhwIjoxNzA4OTQzNTE1fQ.tpCL-NlBGYLovjxtD_ZMtK_70EV36t4BAVFzwUzeQD8,
-                      ]
+                                team_id:
+                                    type: integer
+                            required:
+                                - tournament_id
+                                - team_id
             responses:
                 "200":
-                    description: Successful operation
+                    description: Equipo eliminado correctamente
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/Tournaments"
-                                example:
-                                    message: "Torneo cerrado de forma exitosa"
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
                 "400":
-                    description: Invalid username id supplied
+                    description: Solicitud incorrecta
                 "401":
-                    description: Unauthorized
-                "404":
-                    description: User not found
-
-components:
-    schemas:
-        Tournament:
-            type: object
-            properties:
-                id:
-                    type: integer
-                logo:
-                    type: string
-                creator_id:
-                    type: string
-                name:
-                    type: string
-                players_count:
-                    type: integer
-                teams_count:
-                    type: integer
-                type_tournament:
-                    type: string # or integer, depending on your use case
+                    description: No autorizado
+                "500":
+                    description: Error interno del servidor
