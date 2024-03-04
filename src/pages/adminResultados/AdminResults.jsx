@@ -1,46 +1,81 @@
+import { useSelector } from "react-redux";
+import PeticionAllTournaments from "../../components/common/PeticionAllTournaments";
+import { useState } from "react";
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 const AdminResult = () => {
-	const activeTournaments = [
-		{
-			name: 'Copa Las Condes',
-			role: 'Administrador',
-			logo: 'images/AdminCopaLogo.png',
-			copa: 'images/trophy.svg',
-			logoEquipo: 'images/TeamAdminTorneoLogo.png',
-		},
-		{
-			name: 'Copa Relampago',
-			role: 'Administrador',
-			logo: 'images/real-madrid (4).png',
-			copa: 'images/trophy.svg',
-			logoEquipo: 'images/TeamAdminTorneoLogo.png',
-		},
-		{
-			name: 'Copa Trueno',
-			role: 'Administrador',
-			logo: 'images/real-madrid (2).png',
-			copa: 'images/trophy.svg',
-			logoEquipo: 'images/TeamAdminTorneoLogo.png',
-		},
-	];
+
+	PeticionAllTournaments();
+	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+	const torneosToShow = allTournaments.slice(-15).reverse();
+	const allTeams = useSelector((state) => state.allTeams.allTeams);
+	const teamsToShow = allTeams.slice(-15).reverse();
+	const [selectTournament, setselectTournament] = useState({
+		name: null,
+		logo: null,
+	});
+	const [menuTournamnet, setmenuTournamnet] = useState(false)
+
+	const handleTournament=(id)=>{
+		const selectTournaments = torneosToShow.find((obj)=>obj.id===id);
+		selectTournaments&&setselectTournament(selectTournaments)
+		handleClick()
+	}
+	const handleModalContainerClick = e => e.stopPropagation();
+	const handleClick =()=>{
+		setmenuTournamnet(!menuTournamnet)
+	}
 
 	return (
 		<section className='pb-[119px] bg-primary text-base-100 xl:w-[1224px] xl:m-auto '>
 			<div className='px-[30px] h-52 flex flex-col justify-center gap-[5px] md:items-center'>
 				<h1 className='font-Roboto font-bold text-[32px] mb-5'>Resultados</h1>
-
-				<select
-					id=''
-					className='w-[320px] h-[61px] rounded-xl px-3 bg-secondary md:w-[537px]'
-				>
-					<option value='' className=' lg:w-[380px]'>
-						Seleccione un torneo
-					</option>
-					{activeTournaments.map(tournament => (
-						<option key={tournament.name} value={tournament.name}>
-							{tournament.name}
-						</option>
-					))}
-				</select>
+				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%]'>
+					<div className=' bg-secondary rounded-2xl py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{selectTournament.name?selectTournament.name:'Elija un Torneo'}</h2>
+						<div>
+							<MdKeyboardArrowDown
+								className={` ${menuTournamnet ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-5 `}
+							/>
+						</div>
+					</div>
+				</div>
+            { menuTournamnet && (
+                <div className='w-full h- absolute top-0 left-0 bottom-0 flex justify-center items-center'
+                    onClick={handleClick}>
+                   <div className='absolute rounded-lg  top-[290px]  w-[70%] md:w-[60%] lg:w-[50%] bg-secondary  shadow-lg'
+                    onClick={handleModalContainerClick}>
+                    <ul className='h-[400px] overflow-scroll'>           
+                        {torneosToShow.map((tournament)=>{
+							return(
+								<div key={tournament.id}>
+									<li 
+										 
+										onClick={()=>{handleTournament(tournament.id)}}
+										className='pl-[48px] h-[47px] my-3 flex items-center hover:bg-neutral/20'>
+										<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
+											<img
+												src={
+													tournament.logo?tournament.logo
+														: '/icons/trophyAdminTournament.svg'
+												}
+												alt='icono de trofeo'
+												className='w-[40px] h-[40px] rounded-full'
+											/>
+										</div>
+										<div className='text-xl'>{tournament.name}</div>									
+								</li>
+								<hr className='border-[#545458] w-full'/>
+								</div>
+								 
+							)
+							
+						 }) }  
+                    </ul>
+                </div> 
+                </div>
+                
+            )}
+				
 			</div>
 
 			<img
@@ -50,9 +85,18 @@ const AdminResult = () => {
 			/>
 
 			<div className='flex items-center justify-center gap-5'>
-				<img src={activeTournaments[1].logo} alt='Logo' />
-				<span className='text-lg font-semibold font-Roboto'>
-					{activeTournaments[1].name}
+			<div className='w-[55px] h-[55px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
+											<img
+												src={
+													selectTournament.logo?selectTournament.logo
+														: '/icons/trophyAdminTournament.svg'
+												}
+												alt='icono de trofeo'
+												className='w-[48px] h-[48px] rounded-full'
+											/>
+										</div>
+				<span className='text-lg md:text-2xl font-semibold font-Roboto'>
+					{selectTournament.name?selectTournament.name:'#'}
 				</span>
 			</div>
 
@@ -71,31 +115,48 @@ const AdminResult = () => {
 						/>
 					</svg>
 				</div>
-				<div className='w-[268px] h-[59px] flex items-center justify-center gap-5  rounded-[14px]  bg-secondary'>
-					<img src={activeTournaments[0].logoEquipo} alt='Logo' />
-					<p className='text-lg text-neutral md:text-[20px] font-Roboto'>
-						Equipo &#34;A&#34;
+				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%] gap-5  rounded-[14px]  bg-secondary'>
+					
+					<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
+							<img
+								src={teamsToShow[0].logo==null || teamsToShow[0].logo==''?
+								'images/teamLogoDef.png':teamsToShow[0].logo
+												}
+								alt='icono de equipo'
+								className='w-[40px] h-[40px] rounded-full'
+							/>				
+						</div>
+					<p className='text-lg text-neutral md:text-[20px] font-Roboto truncate'>
+						1# {teamsToShow[0].name}
 					</p>
 				</div>
 			</div>
 
 			<div className='w-[90%] m-auto bg-secondary mt-[45px] text-base-100 rounded-[14px] text-center py-[28px] px-[15px] md:w-[65%]'>
 				<h2 className=' text-[32px] font-semibold font-Roboto md:text-[38px] md:leading-[54px]'>
-					Finales
+					Final
 				</h2>
 				<p className='text-lg text-neutral md:text-[20px] font-Roboto'>
 					29 Julio 2024
 				</p>
 
 				<div className='mt-[15px] flex items-center justify-between md:justify-evenly'>
-					<div>
-						<img src='images/real-madrid.png' alt='real madrid' />
-						<p className=' text-lg text-neutral font-semibold leading-[27px] font-Roboto mt-3'>
-							Equipo “A”
+					<div className=" w-[35%]">
+					<div className='w-[45px] h-[45px]  rounded-full bg-neutral flex justify-center items-center mx-auto'>
+							<img
+								src={teamsToShow[0].logo==null || teamsToShow[0].logo==''?
+								'images/teamLogoDef.png':teamsToShow[0].logo
+												}
+								alt='icono de equipo'
+								className='w-[40px] h-[40px] rounded-full '
+							/>				
+						</div>
+						<p className=' text-lg text-neutral font-semibold leading-[27px] font-Roboto mt-3 truncate'>
+						{teamsToShow[0].name}
 						</p>
 					</div>
 
-					<div className='flex gap-2'>
+					<div className='flex justify-center gap-2 w-[30%]'>
 						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[64px]'>
 							2
 						</span>
@@ -107,10 +168,18 @@ const AdminResult = () => {
 						</span>
 					</div>
 
-					<div>
-						<img src='images/real-madrid1.png' alt='real madrid' />
-						<p className=' text-lg text-neutral font-semibold leading-[27px] font-Roboto mt-3'>
-							Equipo “B”
+					<div className="w-[35%]">
+					<div className='w-[45px] h-[45px] mx-auto rounded-full bg-neutral flex justify-center items-center'>
+							<img
+								src={teamsToShow[1].logo==null || teamsToShow[1].logo==''?
+								'images/teamLogoDef.png':teamsToShow[1].logo
+												}
+								alt='icono de equipo'
+								className='w-[40px] h-[40px] rounded-full'
+							/>				
+						</div>						
+						<p className=' text-lg text-neutral font-semibold leading-[27px] font-Roboto mt-3 truncate'>
+							{teamsToShow[1].name}
 						</p>
 					</div>
 				</div>

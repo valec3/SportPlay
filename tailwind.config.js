@@ -18,7 +18,7 @@ export default {
 				SourceSansPro: ['Source Sans Pro', 'sans-serif'],
 			},
 		    backgroundImage: {
-				hero: "url('/public/images/fondo.svg')",
+				hero: "url('/images/fondo.svg')",
 			},
 		},
 	},

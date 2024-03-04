@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export default function Addplayer() {
-	const [teamSelect, setTeamSelect] = useState(null)
+	const [teamSelect, setTeamSelect] = useState({
+		name: null,
+			logo_url: null,
+	})
 	const [jugadores, setJugadores] = useState([]);
 	const [nombre, setNombre] = useState('');
 	const [apellido, setApellido] = useState('');
@@ -35,6 +38,7 @@ export default function Addplayer() {
 	const handleTeam=(id)=>{
 		const selectTeams = allTeams.find((obj)=>obj.id===id);
 		selectTeams&&setTeamSelect(selectTeams)
+		handleClick()
 	}
 
 	return (
@@ -44,9 +48,8 @@ export default function Addplayer() {
 					<div>
 						<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
 							<img
-								src={
-									teamSelect?teamSelect.logo_url
-										: 'images/teamLogoDef.png'
+								src={teamSelect.logo_url==null || teamSelect.logo_url==''?
+								'images/teamLogoDef.png':teamSelect.logo_url
 												}
 								alt='icono de equipo'
 								className='w-[40px] h-[40px] rounded-full'
@@ -56,7 +59,7 @@ export default function Addplayer() {
 					<h1 className='text-xl font-semibold font-Roboto w-[30%] text-center'>
 						Equipo:  
 					</h1>
-					<div className=' bg-secondary rounded-2xl py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{teamSelect?teamSelect.name:'Elija un equipo'}</h2>
+					<div className=' bg-secondary rounded-2xl py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{teamSelect.name?teamSelect.name:'Elija un equipo'}</h2>
 						<div>
 							<MdKeyboardArrowDown
 								className={` ${menuTeams ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-2 `}
@@ -74,9 +77,9 @@ export default function Addplayer() {
                     <ul className='h-[400px] overflow-scroll'>           
                         {allTeams.map((team)=>{
 							return(
-								<>
+								<div key={team.id}>
 									<li 
-										key={team.id} 
+										 
 										onClick={()=>{handleTeam(team.id)}}
 										className='pl-[48px] h-[47px] my-3 flex items-center hover:bg-neutral/20'>
 										<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
@@ -92,7 +95,7 @@ export default function Addplayer() {
 										<div className='text-xl'>{team.name}</div>									
 								</li>
 								<hr className='border-[#545458] w-full'/>
-								</>
+								</div>
 								 
 							)
 							
