@@ -50,7 +50,7 @@ function AutoPlay() {
 				{allTeams.map(team => (
 					<div
 						key={team.id}
-						className='rounded-md bg-secondary w-[40px] h-[60px]  flex justify-center items-center'
+						className='w-[40px] h-[60px]  flex justify-center items-center'
 					>
 						<img
 							className={`${team.logo_url == null || team.logo_url == '' ? 'w-full h-full object-contain  rounded-lg ' : 'p-0.5 w-full h-full object-contain '}`}
