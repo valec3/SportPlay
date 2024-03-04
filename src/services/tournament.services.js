@@ -110,7 +110,7 @@ export const closeTournamentService = async (tournamentId) => {
     }
 };
 
-export const getTournamentTeamsService = async () => {
+export const getAllTeamsPerTournamentService = async () => {
     try {
         const query = 'SELECT * FROM tournament_teams';
         const tournament_teams = await pool.query(query);
@@ -124,15 +124,26 @@ export const getTournamentTeamsService = async () => {
 
 export const getTeamsPerTournamentService = async (tournamentId) => {
     try {
-        const query = `SELECT * FROM tournament_teams WHERE tournament_id = ?`;
-        const result = await pool.query(query, [tournamentId]);
-
-        return result;
+        if (!tournamentId) {
+            throw new Error('El ID del torneo no puede estar vacío.');
+        }
+        
+        // Obtener la lista de equipos para el torneo dado
+        const teamsQuery = `SELECT * FROM tournament_teams WHERE tournament_id = ?`;
+        const teamsResult = await pool.query(teamsQuery, [tournamentId]);
+        const teams = teamsResult[0]
+        
+        // Calcular el conteo total de equipos
+        const totalTeams = teamsResult[1].length+1;
+        
+        return { total_teams: totalTeams, teams: teams };
     } catch (error) {
         console.error('Error al obtener los equipos del torneo:', error);
         throw new Error('Error interno del servidor');
     }
 }
+
+
 
 export const indexTeamToTournamentService = async (data, logoImage) => {
     try {
@@ -202,6 +213,20 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
     }
 };
 
+export const deleteTeamPerTournamentService = async (data) => {
+    try {
+        if (!data.tournament_id || !data.team_id) {
+            throw new Error('El ID del torneo o del equipo no pueden estar vacíos.');
+        }
+
+        const query = `DELETE FROM tournament_teams WHERE tournament_id = ? AND team_id = ?`;
+        await pool.query(query, [data.tournament_id, data.team_id]);
+
+        return { message: 'Equipo eliminado correctamente' };
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
 
 export const getInfoTournamentService = async (id) => {
     const query = `
