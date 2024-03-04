@@ -1,0 +1,78 @@
+{
+    "paths": {
+        "/api/tournament/tournament-teams": {
+            "post": {
+                "tags": [
+                    "teams per tournament"
+                ],
+                "summary": "Relate a team to a tournament",
+                "responses": {
+                    "201": {
+                        "message": "Equipo creado y agregado al torneo exitosamente",
+                        "team": 37
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "team_id": {
+                                        "type": "integer"
+                                    },
+                                    "tournament_id": {
+                                        "type": "integer"
+                                    },
+                                    "creator_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "logo_url": {
+                                        "type": "file"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "teams per tournament"
+                ],
+                "summary": "Get the teams related by tournament.",
+                "operationId": "getTeamsPerTournament",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The id of the tournament to obtain the teams related to it."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sucessfull operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/tournaments"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    }
+}
