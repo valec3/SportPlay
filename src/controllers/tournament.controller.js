@@ -1,4 +1,4 @@
-import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdService, closeTournamentService, getTournamentTeamsService, indexTeamToTournamentService, getTeamsPerTournamentService } from '../services/tournament.services.js'
+import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdService, closeTournamentService, getTournamentTeamsService, indexTeamToTournamentService, getTeamsPerTournamentService, getInfoTournamentService } from '../services/tournament.services.js'
 
 
 export const createTournament = async (req, res) => {
@@ -79,27 +79,22 @@ export const indexTeamToTournament = async (req, res) => {
     try {
         const data = req.body;
         const logoImage = req.files?.logo_url;
-        const { teamId, message } = await indexTeamToTournamentService(
-            data,
-            logoImage,
-        );
-        if (message === 'Equipo creado y agregado al torneo exitosamente') {
-            res.status(201).json({ message: message, team: teamId });
-        } else {
-            res.status(201).json({ message: 'Equipo asignado correctamente' });
+        const { teamId, message } = await indexTeamToTournamentService(data, logoImage);
+
+        if (message === 'El equipo ya está asociado a este torneo.') {
+            return res.status(400).json({ error: message });
         }
+        
+        res.status(201).json({ message, team: teamId });
     } catch (error) {
         console.error('Error al asignar el equipo al torneo: ', error.message);
-        if (error.message === 'El ID del equipo proporcionado no existe.') {
-            return res.status(400).json({ error: error.message });
-        } else if (
-            error.message === 'El ID del torneo proporcionado no existe.'
-        ) {
+        if (error.message === 'El ID del equipo proporcionado no existe.' || error.message === 'El ID del torneo proporcionado no existe.') {
             return res.status(400).json({ error: error.message });
         }
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
+
 
 export const getInfoTournament = async (req, res) => {
     try {

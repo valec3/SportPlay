@@ -137,9 +137,7 @@ export const getTeamsPerTournamentService = async (tournamentId) => {
 export const indexTeamToTournamentService = async (data, logoImage) => {
     try {
         if (!data.tournament_id) {
-            throw new Error(
-                'El ID del torneo proporcionado no puede estar vacío.',
-            );
+            throw new Error('El ID del torneo proporcionado no puede estar vacío.');
         }
 
         let teamId;
@@ -155,28 +153,55 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
             const [results] = await pool.query(insertTeamQuery, [data.creator_id, data.name, logo_url]);
             teamId = results.insertId;
             console.log("Id del nuevo equipo: ", teamId);
+
+            const tournamentTeamQuery = `SELECT * FROM tournament_teams WHERE team_id = ? AND tournament_id = ?`;
+            const [tournamentTeamResult] = await pool.query(tournamentTeamQuery, [teamId, data.tournament_id]);
+
+            if (tournamentTeamResult.length > 0) {
+                const message = 'El equipo ya está asociado a este torneo.';
+                return { message };
+            }
+
+            const query = `INSERT INTO tournament_teams (team_id, tournament_id) VALUES (?, ?)`;
+            await pool.query(query, [teamId, data.tournament_id]);
+
+            return { teamId, message: 'Equipo creado y agregado al torneo exitosamente' };
         } else {
             teamId = data.team_id;
+
+            const tournamentTeamQuery = `SELECT * FROM tournament_teams WHERE team_id = ? AND tournament_id = ?`;
+            const [tournamentTeamResult] = await pool.query(tournamentTeamQuery, [teamId, data.tournament_id]);
+
+            if (tournamentTeamResult.length > 0) {
+                const message = 'El equipo ya está asociado a este torneo.';
+                return { message };
+            }
+
+            // Validar si el equipo existe en la tabla de equipos
+            const teamExistsQuery = `SELECT id FROM teams WHERE id = ?`;
+            const [teamExistsResult] = await pool.query(teamExistsQuery, [teamId]);
+
+            if (teamExistsResult.length === 0) {
+                throw new Error('El ID del equipo proporcionado no existe.');
+            }
+
+            const tournamentExistsQuery = `SELECT id FROM tournament WHERE id = ?`;
+            const [tournamentExistsResult] = await pool.query(tournamentExistsQuery, [data.tournament_id]);
+
+            if (tournamentExistsResult.length === 0) {
+                throw new Error('El ID del torneo proporcionado no existe.');
+            }
+
+            const query = `INSERT INTO tournament_teams (team_id, tournament_id) VALUES (?, ?)`;
+            await pool.query(query, [teamId, data.tournament_id]);
+
+            return { teamId, message: 'Equipo asignado correctamente' };
         }
-
-        const tournamentExistsQuery = `SELECT id FROM tournament WHERE id = ?`;
-        const [tournamentExistsResult] = await pool.query(
-            tournamentExistsQuery,
-            [data.tournament_id],
-        );
-
-        if (tournamentExistsResult.length === 0) {
-            throw new Error('El ID del torneo proporcionado no existe.');
-        }
-
-        const query = `INSERT INTO tournament_teams (team_id, tournament_id) VALUES (?, ?)`;
-        const result = await pool.query(query, [teamId, data.tournament_id]);
-
-        return result;
     } catch (error) {
         throw new Error(error.message);
     }
 };
+
 
 export const getInfoTournamentService = async (id) => {
     const query = `
