@@ -10,14 +10,15 @@ import Partidos from './pages/partidos/Partidos';
 import Equipos from './pages/equipos/Equipos';
 import Perfil from './pages/perfil/Perfil';
 import Activity from './components/modal/Activity';
+import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 
 function App() {
 	return (
 		<BrowserRouter>
-		  
+ 
 			<div className='text-base-100 h-screen flex flex-col relative z-0 lg:bg-hero lg:bg-[#2F2F42] lg:bg-cover lg:overflow-y-auto'>
-			    <div className='lg:w-[1224px] lg:mx-auto lg:h-screen bg-white'>	
+			    <div className='lg:w-[1224px] lg:mx-auto bg-white'>	
 					<Header />
 					<main className=''>
 						<Routes>
@@ -33,11 +34,13 @@ function App() {
 							<Route path='/Perfil' element={<Perfil />} />
 							<Route path='/Modals' element={<Modals />} />
 							<Route path='/Activity' element={<Activity />} />
+							<Route path='/administrar-torneo' element={<AdminTorneo />} />
 							<Route path='crear-torneo' element={<CrearTorneo />} />
 						</Routes>
 					</main>
 					<Footer />
 				</div>	
+			
 			</div>
 		</BrowserRouter>
 	);

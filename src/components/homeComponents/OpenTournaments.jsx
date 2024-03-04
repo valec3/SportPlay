@@ -1,53 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import Cards from '../common/Cards';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { getTournaments } from '../../redux/featuresSlice/tournamentSlice';
+import { useSelector } from 'react-redux';
+import PeticionAllTournaments from '../common/PeticionAllTournaments';
 
 const OpenTournaments = () => {
-    const dispatch = useDispatch();
+
     const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
 
-    const tournaments = () => {
-		axios
-			.get('https://tournament-sport.onrender.com/api/tournament/all-tournaments'
-			)
-			.then((res) => {
-				dispatch(getTournaments(res.data))
-			})
-			.catch((er) =>{
-				console.log(er);
-			})
-	}
-    
+	const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
+	const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
 
-    const [startIndex, setStartIndex] = useState(0); // Índice inicial del primer torneo a mostrar
-    const [numCardsToShow, setNumCardsToShow] = useState(2); // Número de tarjetas a mostrar
-
-    const updateNumCardsToShow = () => {
-        if (window.innerWidth < 640) {
-            setNumCardsToShow(2);
-        } else if (window.innerWidth < 1024) {
-            setNumCardsToShow(3);
-        } else {
-            setNumCardsToShow(4);
-        }
-    };
-
+	const updateNumCardsToShow = () => {
+		if (window.innerWidth < 640) {
+			setNumCardsToShow(2);
+		} else if (window.innerWidth < 1024) {
+			setNumCardsToShow(3);
+		} else {
+			setNumCardsToShow(5);
+		}
+	};
+    PeticionAllTournaments();
     useEffect(() => {
         
         updateNumCardsToShow();
-        tournaments();
+        
         window.addEventListener('resize', updateNumCardsToShow);
+		return () => {
+			window.removeEventListener('resize', updateNumCardsToShow);
+		};
+	}, []);
 
-        return () => {
-            window.removeEventListener('resize', updateNumCardsToShow);
-        };
-    }, []);
-
-    const handlePrevClick = () => {
-        setStartIndex(Math.max(startIndex - 1, 0));
-    };
+	const handlePrevClick = () => {
+		setStartIndex(Math.max(startIndex - 1, 0));
+	};
 
     const handleNextClick = () => {
         setStartIndex(Math.min(startIndex + 1, allTournaments.length - numCardsToShow));
@@ -57,7 +42,7 @@ const OpenTournaments = () => {
 
     return (
         <div className='w-full'>
-            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4 relative  mx-auto'>
+            <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3  gap-3 mt-4 relative  mx-auto lg:mx-5 lg:flex lg:justify-center lg:gap-6'>
                 {torneosToShow.map((torneo, index) => (
                     <Cards key={index} {...torneo} />
                 ))}
@@ -85,6 +70,7 @@ const OpenTournaments = () => {
             </div>
         </div>
     );
+
 };
 
 export default OpenTournaments;
