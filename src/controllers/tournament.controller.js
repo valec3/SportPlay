@@ -1,12 +1,5 @@
-import {
-    newTournamentService,
-    getAllTournamentsService,
-    getTournamentsByUserIdService,
-    closeTournamentService,
-    getTournamentTeamsService,
-    indexTeamToTournamentService,
-    getInfoTournamentService,
-} from '../services/tournament.services.js';
+import { newTournamentService, getAllTournamentsService, getTournamentsByUserIdService, closeTournamentService, getTournamentTeamsService, indexTeamToTournamentService, getTeamsPerTournamentService } from '../services/tournament.services.js'
+
 
 export const createTournament = async (req, res) => {
     try {
@@ -69,6 +62,18 @@ export const tournamentTeams = async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
+
+export const teamsPerTournament = async (req, res) => {
+    try {
+        const tournamentId = req.query.id
+        const teamsData = await getTeamsPerTournamentService(tournamentId);
+        const teamsPerTournament = teamsData[0]
+        res.json(teamsPerTournament);
+    } catch (error) {
+        console.error('Error al obtener los equipos por torneo:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
 
 export const indexTeamToTournament = async (req, res) => {
     try {

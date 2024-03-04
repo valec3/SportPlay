@@ -122,6 +122,18 @@ export const getTournamentTeamsService = async () => {
     }
 };
 
+export const getTeamsPerTournamentService = async (tournamentId) => {
+    try {
+        const query = `SELECT * FROM tournament_teams WHERE tournament_id = ?`;
+        const result = await pool.query(query, [tournamentId]);
+
+        return result;
+    } catch (error) {
+        console.error('Error al obtener los equipos del torneo:', error);
+        throw new Error('Error interno del servidor');
+    }
+}
+
 export const indexTeamToTournamentService = async (data, logoImage) => {
     try {
         if (!data.tournament_id) {
@@ -130,32 +142,21 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
             );
         }
 
-        const teamExistsQuery = `SELECT id FROM teams WHERE id = ?`;
-        const [teamExistsResult] = await pool.query(teamExistsQuery, [
-            data.team_id,
-        ]);
+        let teamId;
 
-        if (teamExistsResult.length === 0) {
+        if (!data.team_id) {
             let logo_url = null;
             if (logoImage) {
                 const result = await uploadImage(logoImage.tempFilePath);
                 logo_url = result.secure_url;
-
                 await fs.unlink(logoImage.tempFilePath);
             }
             const insertTeamQuery = `INSERT INTO teams (creator_id, name, logo_url) VALUES (?, ?, ?)`;
-            const [results] = await pool.query(insertTeamQuery, [
-                data.creator_id,
-                data.name,
-                logo_url,
-            ]);
-            const teamId = results.insertId;
-            console.log('Id del nuevo team: ', teamId);
-
-            return {
-                teamId,
-                message: 'Equipo creado y agregado al torneo exitosamente',
-            };
+            const [results] = await pool.query(insertTeamQuery, [data.creator_id, data.name, logo_url]);
+            teamId = results.insertId;
+            console.log("Id del nuevo equipo: ", teamId);
+        } else {
+            teamId = data.team_id;
         }
 
         const tournamentExistsQuery = `SELECT id FROM tournament WHERE id = ?`;
@@ -169,10 +170,7 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
         }
 
         const query = `INSERT INTO tournament_teams (team_id, tournament_id) VALUES (?, ?)`;
-        const result = await pool.query(query, [
-            data.team_id,
-            data.tournament_id,
-        ]);
+        const result = await pool.query(query, [teamId, data.tournament_id]);
 
         return result;
     } catch (error) {

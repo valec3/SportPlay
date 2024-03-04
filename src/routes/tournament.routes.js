@@ -7,6 +7,7 @@ import {
     tournamentTeams,
     indexTeamToTournament,
     getInfoTournament,
+    teamsPerTournament
 } from '../controllers/tournament.controller.js';
 import { validatorJwt } from '../middlewares/validatorJwt.js';
 
@@ -23,6 +24,7 @@ router.get('/my-tournaments', validatorJwt, getTournamentsByUserId);
 router.patch('/my-tournaments', validatorJwt, closeTournament);
 router.get('/tournament-teams', tournamentTeams);
 router.post('/tournament-teams', indexTeamToTournament);
+router.get('/tournament-teams/:id', teamsPerTournament)
 router.get('/info-tournament', getInfoTournament);
 
 export default router;
