@@ -4,7 +4,6 @@ import { FaUserLarge } from 'react-icons/fa6';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { RxExit } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
 import { Link } from 'react-router-dom';
 import { changeData } from '../../redux/featuresSlice/userSlice';
@@ -50,10 +49,10 @@ const IconUser = () => {
                 className={`${isRegister?'w-[35px] flex':'w-[34px] flex justify-end'} `}
             >                
                 <FaUserLarge
-						className={`${isRegister?'text-accent':'text-base-100 w-[20px]'} lg:mr-4`}
+						className={`${isRegister?'text-accent w-[20px] lg:w-[45px] lg:h-[45px]':'text-base-100 w-[20px]'} lg:mr-`}
 					/>
 					{isRegister&&<MdKeyboardArrowDown
-						className={` ${isDropdownOpen ? 'rotate-180' : 'rotate-0'} transition-all duration-300 ml-2 text-accent`}
+						className={` ${isDropdownOpen ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-2 text-accent`}
 					/>}
             </button>
             {/* Dropdown para el menú de usuario */}
@@ -76,7 +75,7 @@ const IconUser = () => {
                             <Link to='/crear-torneo'>Crear torneo</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <Link to='/jugador'>Jugador</Link>
+                            <Link to='/addPlayer'>Jugador</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
                             <a href='#'>Resultados</a>
