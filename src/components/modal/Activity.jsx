@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom/dist";
 import PeticionAllTournaments from "../common/PeticionAllTournaments";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const roleActivity =(role)=>{
 	let roleUser = ''
@@ -53,10 +55,19 @@ const Match = ({
 
 export default function Activity() {
 	const navigate = useNavigate();
+	const [activity, setActivity] = useState(false)
 	PeticionAllTournaments();
 	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
 	const userId = useSelector((state) => state.userData.userData.id);
-	const activeTournaments = allTournaments.filter((obj)=>obj.creator_id===userId)
+	const activeTournaments = allTournaments.filter((obj)=>obj.creator_id===userId);
+	useEffect(() => {
+		if(activeTournaments.length>0){
+			setActivity(true)
+		}else{
+			setActivity(false)
+		}
+	}, [allTournaments])
+	
 
 	const activePlayerTournaments = [
 		{ name: 'Torneo A', role: 'Jugador', logo: 'images/cup.png' },
@@ -96,79 +107,109 @@ export default function Activity() {
 
 	return (
 		<section className='pt-[30px] pb-[119px] bg-primary text-base-100'>
-			<div className='px-[30px]'>
-				<h1 className='font-Roboto font-bold text-[32px]'>Actividad</h1>
-				<div className='flex justify-between mt-[43px]'>
-					<h2 className='font-bold text-[22px] font-Roboto leading-[24.53px] tracking-[0.263px]'>
-						Torneos Activos
-					</h2>
-					<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto'>
-						Crear Torneo
-					</span>
+			{activity?
+				<>
+				<div className='px-[30px]'>
+					<h1 className='font-Roboto font-bold text-[32px]'>Actividad</h1>
+					<div className='flex justify-between mt-[43px]'>
+						<h2 className='font-bold text-[22px] font-Roboto leading-[24.53px] tracking-[0.263px]'>
+							Torneos Activos
+						</h2>
+						<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto'>
+							Crear Torneo
+						</span>
+					</div>
 				</div>
-			</div>
 
-			<div className=' mt-[25px] flex flex-col gap-3'>
-				{activeTournaments&&<div className='px-[30px] flex flex-col gap-3'>
-					{activeTournaments.map((tournament, index) => (
-						<Tournament key={index} {...tournament} role={'Administrador'} />
-					))}
-				</div>}
+				<div className=' mt-[25px] flex flex-col gap-3'>
+					{activeTournaments&&<div className='px-[30px] flex flex-col gap-3'>
+						{activeTournaments.map((tournament, index) => (
+							<Tournament key={index} {...tournament} role={'Administrador'} />
+						))}
+					</div>}
 
-				<div className='px-[30px] flex flex-col gap-3'>
-					{activePlayerTournaments.map((tournament, index) => (
-						<Tournament key={index} {...tournament} />
-					))}
+					<div className='px-[30px] flex flex-col gap-3'>
+						{activePlayerTournaments.map((tournament, index) => (
+							<Tournament key={index} {...tournament} />
+						))}
+					</div>
 				</div>
-			</div>
 
-			<img className='mt-[102px]' src='images/divider.svg' alt='Divider' />
+				<img className='mt-[102px]' src='images/divider.svg' alt='Divider' />
 
-			<div className='px-[30px] mt-[56.89px]'>
-				<h3 className='font-Roboto font-medium text-[22px] leading-[24.53px] tracking-[0.263px]'>
-					Próximo Encuentro
-				</h3>
+				<div className='px-[30px] mt-[56.89px]'>
+					<h3 className='font-Roboto font-medium text-[22px] leading-[24.53px] tracking-[0.263px]'>
+						Próximo Encuentro
+					</h3>
 
-				<div>
-					<div className=' mt-9'>
-						
-						{
-							activeTournaments.map((obj, index) => (
-							<div key={index} className='flex items-center gap-[5px]'>
-								<img src={obj.logo} alt='Logo' />
+					<div>
+						<div className=' mt-9'>
+							
+							{
+								activeTournaments.map((obj, index) => (
+								<div key={index} className='flex items-center gap-[5px]'>
+									<img src={obj.logo} alt='Logo' className="w-[45px] h-[45px]" />
+									<span className='text-lg font-semibold font-Roboto'>
+									{obj.name}
+									</span>
+								</div>))
+							}
+
+							<div className=' mt-[25px] flex flex-col gap-3'>
+								<div className='flex flex-col gap-3'>
+									{nextAdminTournament.map((adminTournament, index) => (
+										<Match key={index} {...adminTournament} />
+									))}
+								</div>
+							</div>
+						</div>
+
+						<div className=' mt-[68px]'>
+							<div className='flex items-center gap-[5px]'>
+								<img src={activePlayerTournaments[0].logo} alt='Logo' />
 								<span className='text-lg font-semibold font-Roboto'>
-								{obj.name}
+									{activePlayerTournaments[0].name}
 								</span>
-						    </div>))
-						}
-
-						<div className=' mt-[25px] flex flex-col gap-3'>
-							<div className='flex flex-col gap-3'>
-								{nextAdminTournament.map((adminTournament, index) => (
-									<Match key={index} {...adminTournament} />
-								))}
 							</div>
-						</div>
-					</div>
 
-					<div className=' mt-[68px]'>
-						<div className='flex items-center gap-[5px]'>
-							<img src={activePlayerTournaments[0].logo} alt='Logo' />
-							<span className='text-lg font-semibold font-Roboto'>
-								{activePlayerTournaments[0].name}
-							</span>
-						</div>
-
-						<div className=' mt-[25px] flex flex-col gap-3'>
-							<div className='flex flex-col gap-3'>
-								{nextPlayerTournament.map((playerTournament, index) => (
-									<Match key={index} {...playerTournament} />
-								))}
+							<div className=' mt-[25px] flex flex-col gap-3'>
+								<div className='flex flex-col gap-3'>
+									{nextPlayerTournament.map((playerTournament, index) => (
+										<Match key={index} {...playerTournament} />
+									))}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+				</>:
+				<>
+				<div className="flex flex-col px-[30px]">
+					<div className="flex justify-center p-5">
+						<img src="icons/logo-vert.png" alt="logo sport play" />
+					</div>
+					<div className="flex justify-center py-4">
+						<h1 className="font-Roboto text-[32px] text-accent font-bold">Sin Actividad</h1>
+					</div>
+					<p className="text-[16px] font-SourceSansPro text-neutral text-center">Sumate a un equipo o crea un torneo y accede a la diversion.</p>
+					<div className="flex justify-around py-10">
+					<Link
+						to='/crear-torneo'
+						className='px-3 py-2 rounded-2xl font-SourceSansPro text-base-100 font-semibold bg-success transition duration-300 ease-in-out text-[14px]'
+			>
+				Crear Torneo
+			</Link>
+			<button
+				onClick={''}
+				className='px-3 py-2 rounded-2xl font-SourceSansPro text-base-100 font-semibold bg-accent  transition duration-300 ease-in-out text-[14px]'
+			>
+				Unirme a un equipo
+			</button>
+					</div>
+				</div>
+				
+				</>
+			}
 		</section>
 	);
 }

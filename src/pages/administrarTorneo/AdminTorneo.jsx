@@ -79,15 +79,18 @@ function AdminTorneo() {
 							key={index}
 						>
 							<div className='flex flex-row gap-4 items-center '>
-								<img
-									src={
-										tournament?.logo
-											? tournament.logo
-											: '/icons/trophyAdminTournament.svg'
-									}
-									alt='icono de trofeo'
-									className='w-[40px] h-[40px] rounded-full'
-								/>
+								<div className='w-[45px] h-[45px] rounded-full bg-neutral flex justify-center items-center'>
+									<img
+										src={
+											tournament?.logo
+												? tournament.logo
+												: '/icons/trophyAdminTournament.svg'
+										}
+										alt='icono de trofeo'
+										className='w-[40px] h-[40px] rounded-full'
+									/>
+								</div>
+								
 								<div className='w-full'>{tournament.name}</div>
 							</div>
 							{tournament.status == 'ongoing' ? currentTournament : ''}
