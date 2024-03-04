@@ -13,7 +13,7 @@ import Activity from './components/modal/Activity';
 import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 import Addplayer from './modal/AddPlayer';
-
+import AdminResult from './pages/adminResultados/AdminResults';
 
 function App() {
 	return (
@@ -36,6 +36,7 @@ function App() {
 						<Route path='/administrar-torneo' element={<AdminTorneo />} />
 						<Route path='/crear-torneo' element={<CrearTorneo/>} />
 						<Route path='/addPlayer' element={<Addplayer/>} />
+						<Route path='/Admin-Resultados' element={<AdminResult />} />
 					</Routes>
 				</main>
 				<Footer />

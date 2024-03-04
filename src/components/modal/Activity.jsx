@@ -9,7 +9,7 @@ const roleActivity =(role)=>{
 	if(role=='Administrador'){
 	roleUser='/administrar-torneo'
 }else if(role=='Jugador'){
-	roleUser='/Jugador'
+	roleUser='/addPlayer'
 }
 return roleUser
 }
@@ -199,12 +199,12 @@ export default function Activity() {
 			>
 				Crear Torneo
 			</Link>
-			<button
-				onClick={''}
+			<Link
+				to='/addPlayer'
 				className='px-3 py-2 rounded-2xl font-SourceSansPro text-base-100 font-semibold bg-accent  transition duration-300 ease-in-out text-[14px]'
 			>
 				Unirme a un equipo
-			</button>
+			</Link>
 					</div>
 				</div>
 				

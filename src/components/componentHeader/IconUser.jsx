@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
 import { FaUserLarge } from 'react-icons/fa6';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -10,36 +10,34 @@ import { changeData } from '../../redux/featuresSlice/userSlice';
 import { useNavigate } from 'react-router-dom/dist';
 
 const IconUser = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const isRegister = useSelector((state) => state.isRegister.isRegister);
-    const userData = useSelector((state) => state.userData.userData);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const isRegister = useSelector(state => state.isRegister.isRegister);
+	const userData = useSelector(state => state.userData.userData);
 
-    const toggleDropdown = () => {
+	const toggleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
 	};
-    const handleModalContainerClick = e => e.stopPropagation();
+	const handleModalContainerClick = e => e.stopPropagation();
 
-    const handleOpenModal = () => {
-        navigate(`/Modals`);
+	const handleOpenModal = () => {
+		navigate(`/Modals`);
 	};
-    const handleCloseSesion = () => {
-        let initialState = {
-            userData: {
-                id: null,
-                first_name:'',
-                last_name:'',
-                dni: 0,
-                email:'',
-            },
-        };
-        dispatch(changeData(initialState))
-        navigate('/')
+	const handleCloseSesion = () => {
+		let initialState = {
+			userData: {
+				id: null,
+				first_name: '',
+				last_name: '',
+				dni: 0,
+				email: '',
+			},
+		};
+		dispatch(changeData(initialState));
+		navigate('/');
 		dispatch(closeSesion());
 	};
-    
-
     
   return (
     
@@ -59,7 +57,7 @@ const IconUser = () => {
             { isDropdownOpen && isRegister && (
                 <div className='w-full h-screen absolute top-0 left-0 bg-black/75'
                     onClick={toggleDropdown}>
-                   <div className='absolute right-0 top-[88px]  w-[50%] bg-secondary  shadow-lg'
+                   <div className='absolute right-0 top-[88px]  w-[50%] md:w-[40%] lg:w-[30%] bg-secondary  shadow-lg'
                     onClick={handleModalContainerClick}>
                     <ul className='h-[376px]'>
                     <div className=' w-full  h-[47px] flex justify-start items-center'  ><FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' /><h3>¡Hola, {userData.first_name}!</h3>  
@@ -78,7 +76,7 @@ const IconUser = () => {
                             <Link to='/addPlayer'>Jugador</Link>
                         </li>
                         <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <a href='#'>Resultados</a>
+                            <Link to='Admin-Resultados'>Resultados</Link>
                         </li>      
                     </ul>
                     <hr className='border-[#545458]'/>
@@ -93,4 +91,5 @@ const IconUser = () => {
   )
 }
 
-export default IconUser
+
+export default IconUser;
