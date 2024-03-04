@@ -4,7 +4,6 @@ import { FaUserLarge } from 'react-icons/fa6';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { RxExit } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, openModal } from '../../redux/featuresSlice/modalSlice';
 import { closeSesion } from '../../redux/featuresSlice/registerSlice';
 import { Link } from 'react-router-dom';
 import { changeData } from '../../redux/featuresSlice/userSlice';

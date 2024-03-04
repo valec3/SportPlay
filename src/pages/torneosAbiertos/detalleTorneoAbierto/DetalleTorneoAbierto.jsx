@@ -2,20 +2,39 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import trophy from '../../../../public/icons/trophy.png'
+import axios from 'axios';
 
 const DetalleTorneoAbierto = () => {
 	const params = useParams()
 	const navigate = useNavigate();
 	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
 	const allTeams = useSelector((state) => state.allTeams.allTeams);
+	const [teams, setTeams] = useState({})
 	const [showModal, setShowModal] = useState(false);
 	const modalRef = useRef(null);
+	const apiTeamsOfTournamentURL = `https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${params.id}`;
 
 	useEffect(() => {	
 		window.scrollTo({
 		  top:0,
 		  behavior:'smooth'
-		})	
+		})
+		
+
+				const fetchDataTeams = async () => {
+					try {
+					  const res = await axios.get(apiTeamsOfTournamentURL);
+					  console.log(res.data);
+					  setTeams(res.data)
+					} catch (er) {
+					  console.log(er);
+					}
+				  };
+				fetchDataTeams();
+				document.addEventListener('click', handleOutsideClick, true);
+		return () => {
+			document.removeEventListener('click', handleOutsideClick, true);
+		};
 	}, []);
 
 	const handleButtonClick = () => {
@@ -33,12 +52,7 @@ const DetalleTorneoAbierto = () => {
 		}
 	};
 
-	useEffect(() => {
-		document.addEventListener('click', handleOutsideClick, true);
-		return () => {
-			document.removeEventListener('click', handleOutsideClick, true);
-		};
-	}, []);
+	
 
 	const Modal = ({ onClose }) => (
 		<div className='fixed top-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center'>
@@ -79,7 +93,7 @@ const DetalleTorneoAbierto = () => {
 
 			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
 
-			{allTeams.map((team)=>(
+			{/* {teams.map((team)=>(
 			<button
 			key={team.id}
 				className='bg-secondary w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-start items-center mb-2'
@@ -99,7 +113,7 @@ const DetalleTorneoAbierto = () => {
 					</h1>
 				</div>
 			</button>
-			))}
+			))} */}
 
 			
 
