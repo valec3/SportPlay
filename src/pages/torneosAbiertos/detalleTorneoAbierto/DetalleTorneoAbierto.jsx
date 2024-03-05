@@ -88,6 +88,9 @@ const DetalleTorneoAbierto = () => {
 				</div>
 				<div className='text-left py-4 ml-4'>
 					<h1 className='text-SorceSansPro font-semibold text-[20px]'>{tournament.name}</h1>
+					<h2 className='text-Roboto text-SemiBold text-base text-warning -ml-10'>
+					Vacantes: {}
+				    </h2>
 				</div>
 			</button>
 
