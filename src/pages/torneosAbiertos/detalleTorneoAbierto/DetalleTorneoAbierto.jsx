@@ -25,13 +25,11 @@ const DetalleTorneoAbierto = () => {
 				dispatch(resetTeamsTournament())
 				const fetchDataTeams = async () => {
 					try {
-					  const res = await axios.get(apiTeamsOfTournamentURL);
-					  console.log(res.data.teams);
-					  
+					  const res = await axios.get(apiTeamsOfTournamentURL);					  
 					  dispatch(getTeamsTournament(res.data.teams))
 					  setVacants(tournament.teams_count-res.data.teams.length)
 					} catch (er) {
-						dispatch(resetTeamsTournament())
+						
 					  console.log(er);
 					}
 				  };

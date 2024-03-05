@@ -5,6 +5,7 @@ import PeticionAllTournaments from '../../components/common/PeticionAllTournamen
 
 const ResultadosTorneos = () => {
 	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
+	const torneosToShow = allTournaments.slice(-15).reverse();
 	// Datos de los torneos
 	PeticionAllTournaments();//hace una nueva peticion para actulizar datos
 	
@@ -17,7 +18,7 @@ const ResultadosTorneos = () => {
 				</h1>
 			</div>
 			{/* Mostrar los resultados de cada torneo */}
-			{allTournaments.map((tournament, index ) => (
+			{torneosToShow.map((tournament, index ) => (
 				<Result key={index} {...tournament}  />
 			))}
 		</div>

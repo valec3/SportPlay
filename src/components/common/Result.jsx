@@ -1,6 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTeamsTournament, resetTeamsTournament } from '../../redux/featuresSlice/teamsPerTournamentSlice';
+import axios from 'axios';
 
-const Result = ({  name, teams_count, logo, status }) => {
+const Result = ({ id, name, teams_count, logo, status }) => {
+  const [allTeamsTournament, setAllTeamsTournament] = useState([])
+  const dispatch = useDispatch();
+  //const allTeamsTournament = useSelector((state) => state.allTeamsTournament.allTeamsTournament);
+  const apiTeamsOfTournamentURL = `https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${id}`;
+
+	useEffect(() => {	
+		window.scrollTo({
+		  top:0,
+		  behavior:'smooth'
+		})
+		
+				// dispatch(resetTeamsTournament())
+				const fetchDataTeams = async () => {
+					try {
+					  const res = await axios.get(apiTeamsOfTournamentURL);
+					  //console.log(res.data.teams);					  
+					  // dispatch(getTeamsTournament(res.data.teams))
+            setAllTeamsTournament(res.data.teams)
+					} catch (er) {
+					  console.log(er);
+					}
+				  };
+				fetchDataTeams();
+				
+	}, []);
   
   const startDate = '6 de mayo 2024'
   const teams = [
@@ -45,7 +73,7 @@ const Result = ({  name, teams_count, logo, status }) => {
   
 
   return (
-    <div className='py-1 w-fit px-1 bg-secondary rounded-3xl mb-4 m-2'>
+    <div className='py-1 w-full sm:w-[90%] md:w-[45%] px-1 bg-secondary rounded-3xl mb-4 m-2'>
       {/* Title */}
       <div className='flex items-center justify-center pt-3'>
         <div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1.5 flex justify-center items-center'>
@@ -77,20 +105,26 @@ const Result = ({  name, teams_count, logo, status }) => {
         {/* Table Body */}
         <tbody>
           {/* Renderizando las filas de la tabla basadas en los datos del equipo */}
-          {teams.map((team, index) => (
+          {allTeamsTournament.length>0?(allTeamsTournament.map((team, index) => (
             <tr key={team.id}>
               <th className='p-1.5'>{index + 1}</th>
               <td className='flex flex-row space-x-2 p-1.5 pr-8'>
                 {/* Si los logos de los equipos son dinámicos, puedes establecer su src como 'team.logo' */}
-                <img src={team.logo} alt={team.name} />
+                <div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
+				<img
+					className={`${team.logo_url == null || team.logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+					src={team.logo_url == null || team.logo_url == '' ? 'icons/trophy.png' : team.logo_url}
+					alt='Real Madrid'
+				/>
+			</div>
                 <div>{team.name}</div>
               </td>
-              <td className='p-1.5 border-b border-primary'>{team.ta}</td>
-              <td className='p-1.5 border-b border-primary'>{team.tr}</td>
-              <td className='p-1.5 border-b border-primary'>{team.l}</td>
-              <td className='p-1.5 border-b border-primary'>{team.gl}</td>
+              <td className='p-1.5 border-b border-primary'>{teams[0].ta}</td>
+              <td className='p-1.5 border-b border-primary'>{teams[0].tr}</td>
+              <td className='p-1.5 border-b border-primary'>{teams[0].l}</td>
+              <td className='p-1.5 border-b border-primary'>{teams[0].gl}</td>
             </tr>
-          ))}
+          ))):<></>}
         </tbody>
       </table>
     </div>
