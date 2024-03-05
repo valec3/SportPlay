@@ -115,7 +115,7 @@ export const deleteTeamPerTournament = async (req, res) => {
         const data = req.body;
         const { message } = await deleteTeamPerTournamentService(data);
 
-        if (message === 'Se requieren tanto el ID del torneo como el ID del equipo.') {
+        if (message === 'El ID del torneo o del equipo no pueden estar vacíos.') {
             return res.status(400).json({ error: message });
         }
 
