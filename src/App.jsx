@@ -19,7 +19,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<div className='text-base-100 h-screen flex flex-col relative z-0 lg:bg-hero lg:bg-[#2F2F42] lg:bg-cover lg:overflow-y-auto'>
-				  <div className='lg:w-[1224px] lg:mx-auto bg-white'>	
+				  <div className='lg:w-[1024px] lg:mx-auto bg-white'>	
 				<Header />
 				<main className='bg-primary'>
 					<Routes>

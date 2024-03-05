@@ -16,7 +16,7 @@ const OpenTournaments = () => {
 		} else if (window.innerWidth < 1024) {
 			setNumCardsToShow(3);
 		} else {
-			setNumCardsToShow(5);
+			setNumCardsToShow(4);
 		}
 	};
     PeticionAllTournaments();

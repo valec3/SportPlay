@@ -42,12 +42,13 @@ const Result = ({  name, teams_count, logo, status }) => {
 				},
 			]
 
-  
+    const trunName = name.slice(0, 18);
 
   return (
-    <div className='py-1 w-fit px-1 bg-secondary rounded-3xl mb-4 m-2'>
+    <div className='py-1 w-[95%] px-1 bg-secondary rounded-3xl mb-4 m-2  lg:w-[400px]'>
       {/* Title */}
-      <div className='flex items-center justify-center pt-3'>
+      <div className='flex items-center justify-between pt-3 '>
+       <div className='flex pl-2'>
         <div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1.5 flex justify-center items-center'>
           {/* Si el logo del torneo es dinámico,  se puede establecer su src como 'tournamentData.logo' */}
           <img
@@ -56,13 +57,14 @@ const Result = ({  name, teams_count, logo, status }) => {
             className={`${logo == null || logo == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
           />
         </div>
-        <h1 className='text-lg font-Sans Pro truncate ml-4'>{name}</h1>
-        <p className='text-warning  font-SourceSansPro text-[14px] mt-2 ml-10'>
+        <h1 className='text-lg font-Sans Pro truncate ml-4'>{trunName}</h1>
+        </div>
+        <p className='text-warning  font-SourceSansPro text-[14px] mt-2 ml-10 pr-2'>
           {startDate}
         </p>
       </div>
       {/* Table */}
-      <table className='w-full'>
+      <table className='w-full text-[14px]'>
         {/* Table Header */}
         <thead>
           <tr className='text-base-100 text-left'>
