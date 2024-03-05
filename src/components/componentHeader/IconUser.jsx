@@ -46,7 +46,7 @@ const IconUser = () => {
 				className={`${isRegister ? 'w-[35px] flex' : 'w-[34px] flex justify-end'} `}
 			>
 				<FaUserLarge
-					className={`${isRegister ? 'text-accent' : 'text-base-100 w-[20px]'} lg:mr-4`}
+					className={`${isRegister ? 'text-accent' : 'text-base-100 w-[20px]'}`}
 				/>
 				{isRegister && (
 					<MdKeyboardArrowDown
