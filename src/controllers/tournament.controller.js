@@ -77,6 +77,9 @@ export const allTeamsPerTournament = async (req, res) => {
 export const teamsPerTournament = async (req, res) => {
     try {
         const tournamentId = req.query.id;
+        if (!tournamentId) {
+            return res.status(400).json({ error: 'El ID del torneo no puede estar vacío.' });
+        }
         const teamsData = await getTeamsPerTournamentService(tournamentId);
         const teamsPerTournament = teamsData;
         res.json(teamsPerTournament);
