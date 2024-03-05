@@ -128,13 +128,16 @@ export const getTeamsPerTournamentService = async (tournamentId) => {
             throw new Error('El ID del torneo no puede estar vacío.');
         }
         
-        // Obtener la lista de equipos para el torneo dado
-        const teamsQuery = `SELECT * FROM tournament_teams WHERE tournament_id = ?`;
+        const teamsQuery = `SELECT team_id FROM tournament_teams WHERE tournament_id = ?`;
         const teamsResult = await pool.query(teamsQuery, [tournamentId]);
-        const teams = teamsResult[0]
+        const teamIds = teamsResult[0].map(row => row.team_id);
+
+        const teamsDataQuery = `SELECT id, name, logo_url FROM teams WHERE id IN (?)`;
+        const teamsDataResult = await pool.query(teamsDataQuery, [teamIds]);
+        const teams = teamsDataResult[0];
         
         // Calcular el conteo total de equipos
-        const totalTeams = teamsResult[1].length+1;
+        const totalTeams = teams.length;
         
         return { total_teams: totalTeams, teams: teams };
     } catch (error) {
