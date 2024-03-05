@@ -60,7 +60,7 @@ const DetalleTorneoAbierto = () => {
 		<div className='fixed top-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center'>
 			<div
 				ref={modalRef}
-				className='bg-white p-6 rounded-lg w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5'
+				className='bg-white p-6 rounded-lg w-[80%] h-[200px] md:w-[50%] xl:w-[30%] 2xl:w-[20%]  flex flex-col justify-center'
 			>
 				<h2 className='text-2xl text-center text-accent font-bold mb-4'>
 					¡Éxito!
@@ -105,21 +105,31 @@ const DetalleTorneoAbierto = () => {
 			allTeamsTournament.map((team)=>(
 			<button
 			key={team.id}
+
 				className='bg-secondary w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl h-[47px] overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-start items-center mb-2 mx-auto'
+
+			
+
 				onClick={handleButtonClick}
 			>
-				<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
-				<img
-					className={`${team.logo_url == null || team.logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
-					src={team.logo_url == null || team.logo_url == '' ? 'icons/trophy.png' : team.logo_url}
-					alt='Real Madrid'
-				/>
-			</div>
-				<div className='text-left py-4 ml-2'>
-					<h1 className='text-SorceSansPro font-regular text-s'>
-						{team.name}{' '}
-						<span className='text-success ml-16 md:ml-16'>Unirme</span>
-					</h1>
+				<div className='flex justify-center items-center'>
+					<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
+					<img
+						className={`${team.logo_url == null || team.logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+						src={team.logo_url == null || team.logo_url == '' ? 'icons/trophy.png' : team.logo_url}
+						alt='Real Madrid'
+					/>
+					</div>
+
+					<div className='text-left py-4 ml-2'>
+						<h1 className='text-SorceSansPro font-regular text-s'>
+							{team.name}{' '}
+							
+						</h1>
+					</div>
+				</div>
+				<div>				
+					<span className='text-success ml-16 md:ml-16'>Unirme</span>
 				</div>
 			</button>
 			)):(

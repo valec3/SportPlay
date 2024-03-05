@@ -20,7 +20,7 @@ const Card = ({ id, name, teams_count, logo, status }) => {
 				isClicked ? 'opacity-100' : ''
 			}`}
 		>
-			<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center '>
+			<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center lg:-ml-0 '>
 				<img
 					className={`${logo == null || logo == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 					src={logo == null || logo == '' ? 'icons/trophy.png' : logo}

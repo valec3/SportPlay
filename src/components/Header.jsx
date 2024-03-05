@@ -74,7 +74,8 @@ const Navbar = () => {
 			</div>
 
 			{/* Menú de navegación para pantallas grandes */}
-			<div className='hidden sm:flex space-x-4'>
+			<div className='hidden sm:flex space-x-4 lg:text-lg lg:flex lg:justify-between lg:w-[500px] '>
+
 				<Link to='/'>Inicio</Link>
 
 				<Link to='/TorneosAbiertos'>Torneos</Link>
