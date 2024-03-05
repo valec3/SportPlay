@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaAngleDown } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -6,40 +6,48 @@ import PeticionAllTournaments from '../../components/common/PeticionAllTournamen
 import { useSelector } from 'react-redux';
 
 function AdminTorneo() {
-	const currentTournament = (
-		<details className='dropdown dropdown-end bg-secondary'>
-			<summary className='m-1 btn bg-secondary border-secondary'>
-				<FaAngleDown className='text-base-100 ' />
-			</summary>
-			<ul className='p-2 shadow menu dropdown-content z-[1] bg-primary border border-secondary w-52'>
-				<li className=''>
-					<Link className='text-right block'>Compartir Administración</Link>
-				</li>
-				<li>
-					<Link to={'/administrar-equipos'} className='text-right block'>
-						Administrar Equipos
-					</Link>
-				</li>
-				<li>
-					<Link className='text-right block'>Organizar Partidos</Link>
-				</li>
-				<li>
-					<Link className='text-right block'>Cargar Resultados</Link>
-				</li>
-				<li className=''>
-					<Link className='text-right block'>Notificaciones</Link>
-				</li>
-				<li>
-					<Link className='text-warning text-right block   '>
-						<div className='flex flex-row  items-center justify-end'>
-							<img src='/icons/exit.svg' alt='' />
-							<div className='ml-2'>Finalizar Torneo</div>
+	const navigate = useNavigate();
+	const currentTournament = tournament => {
+		return (
+			<details className='dropdown dropdown-end bg-secondary'>
+				<summary className='m-1 btn bg-secondary border-secondary'>
+					<FaAngleDown className='text-base-100 ' />
+				</summary>
+				<ul className='p-2 shadow menu dropdown-content z-[1] bg-primary border border-secondary w-52'>
+					<li className=''>
+						<Link className='text-right block'>Compartir Administración</Link>
+					</li>
+					<li>
+						<div
+							onClick={() =>
+								navigate('/administrar-equipos', { state: tournament })
+							}
+							className='text-right block'
+						>
+							Administrar Equipos
 						</div>
-					</Link>
-				</li>
-			</ul>
-		</details>
-	);
+					</li>
+					<li>
+						<Link className='text-right block'>Organizar Partidos</Link>
+					</li>
+					<li>
+						<Link className='text-right block'>Cargar Resultados</Link>
+					</li>
+					<li className=''>
+						<Link className='text-right block'>Notificaciones</Link>
+					</li>
+					<li>
+						<Link className='text-warning text-right block   '>
+							<div className='flex flex-row  items-center justify-end'>
+								<img src='/icons/exit.svg' alt='' />
+								<div className='ml-2'>Finalizar Torneo</div>
+							</div>
+						</Link>
+					</li>
+				</ul>
+			</details>
+		);
+	};
 	const tournamentCancel = (
 		<img src='/icons/iconCancel.svg' alt='icono de calcelar' />
 	);
@@ -96,7 +104,9 @@ function AdminTorneo() {
 
 								<div className='w-full'>{tournament.name}</div>
 							</div>
-							{tournament.status == 'ongoing' ? currentTournament : ''}
+							{tournament.status == 'ongoing'
+								? currentTournament(tournament)
+								: ''}
 							{tournament.status == 'finished' ? wonTournament : ''}
 							{tournament.status == 'cancelled' ? tournamentCancel : ''}
 						</div>

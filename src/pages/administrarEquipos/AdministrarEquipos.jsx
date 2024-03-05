@@ -2,8 +2,21 @@ import axios from 'axios';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
+import { useLocation } from 'react-router-dom';
 
 function AdministrarEquipos() {
+	const { state } = useLocation();
+	console.log('datos del torneo', state);
+	PeticionAllTournaments();
+	const allTeams = useSelector(state => state.allTeams.allTeams);
+	console.log(allTeams);
+	const userId = useSelector(state => state.userData.userData.id);
+	const equiposDelTorneo = allTeams
+		.filter(obj => obj.creator_id === userId)
+		.slice(-15)
+		.reverse();
+	console.log('equiposDelTorneo', equiposDelTorneo);
 	const userData = useSelector(state => state.userData.userData);
 	const [imageUrl, setImageUrl] = useState('/images/torneo-nuevo.svg');
 
@@ -35,8 +48,6 @@ function AdministrarEquipos() {
 
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			console.log('values', values);
-			console.log('maday');
 			var fileFormData = new FormData();
 			fileFormData.append('name', values.name);
 			fileFormData.append('logo_url', values.logo_url);
@@ -70,8 +81,8 @@ function AdministrarEquipos() {
 			<div className='m-auto w-[327px] md:w-[400px] text-neutral '>
 				<div className='flex justify-center p-4'>
 					<div className='flex flex-row items-center '>
-						<img src='/images/atletico.svg' alt='' className='mr-2' />
-						<h2 className='text-[20px] font-semibold'>Copa las condes</h2>
+						<img src={state.logo} alt='' className='mr-2 w-[20px] h-[20px]' />
+						<h2 className='text-[20px] font-semibold'>{state.name}</h2>
 					</div>
 				</div>
 			</div>
@@ -134,21 +145,29 @@ function AdministrarEquipos() {
 				<div className='flex flex-col gap-4 py-4'>
 					<div className='flex flex-row justify-between py-4'>
 						<div>Equipos :</div>
-						<div className='text-warning'>Vacante: 1</div>
+						<div className='text-warning'>{`Vacante: ${state.teams_count - equiposDelTorneo.length}`}</div>
 					</div>
-					<div className='flex flex-row justify-between p-4 rounded-[14px] md:w-[355px] h-[61px] bg-secondary'>
-						<div className='flex flex-row gap-4'>
-							<img src='/icons/equipo.svg' alt='icono de equipo' />
-							<p>Equipo A</p>
-						</div>
-						<div className='flex flex-row gap-4'>
-							<img
-								src='/icons/add-member.svg'
-								alt='icono agregar a un integrante'
-							/>
-							<img src='/icons/cancel-team.svg ' alt='icono cancelar' />
-						</div>
-					</div>
+					{}
+					{equiposDelTorneo.map((equipo, index) => {
+						return (
+							<div
+								className='flex flex-row justify-between p-4 rounded-[14px] md:w-[355px] h-[61px] bg-secondary'
+								key={index}
+							>
+								<div className='flex flex-row gap-4 w-[200px]'>
+									<img src={equipo.logo_url} alt='icono de equipo' />
+									<p>{equipo.name}</p>
+								</div>
+								<div className='flex flex-row gap-4'>
+									<img
+										src='/icons/add-member.svg'
+										alt='icono agregar a un integrante'
+									/>
+									<img src='/icons/cancel-team.svg ' alt='icono cancelar' />
+								</div>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</>
