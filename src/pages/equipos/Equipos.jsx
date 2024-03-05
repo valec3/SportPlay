@@ -19,7 +19,7 @@ const Equipos = () => {
         {allTeams.map((team) => (
           <div key={team.id} className='bg-secondary w-[170px] h-[180px] flex flex-col items-center justify-center p-8 rounded-[18px]  mb-9 mx-auto  drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)]'>
             {/* logo del equipo */}
-            <img src={team.logo} alt={team.name} className={`${team.logo_url == null || team.logo_url == '' ? 'w-[35px] h-[35px] ' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+            <img alt={team.name} className={`${team.logo_url == null || team.logo_url == '' ? 'w-[35px] h-[35px] ' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 					src={team.logo_url == null || team.logo_url == '' ? 'icons/trophy.png' : team.logo_url} />
             {/* nombre del equipo */}
             <h2 className="text-xl font-semibold text-center">{team.name}</h2>
