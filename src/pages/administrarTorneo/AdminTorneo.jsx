@@ -16,7 +16,7 @@ function AdminTorneo() {
 					<Link className='text-right block'>Compartir Administración</Link>
 				</li>
 				<li>
-					<Link to={'/'} className='text-right block'>
+					<Link to={'/administrar-equipos'} className='text-right block'>
 						Administrar Equipos
 					</Link>
 				</li>
@@ -46,14 +46,17 @@ function AdminTorneo() {
 	const wonTournament = (
 		<img src='/icons/trophyGreen.svg' alt='icono de calcelar' />
 	);
-	const handleTournamentCancel = ()=>{
-		
-	}
+	const handleTournamentCancel = () => {};
 	PeticionAllTournaments();
-	const allTournaments = useSelector((state) => state.allTournaments.allTournaments);
-    const userId = useSelector((state) => state.userData.userData.id);
-	const activeTournaments = allTournaments.filter((obj)=>obj.creator_id===userId).slice(-15).reverse();
-	
+	const allTournaments = useSelector(
+		state => state.allTournaments.allTournaments
+	);
+	const userId = useSelector(state => state.userData.userData.id);
+	const activeTournaments = allTournaments
+		.filter(obj => obj.creator_id === userId)
+		.slice(-15)
+		.reverse();
+
 	return (
 		<div className='space-y-4'>
 			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
@@ -61,7 +64,7 @@ function AdminTorneo() {
 					<h1 className='text-[2rem] text-base-100 mb-8'>
 						Administrador del Torneo
 					</h1>
-					<Link 
+					<Link
 						to='/crear-torneo'
 						className='bg-accent btn btn-sm border-accent text-base-100 '
 					>
@@ -90,7 +93,7 @@ function AdminTorneo() {
 										className='w-[40px] h-[40px] rounded-full'
 									/>
 								</div>
-								
+
 								<div className='w-full'>{tournament.name}</div>
 							</div>
 							{tournament.status == 'ongoing' ? currentTournament : ''}

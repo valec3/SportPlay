@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom/dist';
 
 function CrearTorneo() {
-	const optionsNumberTeams = ['4',  '8',  '16'];
+	const optionsNumberTeams = ['4', '8', '16'];
 	const optionsNumberPlayers = ['4', '5', '6', '7', '8', '9', '10', '11', '12'];
-	const userData = useSelector((state) => state.userData.userData);
+	const userData = useSelector(state => state.userData.userData);
 	const [fileImg, setFileImg] = useState();
 	const [imageUrl, setImageUrl] = useState(null);
 	const initialValues = {
@@ -20,13 +20,13 @@ function CrearTorneo() {
 	};
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			var fileFormData = new FormData();			
-			fileFormData.append('logo', fileImg );
-			fileFormData.append('name', values.name );
-			fileFormData.append('type_tournament', values.type_tournament );
-			fileFormData.append('teams_count', values.teams_count );
-			fileFormData.append('players_count', values.players_count );
-			fileFormData.append('creator_id', userData.id );
+			var fileFormData = new FormData();
+			fileFormData.append('logo', fileImg);
+			fileFormData.append('name', values.name);
+			fileFormData.append('type_tournament', values.type_tournament);
+			fileFormData.append('teams_count', values.teams_count);
+			fileFormData.append('players_count', values.players_count);
+			fileFormData.append('creator_id', userData.id);
 
 			const response = await axios.post(
 				'https://tournament-sport.onrender.com/api/tournament/create-tournament',
@@ -44,49 +44,45 @@ function CrearTorneo() {
 			setSubmitting(false); // Reset submitting state in case of error
 		}
 	};
-	const handleImageChange = (e) =>{
-			
-			const file = (e.target.files[0]);
-			setFileImg(file);
-			const reader = new FileReader();		
-			reader.onload = () => {
-			  const url = reader.result;
-			  setImageUrl(url);
-			};
-			if (file) {
-			  reader.readAsDataURL(file);
-			} 
-	}
+	const handleImageChange = e => {
+		const file = e.target.files[0];
+		setFileImg(file);
+		const reader = new FileReader();
+		reader.onload = () => {
+			const url = reader.result;
+			setImageUrl(url);
+		};
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	};
 
 	return (
 		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
 			<h2 className='text-[22px] md:text-[32px] text-base-100 mt-1 text-center font-bold'>
 				Torneo nuevo
 			</h2>
-			
+
 			<div className=' flex flex-col items-center  mx-auto w-full '>
-				
 				<div className='w-[134px] h-[134px] flex items-center rounded-full z-[2] bg-neutral'>
 					<img
-						src={`${imageUrl?imageUrl:'/images/torneo-nuevo.svg'} `}
+						src={`${imageUrl ? imageUrl : '/images/torneo-nuevo.svg'} `}
 						alt='logo tornep'
 						className='mx-auto w-[134px] h-[134px] rounded-full z-0'
 					/>
 				</div>
 				<form encType='multipart/form-data' name='fileinfo' method='post'>
-					<input 
-						type="file" 
+					<input
+						type='file'
 						name='file'
-						className="file-input bg-secondary h-[56px] w-full rounded-xl mt-5"
+						className='file-input bg-secondary h-[56px] w-full rounded-xl mt-5'
 						onChange={handleImageChange}
 					/>
 				</form>
-				
 			</div>
 
 			<Formik
 				initialValues={initialValues}
-				
 				validate={values => {
 					const errors = {};
 					if (!values.name) {
@@ -203,7 +199,9 @@ function CrearTorneo() {
 					</p>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
-					<Link to='/administrar-torneo' className='bg-black'>close</Link>
+					<Link to='/administrar-torneo' className='bg-black'>
+						close
+					</Link>
 				</form>
 			</dialog>
 		</div>
