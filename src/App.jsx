@@ -13,6 +13,7 @@ import Activity from './components/modal/Activity';
 import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 import Jugador from './pages/jugador/Jugador';
+import OrganizeGames from './pages/partidos/OrganizeGames';
 
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 						<Route path='/administrar-torneo' element={<AdminTorneo />} />
 						<Route path='/crear-torneo' element={<CrearTorneo/>} />
 						<Route path='/jugador' element={<Jugador/>} />
+						<Route path='/OrganizeGames' element={<OrganizeGames />} />
 					</Routes>
 				</main>
 				<Footer />
