@@ -10,7 +10,7 @@ import { changeData } from '../../redux/featuresSlice/userSlice';
 import { useNavigate } from 'react-router-dom/dist';
 
 const IconUser = () => {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isRegister = useSelector(state => state.isRegister.isRegister);
@@ -38,58 +38,75 @@ const IconUser = () => {
 		navigate('/');
 		dispatch(closeSesion());
 	};
-    
-  return (
-    
-			<>
-            <button
-                onClick={isRegister?toggleDropdown:handleOpenModal}
-                className={`${isRegister?'w-[35px] flex':'w-[34px] flex justify-end'} `}
-            >                
-                <FaUserLarge
-						className={`${isRegister?'text-accent w-[20px] lg:w-[45px] lg:h-[45px]':'text-base-100 w-[20px]'} lg:mr-`}
-					/>
-					{isRegister&&<MdKeyboardArrowDown
-						className={` ${isDropdownOpen ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-2 text-accent`}
-					/>}
-            </button>
-            {/* Dropdown para el menú de usuario */}
-            { isDropdownOpen && isRegister && (
-                <div className='w-full h-screen absolute top-0 left-0 bg-black/75'
-                    onClick={toggleDropdown}>
-                   <div className='absolute right-0 top-[88px]  w-[50%] md:w-[40%] lg:w-[30%] bg-secondary  shadow-lg'
-                    onClick={handleModalContainerClick}>
-                    <ul className='h-[376px]'>
-                    <div className=' w-full  h-[47px] flex justify-start items-center'  ><FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' /><h3>¡Hola, {userData.first_name}!</h3>  
-            </div>
-            <hr className='border-[#545458]'/>
-                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                        <Link to={'/Perfil'}>Perfil</Link>
-                        </li>
-                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <Link to='Activity'>Actividad</Link>
-                        </li>
-                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <Link to='/crear-torneo'>Crear torneo</Link>
-                        </li>
-                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <Link to='/addPlayer'>Jugador</Link>
-                        </li>
-                        <li className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'>
-                            <Link to='Admin-Resultados'>Resultados</Link>
-                        </li>      
-                    </ul>
-                    <hr className='border-[#545458]'/>
-                    <button onClick={handleCloseSesion} className='text-warning pl-[25px] h-[47px] flex items-center w-full'>
-                           <RxExit className='w-[15px] h-[15px] mr-[7px]' /> <div >Cerrar Sesión</div>
-                        </button>
-                </div> 
-                </div>
-                
-            )}
-        </>
-  )
-}
 
+	return (
+		<>
+			<button
+				onClick={isRegister ? toggleDropdown : handleOpenModal}
+				className={`${isRegister ? 'w-[35px] flex' : 'w-[34px] flex justify-end'} `}
+			>
+				<FaUserLarge
+					className={`${isRegister ? 'text-accent' : 'text-base-100 w-[20px]'}`}
+				/>
+				{isRegister && (
+					<MdKeyboardArrowDown
+						className={` ${isDropdownOpen ? 'rotate-180' : 'rotate-0'} transition-all duration-300 ml-2 text-accent`}
+					/>
+				)}
+			</button>
+			{/* Dropdown para el menú de usuario */}
+			<div
+				className={`absolute top-[80px] right-0  scale-0  w-[50%] bg-secondary  shadow-lg ${isDropdownOpen && isRegister && 'scale-100 '} transition-all ease-in-out duration-500 overflow-hidden `}
+				onClick={handleModalContainerClick}
+			>
+				<ul className='h-[376px]'>
+					<div className=' w-full  h-[47px] flex justify-start items-center'>
+						<FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' />
+						<h3>¡Hola, {userData.first_name}!</h3>
+					</div>
+					<hr className='border-[#545458]' />
+					<li
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						onClick={() => toggleDropdown(false)}
+					>
+						<Link to={'/Perfil'}>Perfil</Link>
+					</li>
+					<li
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						onClick={() => toggleDropdown(false)}
+					>
+						<Link to='Activity'>Actividad</Link>
+					</li>
+					<li
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						onClick={() => toggleDropdown(false)}
+					>
+						<Link to='/crear-torneo'>Crear torneo</Link>
+					</li>
+					<li
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						onClick={() => toggleDropdown(false)}
+					>
+						<Link to='/jugador'>Jugador</Link>
+					</li>
+					<li
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						onClick={() => toggleDropdown(false)}
+					>
+						<a href='#'>Resultados</a>
+					</li>
+				</ul>
+				<hr className='border-[#545458]' />
+				<button
+					onClick={handleCloseSesion}
+					className='text-warning pl-[25px] h-[47px] flex items-center w-full'
+				>
+					<RxExit className='w-[15px] h-[15px] mr-[7px]' />{' '}
+					<div>Cerrar Sesión</div>
+				</button>
+			</div>
+		</>
+	);
+};
 
 export default IconUser;

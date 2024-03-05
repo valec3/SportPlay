@@ -30,6 +30,7 @@ const PeticionAllTournaments = () => {
 					  console.log(er);
 					}
 				  };
+				  
 				fetchDataTeams();
 				fetchDataTournaments();
 			  }, []);
