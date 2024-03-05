@@ -199,7 +199,7 @@ function CrearTorneo() {
 					</p>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
-					<Link to='/administrar-torneo' className='bg-black'>
+					<Link to='/administrar-torneo' className=''>
 						close
 					</Link>
 				</form>
