@@ -67,8 +67,8 @@ function AdministrarEquipos() {
 
 	return (
 		<>
-			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
-				<div className='flex justify-center m-4'>
+			<div className='m-auto w-[327px] md:w-[400px] text-neutral '>
+				<div className='flex justify-center p-4'>
 					<div className='flex flex-row items-center '>
 						<img src='/images/atletico.svg' alt='' className='mr-2' />
 						<h2 className='text-[20px] font-semibold'>Copa las condes</h2>

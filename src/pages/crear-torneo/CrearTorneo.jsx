@@ -59,7 +59,7 @@ function CrearTorneo() {
 
 	return (
 		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
-			<h2 className='text-[22px] md:text-[32px] text-base-100 mt-1 text-center font-bold'>
+			<h2 className='text-[22px] md:text-[32px] text-base-100  text-center font-bold'>
 				Torneo nuevo
 			</h2>
 

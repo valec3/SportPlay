@@ -85,7 +85,7 @@ function AdminTorneo() {
 								<div className='w-[45px] h-[45px] rounded-full bg-neutral flex justify-center items-center'>
 									<img
 										src={
-											tournament?.logo
+											tournament.logo
 												? tournament.logo
 												: '/icons/trophyAdminTournament.svg'
 										}

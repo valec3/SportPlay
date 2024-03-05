@@ -32,7 +32,7 @@ const Navbar = () => {
 								onClick={handleModalContainerClick}
 								className='absolute top-[88px] bg-secondary text-white w-1/2 h-[423px]   '
 							>
-								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
+								<ul className='text-white font-Roboto flex flex-col items-start pt-[47px] '>
 									<li className='flex items-center hover:bg-neutral/20 w-full pl-[30px] h-[47px]'>
 										<Link to='/'>Inicio</Link>
 									</li>
@@ -54,20 +54,20 @@ const Navbar = () => {
 					)}
 				</div>
 				{/* Logo */}
-				<div className='flex items-center justify-center sm:justify-start w-64'>
+				<div className='flex items-center justify-center sm:justify-start w-64 lg:ml-4 '>
 
 				<Link to="/" >
 					<img
-						src='/images/logo-hori-2.png'
+						src='/images/logo-hori.svg'
 						alt='Logo'
-						className='h-14 sm:h-16  '
+						className='h-14 sm:h-16  lg:'
 					/>
 				</Link>					
 
 				</div>
 			
 			{/* Menú de navegación para pantallas grandes */}
-			<div className='hidden sm:flex space-x-4'>
+			<div className='hidden sm:flex space-x-4 lg:text-lg lg:flex lg:justify-between lg:w-[500px] lg:ml-52'>
 
 				<Link to='/'>Inicio</Link>
 

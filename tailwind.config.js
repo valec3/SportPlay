@@ -17,6 +17,9 @@ export default {
 				Roboto: ['Roboto', 'sans-serif'],
 				SourceSansPro: ['Source Sans Pro', 'sans-serif'],
 			},
+		    backgroundImage: {
+				hero: "url('/images/fondo.svg')",
+			},
 		},
 	},
 	plugins: [require('daisyui')],
