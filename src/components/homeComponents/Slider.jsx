@@ -56,7 +56,7 @@ function AutoPlay() {
 							className={`${team.logo_url == null || team.logo_url == '' ? 'w-full h-full object-contain  rounded-lg ' : 'p-0.5 w-full h-full object-contain '}`}
 							src={
 								team.logo_url == null || team.logo_url == ''
-									? 'icons/trophyAdminTournament.svg'
+									? 'images/teamLogo_urlDef.png'
 									: team.logo_url
 							}
 							alt='logo'

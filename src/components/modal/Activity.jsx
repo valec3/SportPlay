@@ -115,7 +115,7 @@ export default function Activity() {
 						<h2 className='font-bold text-[22px] font-Roboto leading-[24.53px] tracking-[0.263px]'>
 							Torneos Activos
 						</h2>
-						<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto'>
+						<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto cursor-pointer'>
 							Crear Torneo
 						</span>
 					</div>

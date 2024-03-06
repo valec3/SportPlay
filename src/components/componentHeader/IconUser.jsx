@@ -10,7 +10,7 @@ import { changeData } from '../../redux/featuresSlice/userSlice';
 import { useNavigate } from 'react-router-dom/dist';
 
 const IconUser = () => {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isRegister = useSelector(state => state.isRegister.isRegister);
@@ -69,31 +69,31 @@ const IconUser = () => {
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
 						onClick={() => toggleDropdown(false)}
 					>
-						<Link to={'/Perfil'}>Perfil</Link>
+						<Link className='w-full' to={'/Perfil'}>Perfil</Link>
 					</li>
 					<li
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
 						onClick={() => toggleDropdown(false)}
 					>
-						<Link to='Activity'>Actividad</Link>
+						<Link className='w-full' to='Activity'>Actividad</Link>
 					</li>
 					<li
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
 						onClick={() => toggleDropdown(false)}
 					>
-						<Link to='/crear-torneo'>Crear torneo</Link>
+						<Link className='w-full' to='/crear-torneo'>Crear torneo</Link>
 					</li>
 					<li
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
 						onClick={() => toggleDropdown(false)}
 					>
-						<Link to='/jugador'>Jugador</Link>
+						<Link className='w-full' to='/addPlayer'>Jugador</Link>
 					</li>
 					<li
-						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
+						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20 w-full'
 						onClick={() => toggleDropdown(false)}
 					>
-						<a href='#'>Resultados</a>
+						<Link className='w-full' to='/Admin-Resultados'>Resultados</Link>
 					</li>
 				</ul>
 				<hr className='border-[#545458]' />

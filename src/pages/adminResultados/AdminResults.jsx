@@ -27,7 +27,7 @@ const AdminResult = () => {
 	}
 
 	return (
-		<section className='pb-[119px] bg-primary text-base-100 xl:w-[1224px] xl:m-auto '>
+		<section className='pb-[119px] bg-primary text-base-100 xl:w-[1024px] xl:m-auto '>
 			<div className='px-[30px] h-52 flex flex-col justify-center gap-[5px] md:items-center'>
 				<h1 className='font-Roboto font-bold text-[32px] mb-5'>Resultados</h1>
 				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%]'>
@@ -119,8 +119,8 @@ const AdminResult = () => {
 					
 					<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
 							<img
-								src={teamsToShow[0].logo==null || teamsToShow[0].logo==''?
-								'images/teamLogoDef.png':teamsToShow[0].logo
+								src={teamsToShow[0].logo_url==null || teamsToShow[0].logo_url==''?
+								'images/teamLogo_urlDef.png':teamsToShow[0].logo_url
 												}
 								alt='icono de equipo'
 								className='w-[40px] h-[40px] rounded-full'
@@ -144,8 +144,8 @@ const AdminResult = () => {
 					<div className=" w-[35%]">
 					<div className='w-[45px] h-[45px]  rounded-full bg-neutral flex justify-center items-center mx-auto'>
 							<img
-								src={teamsToShow[0].logo==null || teamsToShow[0].logo==''?
-								'images/teamLogoDef.png':teamsToShow[0].logo
+								src={teamsToShow[0].logo_url==null || teamsToShow[0].logo_url==''?
+								'images/teamLogo_urlDef.png':teamsToShow[0].logo_url
 												}
 								alt='icono de equipo'
 								className='w-[40px] h-[40px] rounded-full '
@@ -171,8 +171,8 @@ const AdminResult = () => {
 					<div className="w-[35%]">
 					<div className='w-[45px] h-[45px] mx-auto rounded-full bg-neutral flex justify-center items-center'>
 							<img
-								src={teamsToShow[1].logo==null || teamsToShow[1].logo==''?
-								'images/teamLogoDef.png':teamsToShow[1].logo
+								src={teamsToShow[1].logo_url==null || teamsToShow[1].logo_url==''?
+								'images/teamLogo_urlDef.png':teamsToShow[1].logo_url
 												}
 								alt='icono de equipo'
 								className='w-[40px] h-[40px] rounded-full'
