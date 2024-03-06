@@ -55,8 +55,8 @@ const LoadResults = () => {
 		addGameStats(data);
 	};
 	return (
-		<section className='px-6 md:px-9'>
-			<div className='flex justify-center items-center gap-3 font-semibold'>
+		<section className='px-6 md:px-28 lg:px-20'>
+			<div className='w-full flex justify-center items-center gap-3 font-semibold py-2'>
 				<img
 					className='size-10 rounded-full object-contain'
 					src={infoTournament.logo}
@@ -93,7 +93,7 @@ const LoadResults = () => {
 				</div>
 			) : (
 				<div className='flex justify-center items-center h-[10rem]'>
-					<p className='text-2xl'>Seleccione un partido</p>
+					<p className='text-2xl'>No hay nada que mostrar</p>
 				</div>
 			)}
 		</section>

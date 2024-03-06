@@ -102,8 +102,8 @@ const TableInput = ({ game, dataGame, setDataGame }) => {
 	};
 	console.log('game players', dataGame);
 	return (
-		<div>
-			<table className='w-full'>
+		<div className='w-full flex flex-col lg:flex-row lg:justify-between gap-x-8 gap-y-10 lg:gap-x-16 lg:mt-10'>
+			<table className='flex flex-1 flex-col bg-secondary p-5 rounded-lg'>
 				<thead>
 					<tr className='grid grid-cols-[5fr_1fr_1fr_1fr_1fr]'>
 						<th className='text-left text-xl text-red-400'>
@@ -123,7 +123,7 @@ const TableInput = ({ game, dataGame, setDataGame }) => {
 							className='grid grid-cols-[5fr_1fr_1fr_1fr_1fr]'
 							key={player.player_id}
 						>
-							<td>{player.player_name}</td>
+							<td className='flex items-center'>{player.player_name}</td>
 							<td className='py-2 text-center'>
 								<input
 									type='number'
@@ -192,7 +192,7 @@ const TableInput = ({ game, dataGame, setDataGame }) => {
 					))}
 				</tbody>
 			</table>
-			<table className='w-full mt-6'>
+			<table className='flex flex-1 flex-col bg-secondary p-5 rounded-lg'>
 				<thead>
 					<tr className='grid grid-cols-[5fr_1fr_1fr_1fr_1fr]'>
 						<th className='text-left text-xl text-blue-400'>
@@ -212,7 +212,7 @@ const TableInput = ({ game, dataGame, setDataGame }) => {
 							className='grid grid-cols-[5fr_1fr_1fr_1fr_1fr]'
 							key={player.player_id}
 						>
-							<td>{player.player_name}</td>
+							<td className='flex items-center'>{player.player_name}</td>
 							<td className='py-2 text-center'>
 								<input
 									type='number'
