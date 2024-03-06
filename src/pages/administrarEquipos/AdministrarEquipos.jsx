@@ -12,17 +12,15 @@ function AdministrarEquipos() {
 	//get teams of tournament
 	const [equiposDelTorneo, setEquiposDelTorneo] = useState([]);
 
-	useEffect(() => {
-		const fetchEquiposDelTorneo = async () => {
-			const response = await axios.get(
-				`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${state.id}`
-			);
-			const data = await response.data;
-			console.log('equipos del partido', data);
-			setEquiposDelTorneo(data.teams);
-		};
-		fetchEquiposDelTorneo();
-	}, [equiposDelTorneo]);
+	const fetchEquiposDelTorneo = async () => {
+		const response = await axios.get(
+			`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${state.id}`
+		);
+		const data = await response.data;
+		console.log('equipos del partido', data);
+		setEquiposDelTorneo(data.teams);
+	};
+	fetchEquiposDelTorneo();
 
 	//data of new team
 	const userData = useSelector(state => state.userData.userData);
@@ -77,8 +75,7 @@ function AdministrarEquipos() {
 
 			// Handle success here (e.g., display success message, redirect)
 			setSubmitting(false); // Reset submitting state
-			setFieldValue('name', '');
-			setFieldValue('logo_url', null);
+			fetchEquiposDelTorneo();
 		} catch (error) {
 			console.error('Error:', error.response.data); // Handle error response
 
@@ -88,18 +85,19 @@ function AdministrarEquipos() {
 	};
 	//eliminar un equipo
 	const eliminarEquipo = async equipoId => {
-		try {
-			await axios.delete(
-				`https://tournament-sport.onrender.com/api/tournament/tournament-teams`,
-				{
-					tournament_id: state.id,
-					team_id: equipoId,
-				}
-			);
-			console.log('Equipo eliminado exitosamente');
-		} catch (error) {
-			console.error('Error al eliminar equipo:', error.response.data);
-		}
+		// try {
+		// 	await axios.delete(
+		// 		`https://tournament-sport.onrender.com/api/tournament/tournament-teams`,
+		// 		{
+		// 			tournament_id: state.id,
+		// 			team_id: equipoId,
+		// 		}
+		// 	);
+		// 	console.log('Equipo eliminado exitosamente');
+		// } catch (error) {
+		// 	console.error('Error al eliminar equipo:', error.response.data);
+		// }
+		console.log(equipoId);
 	};
 
 	return (
@@ -181,17 +179,23 @@ function AdministrarEquipos() {
 								key={index}
 							>
 								<div className='flex flex-row gap-4 w-[200px]'>
-									<img src={equipo.logo_url} alt='icono de equipo' />
+									<img
+										src={equipo.logo_url}
+										alt='icono de equipo'
+										className='w-[30px] h-[30px]'
+									/>
 									<p>{equipo.name}</p>
 								</div>
 								<div className='flex flex-row gap-4'>
 									<img
 										src='/icons/add-member.svg'
 										alt='icono agregar a un integrante'
+										className='w-[26px] h-[21px]'
 									/>
 									<img
 										src='/icons/cancel-team.svg '
 										alt='icono cancelar'
+										className='w-[20px] h-[21px]'
 										onClick={() => eliminarEquipo(equipo.id)}
 									/>
 								</div>
