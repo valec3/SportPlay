@@ -24,7 +24,6 @@ function AdministrarEquipos() {
 					`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${idTournament}`
 				);
 				const data = await response.data;
-				console.log('equipos del partido', data);
 				setEquiposDelTorneo(data.teams);
 			};
 			fetchEquiposDelTorneo();
@@ -98,19 +97,21 @@ function AdministrarEquipos() {
 	};
 	//eliminar un equipo
 	const eliminarEquipo = async equipoId => {
-		// try {
-		// 	await axios.delete(
-		// 		`https://tournament-sport.onrender.com/api/tournament/tournament-teams`,
-		// 		{
-		// 			tournament_id: state.id,
-		// 			team_id: equipoId,
-		// 		}
-		// 	);
-		// 	console.log('Equipo eliminado exitosamente');
-		// } catch (error) {
-		// 	console.error('Error al eliminar equipo:', error.response.data);
-		// }
-		console.log(equipoId);
+		try {
+			await axios.delete(
+				`https://tournament-sport.onrender.com/api/tournament/tournament-teams`,
+				{
+					data: {
+						tournament_id: state.id, // Access the tournament ID from your state
+						team_id: equipoId,
+					},
+				}
+			);
+			console.log('Equipo eliminado exitosamente');
+			setActualizarEquipos(true);
+		} catch (error) {
+			console.error('Error al eliminar equipo:', error.response.data);
+		}
 	};
 
 	return (
