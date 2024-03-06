@@ -56,32 +56,87 @@ export const addGameStatsService = async (data) => {
         players: away_players,
     } = away_team;
     // Update game score
-    const query = `UPDATE games SET score_home = '${score_home}', score_away = '${score_away}' WHERE game_id = '${game_id}';`;
-    await pool.query(query);
+    const query =
+        'UPDATE games SET score_home = ?, score_away = ? WHERE id = ?';
+    console.log('Updating game score');
+    const [response] = await pool.query(query, [
+        score_home,
+        score_away,
+        game_id,
+    ]);
+    if (!response) throw new Error('Internal server error');
+    console.log('Game score updated');
     // Add stats for home team
     for (const player of home_players) {
-        const { id, type } = player;
-        if (
-            type === 'goal' ||
-            type === 'yellow' ||
-            type === 'red' ||
-            type === 'injury'
-        ) {
-            await addPlayerStats(id, game_id, home_team_id, type);
+        const { player_id, yellow, red, injury, goal } = player;
+        if (yellow) {
+            for (let i = 0; i < yellow; i++) {
+                await addPlayerStats(
+                    player_id,
+                    game_id,
+                    home_team_id,
+                    'yellow',
+                );
+            }
+        }
+        if (red) {
+            for (let i = 0; i < red; i++) {
+                await addPlayerStats(player_id, game_id, home_team_id, 'red');
+            }
+        }
+        if (injury) {
+            for (let i = 0; i < injury; i++) {
+                await addPlayerStats(
+                    player_id,
+                    game_id,
+                    home_team_id,
+                    'injury',
+                );
+            }
+        }
+        if (goal) {
+            for (let i = 0; i < goal; i++) {
+                await addPlayerStats(player_id, game_id, home_team_id, 'goal');
+            }
         }
     }
     // Add stats for away team
     for (const player of away_players) {
-        const { id, type } = player;
-        if (
-            type === 'goal' ||
-            type === 'yellow' ||
-            type === 'red' ||
-            type === 'injury'
-        ) {
-            await addPlayerStats(id, game_id, away_team_id, type);
+        const { player_id, yellow, red, injury, goal } = player;
+        if (yellow) {
+            for (let i = 0; i < yellow; i++) {
+                await addPlayerStats(
+                    player_id,
+                    game_id,
+                    away_team_id,
+                    'yellow',
+                );
+            }
+        }
+        if (red) {
+            for (let i = 0; i < red; i++) {
+                await addPlayerStats(player_id, game_id, away_team_id, 'red');
+            }
+        }
+        if (injury) {
+            for (let i = 0; i < injury; i++) {
+                await addPlayerStats(
+                    player_id,
+                    game_id,
+                    away_team_id,
+                    'injury',
+                );
+            }
+        }
+        if (goal) {
+            for (let i = 0; i < goal; i++) {
+                await addPlayerStats(player_id, game_id, away_team_id, 'goal');
+            }
         }
     }
+    return {
+        message: 'Stats added',
+    };
 };
 
 export const getGamesByTeamService = async (params) => {

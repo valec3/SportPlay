@@ -291,10 +291,10 @@ SELECT
 FROM games g
 INNER JOIN teams t ON g.home_team_id = t.id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS goals_count
+    SELECT team_id, COUNT(*) AS goals_count
     FROM goals
-    GROUP BY game_id
-) AS home_goals ON g.id = home_goals.game_id
+    GROUP BY team_id
+) AS home_goals ON g.home_team_id = home_goals.team_id
 LEFT JOIN (
     SELECT game_id, COUNT(*) AS red_cards_count
     FROM red_cards
@@ -328,10 +328,10 @@ SELECT
 FROM games g
 INNER JOIN teams t ON g.away_team_id = t.id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS goals_count
+    SELECT team_id, COUNT(*) AS goals_count
     FROM goals
-    GROUP BY game_id
-) AS away_goals ON g.id = away_goals.game_id
+    GROUP BY team_id
+) AS away_goals ON g.away_team_id = away_goals.team_id
 LEFT JOIN (
     SELECT game_id, COUNT(*) AS red_cards_count
     FROM red_cards
