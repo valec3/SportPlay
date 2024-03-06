@@ -284,6 +284,7 @@ SELECT
     g.tournament_id,
     g.home_team_id AS team_id,
     t.name AS team_name,
+    t_count.teams_count AS teams_count,
     COALESCE(home_goals.goals_count, 0) AS goals,
     COALESCE(home_red_cards.red_cards_count, 0) AS red_cards,
     COALESCE(home_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
@@ -310,6 +311,10 @@ LEFT JOIN (
     FROM injuries
     GROUP BY game_id
 ) AS home_injuries ON g.id = home_injuries.game_id
+INNER JOIN (
+    SELECT teams_count,id
+    FROM tournament
+) AS t_count ON t_count.id = g.tournament_id
 
 UNION ALL
 
@@ -321,6 +326,7 @@ SELECT
     g.tournament_id,
     g.away_team_id AS team_id,
     t.name AS team_name,
+    t_count.teams_count AS teams_count,
     COALESCE(away_goals.goals_count, 0) AS goals,
     COALESCE(away_red_cards.red_cards_count, 0) AS red_cards,
     COALESCE(away_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
@@ -346,7 +352,11 @@ LEFT JOIN (
     SELECT game_id, COUNT(*) AS injuries_count
     FROM injuries
     GROUP BY game_id
-) AS away_injuries ON g.id = away_injuries.game_id;
+) AS away_injuries ON g.id = away_injuries.game_id
+INNER JOIN (
+    SELECT teams_count,id
+    FROM tournament
+) AS t_count ON t_count.id = g.tournament_id;
 
 
 SELECT * FROM game_team_stats;
