@@ -26,7 +26,7 @@ const Navbar = () => {
 				{/* Menú hamburguesa desplegable */}
 				<div
 					onClick={handleModalContainerClick}
-					className={`absolute top-[88px] bg-secondary text-white w-1/2 h-[423px]  ${isOpen ? 'left-0' : '-left-56'} transition-all ease-in-out duration-500`}
+					className={`absolute top-[88px] bg-secondary text-white w-1/2 h-[423px]  ${isOpen ? 'left-0' : '-left-96'} transition-all ease-in-out duration-500`}
 				>
 					<ul className='text-white font-Roboto flex flex-col items-start pt-[47px]  '>
 						<li

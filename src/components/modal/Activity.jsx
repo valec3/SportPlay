@@ -16,7 +16,7 @@ return roleUser
 
 const Tournament = ({ logo, name, role }) => (
 	
-	<div className='w-full bg-secondary rounded-[14px] px-5 flex items-center justify-between py-[13px]'>
+	<div className='w-full bg-secondary rounded-[14px] px-5 flex items-center justify-between py-[13px] lg:w-[70%] lg:m-auto'>
 		<div className='flex items-center gap-[6px]'>
 		<div className='rounded-full bg-neutral w-[40px] h-[40px] flex justify-center items-center'>
 								<img 
@@ -106,13 +106,13 @@ export default function Activity() {
 	};
 
 	return (
-		<section className='pt-[30px] pb-[119px] bg-primary text-base-100'>
+		<section className='pt-[30px] pb-[119px] bg-primary text-base-100 '>
 			{activity?
 				<>
 				<div className='px-[30px]'>
-					<h1 className='font-Roboto font-bold text-[32px]'>Actividad</h1>
-					<div className='flex justify-between mt-[43px]'>
-						<h2 className='font-bold text-[22px] font-Roboto leading-[24.53px] tracking-[0.263px]'>
+					<h1 className='font-Roboto font-bold text-[32px] lg:text-center lg:text-2xl lg:pt-2'>Actividad</h1>
+					<div className='flex justify-between mt-[43px] lg:w-[70%] lg:m-auto	lg:mt-10'>
+						<h2 className='font-bold text-[20px] font-Roboto leading-[24.53px] tracking-[0.263px] '>
 							Torneos Activos
 						</h2>
 						<span onClick={handleCrearTorneo} className='font-bold text-success font-Roboto cursor-pointer'>
@@ -135,7 +135,8 @@ export default function Activity() {
 					</div>
 				</div>
 
-				<img className='mt-[102px]' src='images/divider.svg' alt='Divider' />
+				<div className='bg-[#545458] w-full h-[0.5px] mt-[100px]'>
+			</div>
 
 				<div className='px-[30px] mt-[56.89px]'>
 					<h3 className='font-Roboto font-medium text-[22px] leading-[24.53px] tracking-[0.263px]'>
@@ -143,11 +144,11 @@ export default function Activity() {
 					</h3>
 
 					<div>
-						<div className=' mt-9'>
-							
+						<div className=' mt-9 lg:border lg:border-red-100 lg:rounded-2xl lg:py-5'>
+						<div className="lg:flex lg:justify-center lg:flex-col lg:items-center">
 							{
 								activeTournaments.map((obj, index) => (
-								<div key={index} className='flex items-center gap-[5px]'>
+								<div key={index} className='flex items-center gap-[5px] lg:w-[90%]'>
 									<img src={obj.logo} alt='Logo' className="w-[45px] h-[45px]" />
 									<span className='text-lg font-semibold font-Roboto'>
 									{obj.name}
@@ -155,16 +156,18 @@ export default function Activity() {
 								</div>))
 							}
 
-							<div className=' mt-[25px] flex flex-col gap-3'>
-								<div className='flex flex-col gap-3'>
+							<div className=' mt-[25px] flex flex-col gap-3 lg:w-[90%]'>
+								<div className='flex flex-col gap-3 lg:flex-row lg:w-full'>
 									{nextAdminTournament.map((adminTournament, index) => (
 										<Match key={index} {...adminTournament} />
 									))}
 								</div>
 							</div>
+							</div>
 						</div>
 
-						<div className=' mt-[68px]'>
+							<div className=' mt-[68px] lg:border lg:border-red-100 lg:rounded-2xl lg:py-5'>
+								<div className="lg:flex lg:flex-col lg:w-[90%] lg:m-auto">
 							<div className='flex items-center gap-[5px]'>
 								<img src={activePlayerTournaments[0].logo} alt='Logo' />
 								<span className='text-lg font-semibold font-Roboto'>
@@ -173,12 +176,13 @@ export default function Activity() {
 							</div>
 
 							<div className=' mt-[25px] flex flex-col gap-3'>
-								<div className='flex flex-col gap-3'>
+								<div className='flex flex-col gap-3 lg:w-[49%]'>
 									{nextPlayerTournament.map((playerTournament, index) => (
 										<Match key={index} {...playerTournament} />
 									))}
 								</div>
-							</div>
+								</div>
+								</div>
 						</div>
 					</div>
 				</div>

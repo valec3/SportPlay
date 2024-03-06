@@ -59,17 +59,17 @@ function CrearTorneo() {
 	}
 
 	return (
-		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
-			<h2 className='text-[22px] md:text-[32px] text-base-100 mt-1 text-center font-bold'>
+		<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral py-8'>
+			<h2 className='text-2xl text-base-100  text-center font-bold pb-4'>
 				Torneo nuevo
 			</h2>
 			
-			<div className=' flex flex-col items-center  mx-auto w-full '>
+			<div className=' flex flex-col items-center  mx-auto w-full lg:py-4'>
 				
 				<div className='w-[134px] h-[134px] flex items-center rounded-full z-[2] bg-neutral'>
 					<img
 						src={`${imageUrl?imageUrl:'/images/torneo-nuevo.svg'} `}
-						alt='logo tornep'
+						alt='logo torneo'
 						className='mx-auto w-[134px] h-[134px] rounded-full z-0'
 					/>
 				</div>
@@ -181,13 +181,15 @@ function CrearTorneo() {
 								</div>
 							</div>
 						</div>
+						<div className='flex justify-center mt-11'>	
 						<button
 							type='submit'
-							className='bg-accent btn btn-sm border-accent text-base-100 '
+							className='bg-accent rounded-2xl border-accent text-base-100 w-[260px] h-[40px]'
 							disabled={isSubmitting}
 						>
 							Crear torneo
 						</button>
+						</div>
 					</Form>
 				)}
 			</Formik>

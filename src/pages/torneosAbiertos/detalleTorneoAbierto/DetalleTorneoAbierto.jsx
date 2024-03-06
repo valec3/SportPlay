@@ -106,7 +106,7 @@ const DetalleTorneoAbierto = () => {
 			<button
 			key={team.id}
 
-				className='bg-secondary w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl h-[47px] overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-start items-center mb-2 mx-auto'
+				className='bg-secondary px-3 w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl h-[47px] overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-between items-center mb-2 mx-auto'
 
 			
 

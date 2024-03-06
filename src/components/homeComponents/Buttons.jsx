@@ -21,13 +21,13 @@ const Buttons = () => {
 			{!isRegister&&<button
 				onClick={handleOpenModal}
 				className='px-6 py-2 rounded-2xl drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] font-SourceSansPro text-primary font-semibold bg-accent hover:bg-success transition duration-300 
-				ease-in-out lg:w-[167px] lg:h-[43px] lg:mr-10'
+				ease-in-out lg:w-[167px] lg:h-[43px] lg:mr-20 '
 			>
 				Registrarse
 			</button>}
 			<button
 				onClick={isRegister?handleCrearTorneo:handleOpenModal}
-				className='px-6 py-2 rounded-2xl drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] font-SourceSansPro text-base-100 bg-secondary hover:bg-success transition duration-300 ease-in-out lg:w-[167px] lg:h-[43px]'
+				className='px-6 py-2 rounded-2xl drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] font-SourceSansPro text-base-100 bg-secondary hover:bg-success transition duration-300 ease-in-out lg:w-[167px] lg:h-[43px] lg:-ml-16'
 			>
 				Crear Torneo
 			</button>
