@@ -1,24 +1,31 @@
 import axios from 'axios';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
+// import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
 import { useLocation } from 'react-router-dom';
 
 function AdministrarEquipos() {
-	const { state } = useLocation();
-	console.log('datos del torneo', state);
-	PeticionAllTournaments();
-	const allTeams = useSelector(state => state.allTeams.allTeams);
-	console.log(allTeams);
-	const userId = useSelector(state => state.userData.userData.id);
-	const equiposDelTorneo = allTeams
-		.filter(obj => obj.creator_id === userId)
-		.slice(-15)
-		.reverse();
-	console.log('equiposDelTorneo', equiposDelTorneo);
-	const userData = useSelector(state => state.userData.userData);
 	const [imageUrl, setImageUrl] = useState('/images/torneo-nuevo.svg');
+	//get data of tournament
+	const { state } = useLocation();
+	//get teams of tournament
+	const [equiposDelTorneo, setEquiposDelTorneo] = useState([]);
+
+	useEffect(() => {
+		const fetchEquiposDelTorneo = async () => {
+			const response = await axios.get(
+				`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${state.id}`
+			);
+			const data = await response.data;
+			console.log('equipos del partido', data);
+			setEquiposDelTorneo(data.teams);
+		};
+		fetchEquiposDelTorneo();
+	}, [equiposDelTorneo]);
+
+	//data of new team
+	const userData = useSelector(state => state.userData.userData);
 
 	const validate = values => {
 		const errors = {};
@@ -49,12 +56,14 @@ function AdministrarEquipos() {
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
 			var fileFormData = new FormData();
-			fileFormData.append('name', values.name);
-			fileFormData.append('logo_url', values.logo_url);
+			fileFormData.append('team_id', '');
+			fileFormData.append('tournament_id', state.id);
 			fileFormData.append('creator_id', userData.id);
-			console.log(fileFormData);
+			fileFormData.append('logo_url', values.logo_url);
+			fileFormData.append('name', values.name);
+
 			const response = await axios.post(
-				'https://tournament-sport.onrender.com/api/teams/create',
+				'https://tournament-sport.onrender.com/api/tournament/tournament-teams',
 				fileFormData,
 				{
 					// Upload to server
@@ -68,11 +77,28 @@ function AdministrarEquipos() {
 
 			// Handle success here (e.g., display success message, redirect)
 			setSubmitting(false); // Reset submitting state
+			setFieldValue('name', '');
+			setFieldValue('logo_url', null);
 		} catch (error) {
 			console.error('Error:', error.response.data); // Handle error response
 
 			// Handle errors here (e.g., display error message)
 			setSubmitting(false); // Reset submitting state in case of error
+		}
+	};
+	//eliminar un equipo
+	const eliminarEquipo = async equipoId => {
+		try {
+			await axios.delete(
+				`https://tournament-sport.onrender.com/api/tournament/tournament-teams`,
+				{
+					tournament_id: state.id,
+					team_id: equipoId,
+				}
+			);
+			console.log('Equipo eliminado exitosamente');
+		} catch (error) {
+			console.error('Error al eliminar equipo:', error.response.data);
 		}
 	};
 
@@ -147,7 +173,7 @@ function AdministrarEquipos() {
 						<div>Equipos :</div>
 						<div className='text-warning'>{`Vacante: ${state.teams_count - equiposDelTorneo.length}`}</div>
 					</div>
-					{}
+
 					{equiposDelTorneo.map((equipo, index) => {
 						return (
 							<div
@@ -163,7 +189,11 @@ function AdministrarEquipos() {
 										src='/icons/add-member.svg'
 										alt='icono agregar a un integrante'
 									/>
-									<img src='/icons/cancel-team.svg ' alt='icono cancelar' />
+									<img
+										src='/icons/cancel-team.svg '
+										alt='icono cancelar'
+										onClick={() => eliminarEquipo(equipo.id)}
+									/>
 								</div>
 							</div>
 						);
