@@ -37,17 +37,17 @@ paths:
             summary: Get all tournaments
             operationId: getAllTournaments
             responses:
-                '200':
+                "200":
                     description: Successful operation
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Tournaments'
+                                $ref: "#/components/schemas/Tournaments"
                                 example:
                                     - id: 1
-                                      logo: ''
+                                      logo: ""
                                       creator_id: null
-                                      name: 'Torneo prueba'
+                                      name: "Torneo prueba"
                                       players_count: 8
                                       teams_count: 8
                                       type_tournament: 1
@@ -55,7 +55,7 @@ paths:
                                     - id: 2
                                       logo: null
                                       creator_id: null
-                                      name: 'Torneo prueba'
+                                      name: "Torneo prueba"
                                       players_count: 8
                                       teams_count: 8
                                       type_tournament: 1
@@ -63,7 +63,7 @@ paths:
                                     - id: 3
                                       logo: null
                                       creator_id: null
-                                      name: 'Torneo prueba'
+                                      name: "Torneo prueba"
                                       players_count: 8
                                       teams_count: 8
                                       type_tournament: 1
@@ -71,7 +71,7 @@ paths:
                                     - id: 4
                                       logo: null
                                       creator_id: null
-                                      name: 'Torneo prueba'
+                                      name: "Torneo prueba"
                                       players_count: 8
                                       teams_count: 8
                                       type_tournament: 1
@@ -79,12 +79,12 @@ paths:
                                     - id: 5
                                       logo: null
                                       creator_id: null
-                                      name: 'Torneo prueba'
+                                      name: "Torneo prueba"
                                       players_count: 8
                                       teams_count: 8
                                       type_tournament: 1
                                       finished: 0
-                '401':
+                "401":
                     description: Unauthorized
 
     /api/tournament/my-tournaments:
@@ -112,69 +112,60 @@ paths:
                           eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTcwODkwNzUxNSwiZXhwIjoxNzA4OTQzNTE1fQ.tpCL-NlBGYLovjxtD_ZMtK_70EV36t4BAVFzwUzeQD8,
                       ]
             responses:
-                '200':
+                "200":
                     description: Successful operation
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Tournaments'
+                                $ref: "#/components/schemas/Tournaments"
                                 example:
                                     - id: 10
-                                      logo: 'https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572493/sports-db/xdvkewvt3hixinfnmjvx.jpg'
+                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572493/sports-db/xdvkewvt3hixinfnmjvx.jpg"
                                       creator_id: 18
-                                      name: 'Torneo de gatos'
+                                      name: "Torneo de gatos"
                                       players_count: 11
                                       teams_count: 16
                                       type_tournament: 0
                                       finished: 0
                                     - id: 11
-                                      logo: 'https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572868/sports-db/n6nhaqofil2rcklnmjyn.jpg'
+                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572868/sports-db/n6nhaqofil2rcklnmjyn.jpg"
                                       creator_id: 18
-                                      name: 'Torneo de gatos'
+                                      name: "Torneo de gatos"
                                       players_count: 11
                                       teams_count: 16
                                       type_tournament: 0
                                       finished: 0
                                     - id: 12
-                                      logo: 'https://res.cloudinary.com/dy7ncwtov/image/upload/v1708644660/sports-db/r7jfxng8uzzypxth7hgn.jpg'
+                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708644660/sports-db/r7jfxng8uzzypxth7hgn.jpg"
                                       creator_id: 18
-                                      name: 'Torneo de gatos'
+                                      name: "Torneo de gatos"
                                       players_count: 11
                                       teams_count: 16
                                       type_tournament: 0
                                       finished: 1
                                     - id: 13
-                                      logo: 'https://res.cloudinary.com/dy7ncwtov/image/upload/v1708650791/sports-db/lwydya8znliyzbss612e.jpg'
+                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708650791/sports-db/lwydya8znliyzbss612e.jpg"
                                       creator_id: 18
-                                      name: 'Torneo de gatos'
+                                      name: "Torneo de gatos"
                                       players_count: 11
                                       teams_count: 16
                                       type_tournament: 0
                                       finished: 1
-                '400':
+                "400":
                     description: Invalid username id supplied
-                '401':
+                "401":
                     description: Unauthorized
-                '404':
+                "404":
                     description: User not found
         patch:
             tags:
                 - tournaments
-            summary: Close a tournament.
+            summary: Actualizar el estado del torneo.
             description: |
-                Cierra un torneo con el ID de usuario especificado. El ID de usuario debe proporcionarse como un parámetro de consulta denominado "id" en la URL. Ejemplo:
-
-                http://localhost:3100/api/tournament/my-tournaments?id=18
+                Actualiza el estado de un torneo: abierto, cerrado o cancelado.
 
                 *Requiere autenticación JWT. Por favor, proporcione un token JWT válido en el encabezado 'Authorization' para acceder a este endpoint.
-            operationId: CloseATournament
-            parameters:
-                - in: query
-                  name: id
-                  required: true
-                  schema:
-                      type: string
-                  description: The user ID to close a tournament.
+            operationId: SetStateATournament
             requestBody:
                 required: true
                 content:
@@ -182,28 +173,53 @@ paths:
                         schema:
                             type: object
                             properties:
-                                id:
+                                tournament_id:
                                     type: integer
+                                    description: ID del torneo que se desea actualizar.
+                                status:
+                                    type: string
+                                    enum: ["ongoing", "finished", "cancelled"]
+                                    description: Nuevo estado del torneo ('ongoing', 'finished' o 'cancelled').
             security:
                 - bearerAuth:
                       [
                           eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTcwODkwNzUxNSwiZXhwIjoxNzA4OTQzNTE1fQ.tpCL-NlBGYLovjxtD_ZMtK_70EV36t4BAVFzwUzeQD8,
                       ]
             responses:
-                '200':
-                    description: Successful operation
+                "201":
+                    description: Éxito. El estado del torneo se ha cambiado correctamente.
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Tournaments'
-                                example:
-                                    message: 'Torneo cerrado de forma exitosa'
-                '400':
-                    description: Invalid username id supplied
-                '401':
-                    description: Unauthorized
-                '404':
-                    description: User not found
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                        description: Mensaje de éxito.
+                                    status:
+                                        type: string
+                                        description: Estado actual del torneo después del cambio.
+                "400":
+                    description: Error de solicitud. El ID del torneo o el estado no pueden estar vacíos.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: Descripción del error.
+                "401":
+                    description: Error de solicitud. El estado del torneo debe ser 'ongoing', 'finished' o 'cancelled'.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: Descripción del error.
+
 
 components:
     schemas:

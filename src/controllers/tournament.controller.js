@@ -2,7 +2,7 @@ import {
     newTournamentService,
     getAllTournamentsService,
     getTournamentsByUserIdService,
-    closeTournamentService,
+    setStatusTournamentService,
     getAllTeamsPerTournamentService,
     indexTeamToTournamentService,
     getTeamsPerTournamentService,
@@ -50,13 +50,21 @@ export const getTournamentsByUserId = async (req, res) => {
     }
 };
 
-export const closeTournament = async (req, res) => {
+export const setStatusTournament = async (req, res) => {
     try {
-        const tournamentId = req.body.id;
-        const userId = req.query.id;
-        await closeTournamentService(tournamentId, userId);
+        const { tournament_id, status } = req.body;
+        console.log("id: ", tournament_id, "status: ", status);
 
-        res.status(201).json({ message: 'Torneo cerrado de forma exitosa' });
+        if (!tournament_id || !status) {
+            return res.status(400).json({ error: 'El ID del torneo o el estado no pueden estar vacíos.' });
+        }
+        if (status !== 'ongoing' && status !== 'finished' && status !== 'cancelled') {
+            return res.status(401).json({ error: "El estado del torneo debe ser 'ongoing', 'finished' o 'cancelled'." });
+        }
+
+        const { currentStatus } = await setStatusTournamentService(status, tournament_id);
+
+        res.status(201).json({ message: 'Éxito. El estado del torneo se ha cambiado correctamente.', status: currentStatus });
     } catch (error) {
         console.error('Error al cerrar el torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -112,20 +120,24 @@ export const indexTeamToTournament = async (req, res) => {
 
 export const deleteTeamPerTournament = async (req, res) => {
     try {
-        const data = req.body;
-        const { message } = await deleteTeamPerTournamentService(data);
+        console.log('Datos recibidos en el controlador:', req.body);
 
-        if (message === 'Se requieren tanto el ID del torneo como el ID del equipo.') {
-            return res.status(400).json({ error: message });
+        const tournament_id = req.body.tournament_id;
+        const team_id = req.body.team_id;
+
+        if (!tournament_id || !team_id) {
+            return res.status(400).json({ error: 'Se requieren tanto el ID del torneo como el ID del equipo.' });
         }
 
-        res.status(201).json({ message });
+        const { message } = await deleteTeamPerTournamentService(tournament_id, team_id);
 
+        res.status(201).json({ message });
     } catch (error) {
         console.error('Error al eliminar el equipo del torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
+
 
 export const getInfoTournament = async (req, res) => {
     try {
