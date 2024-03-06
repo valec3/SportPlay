@@ -180,10 +180,18 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
     }
 };
 
-export const getInfoTournamentService = async (id) => {
+export const getStatsTournamentService = async (id) => {
     const query = `
             SELECT * FROM game_team_stats
             WHERE game_id IN (SELECT id FROM games WHERE tournament_id = ?)`;
     const result = await pool.query(query, [id]);
+    return result;
+};
+
+export const getInfoTournamentService = async (id) => {
+    const query = `
+            SELECT * FROM tournament
+            WHERE id = ?`;
+    const [result] = await pool.query(query, [id]);
     return result;
 };

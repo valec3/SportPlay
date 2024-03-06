@@ -155,6 +155,39 @@
                     }
                 }
             }
+        },
+        "/api/games/statsForTeam": {
+            "get": {
+                "tags": ["games"],
+                "summary": "Get stats for a team in a tournament",
+                "description": "Returns stats for team",
+                "operationId": "getStatsForTeam",
+                "parameters": [
+                    {
+                        "name": "team_id",
+                        "in": "query",
+                        "description": "ID of tournament to return stats for team",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found"
+                    }
+                }
+            }
         }
     }
 }

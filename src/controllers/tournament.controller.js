@@ -5,6 +5,7 @@ import {
     closeTournamentService,
     getTournamentTeamsService,
     indexTeamToTournamentService,
+    getStatsTournamentService,
     getInfoTournamentService,
 } from '../services/tournament.services.js';
 
@@ -96,9 +97,21 @@ export const indexTeamToTournament = async (req, res) => {
     }
 };
 
+export const getStatsTournament = async (req, res) => {
+    try {
+        const tournamentId = req.params.id;
+        const tournamentData = await getStatsTournamentService(tournamentId);
+        const tournament = tournamentData[0];
+        res.json(tournament);
+    } catch (error) {
+        console.error('Error al obtener la información del torneo:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
 export const getInfoTournament = async (req, res) => {
     try {
-        const tournamentId = req.query.id;
+        const tournamentId = req.params.id;
         const tournamentData = await getInfoTournamentService(tournamentId);
         const tournament = tournamentData[0];
         res.json(tournament);
