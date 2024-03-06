@@ -30,6 +30,7 @@ const swaggerOptions = {
                 name: 'tournaments',
                 description: 'Operations about tournaments',
             },
+            { name: 'teams per tournament', description: 'Operations about teams per tournament' },
             { name: 'players', description: 'Operations about players' },
         ],
     },
