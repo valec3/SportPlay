@@ -14,6 +14,7 @@ import AdminTorneo from './pages/administrarTorneo/AdminTorneo';
 import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 import Addplayer from './modal/AddPlayer';
 import AdminResult from './pages/adminResultados/AdminResults';
+import AdministrarEquipos from './pages/administrarEquipos/AdministrarEquipos';
 
 function App() {
 	return (
@@ -29,6 +30,10 @@ function App() {
 							<Route path='/DetalleTorneoAbierto/:id' element={<DetalleTorneoAbierto />} />
 							<Route path='/Partidos' element={<Partidos />} />
 							<Route path='/Equipos' element={<Equipos />} />
+							<Route
+								path='/administrar-equipos'
+								element={<AdministrarEquipos />}
+							/>
 							<Route path='/Perfil' element={<Perfil />} />
 							<Route path='/Modals' element={<Modals />} />
 							<Route path='/Activity' element={<Activity />} />
