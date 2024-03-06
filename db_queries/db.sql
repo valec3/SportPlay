@@ -59,6 +59,7 @@ CREATE TABLE games(
     FOREIGN KEY (away_team_id) REFERENCES teams(id)
 );
 
+
 CREATE TABLE red_cards(
     id SERIAL PRIMARY KEY,
     player_id BIGINT UNSIGNED,
@@ -227,26 +228,10 @@ LEFT JOIN (
 ) AS injuries ON p.id = injuries.player_id;
 
 
-+-----------+--------------------+-------+-----------+--------------+----------+
-| player_id | player_name        | goals | red_cards | yellow_cards | injuries |
-+-----------+--------------------+-------+-----------+--------------+----------+
-|         6 | Lionel Messi       |     0 |         1 |            0 |        0 |
-|         7 | Sergio Ramos       |     0 |         1 |            0 |        0 |
-|         8 | Neymar Jr.         |     2 |         0 |            1 |        0 |
-|         9 | Mohamed Salah      |     0 |         0 |            0 |        1 |
-|        10 | Kevin De Bruyne    |     0 |         0 |            0 |        0 |
-|        11 | Robert Lewandowski |     0 |         0 |            0 |        0 |
-|        12 | Virgil van Dijk    |     0 |         0 |            0 |        0 |
-|        13 | Kylian Mbappé      |     0 |         0 |            0 |        0 |
-|        14 | Cristiano Ronaldo  |     2 |         0 |            1 |        0 |
-|        15 | Luis Suárez        |     0 |         0 |            0 |        1 |
-|        16 | Gareth Bale        |     0 |         0 |            0 |        0 |
-|        17 | Eden Hazard        |     0 |         0 |            0 |        0 |
-|        18 | Antoine Griezmann  |     0 |         0 |            0 |        0 |
-|        19 | Sadio Mané         |     0 |         0 |            0 |        0 |
-|        20 | Harry Kane         |     0 |         0 |            0 |        0 |
-|        21 | Sergio Agüero      |     0 |         0 |            0 |        0 |
-+-----------+--------------------+-------+-----------+--------------+----------+
+
+-- VISTA PARA OBTENER LAS STATS DE CADA JUGADOR
+-- EN UN JUEGO EN ESPECIFICO
+
 DROP VIEW game_team_player_stats IF EXISTS;
 CREATE VIEW game_team_player_stats AS
 SELECT
@@ -283,15 +268,23 @@ LEFT JOIN (
 ) AS injuries ON p.id = injuries.player_id AND g.id = injuries.game_id;
 
 
-DROP VIEW game_team_stats IF EXISTS;
+
+
+
+
+
+-- VISTA PARA OBTENER LAS STATS POR EQUIPO EN UN JUEGO EN ESPECIFICO
+DROP VIEW game_team_stats;
 CREATE VIEW game_team_stats AS
 SELECT
     g.id AS game_id,
     g.date,
     g.time,
     g.location,
-    t.id AS team_id,
+    g.tournament_id,
+    g.home_team_id AS team_id,
     t.name AS team_name,
+    t_count.teams_count AS teams_count,
     COALESCE(home_goals.goals_count, 0) AS goals,
     COALESCE(home_red_cards.red_cards_count, 0) AS red_cards,
     COALESCE(home_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
@@ -299,10 +292,10 @@ SELECT
 FROM games g
 INNER JOIN teams t ON g.home_team_id = t.id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS goals_count
+    SELECT team_id, COUNT(*) AS goals_count
     FROM goals
-    GROUP BY game_id
-) AS home_goals ON g.id = home_goals.game_id
+    GROUP BY team_id
+) AS home_goals ON g.home_team_id = home_goals.team_id
 LEFT JOIN (
     SELECT game_id, COUNT(*) AS red_cards_count
     FROM red_cards
@@ -317,50 +310,74 @@ LEFT JOIN (
     SELECT game_id, COUNT(*) AS injuries_count
     FROM injuries
     GROUP BY game_id
-) AS home_injuries ON g.id = home_injuries.game_id;
+) AS home_injuries ON g.id = home_injuries.game_id
+INNER JOIN (
+    SELECT teams_count,id
+    FROM tournament
+) AS t_count ON t_count.id = g.tournament_id
+
+UNION ALL
+
+SELECT
+    g.id AS game_id,
+    g.date,
+    g.time,
+    g.location,
+    g.tournament_id,
+    g.away_team_id AS team_id,
+    t.name AS team_name,
+    t_count.teams_count AS teams_count,
+    COALESCE(away_goals.goals_count, 0) AS goals,
+    COALESCE(away_red_cards.red_cards_count, 0) AS red_cards,
+    COALESCE(away_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
+    COALESCE(away_injuries.injuries_count, 0) AS injuries
+FROM games g
+INNER JOIN teams t ON g.away_team_id = t.id
+LEFT JOIN (
+    SELECT team_id, COUNT(*) AS goals_count
+    FROM goals
+    GROUP BY team_id
+) AS away_goals ON g.away_team_id = away_goals.team_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS red_cards_count
+    FROM red_cards
+    GROUP BY game_id
+) AS away_red_cards ON g.id = away_red_cards.game_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS yellow_cards_count
+    FROM yellow_cards
+    GROUP BY game_id
+) AS away_yellow_cards ON g.id = away_yellow_cards.game_id
+LEFT JOIN (
+    SELECT game_id, COUNT(*) AS injuries_count
+    FROM injuries
+    GROUP BY game_id
+) AS away_injuries ON g.id = away_injuries.game_id
+INNER JOIN (
+    SELECT teams_count,id
+    FROM tournament
+) AS t_count ON t_count.id = g.tournament_id;
 
 
+SELECT * FROM game_team_stats;
 
 
+-- VISTA PARA OBTENER LA INFORMACIÓN DE LOS EQUIPOS QUE PARTICIPAN 
+-- EN UN TORNEO EN UN JUEGO EN ESPECIFICO
 
+DROP VIEW tournament_games_teams;
+CREATE VIEW tournament_games_teams AS
+SELECT
+    g.id AS game_id,
+    g.tournament_id,
+    g.home_team_id AS home_team_id,
+    g.away_team_id AS away_team_id,
+    hte.name AS home_team_name,
+    ate.name AS away_team_name,
+    hte.logo_url AS home_team_logo,
+    ate.logo_url AS away_team_logo
+FROM games g
+INNER JOIN teams hte ON g.home_team_id = hte.id
+INNER JOIN teams ate ON g.away_team_id = ate.id;
 
-
--- // {
--- //     "home_team": {
--- //         "id": "1",
--- //         "score": "2",
--- //         "players": [
--- //             {
--- //                 "id": "1",
--- //                 "type": "goal"
--- //             },
--- //             {
--- //                 "id": "2",
--- //                 "type": "yellow"
--- //             },
--- //             {
--- //                 "id": "3",
--- //                 "type": "red"
--- //             }
--- //         ]
--- //     },
--- //     "away_team": {
--- //         "id": "2",
--- //         "score": "1",
--- //         "players": [
--- //             {
--- //                 "id": "4",
--- //                 "type": "goal"
--- //             },
--- //             {
--- //                 "id": "5",
--- //                 "type": "yellow"
--- //             },
--- //             {
--- //                 "id": "6",
--- //                 "type": "injury"
--- //             }
--- //         ]
--- //     },
--- //     "game_id": "1"
--- // }
+SELECT * FROM tournament_games_teams;

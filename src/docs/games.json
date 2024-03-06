@@ -36,8 +36,8 @@
         "/api/games/add": {
             "post": {
                 "tags": ["games"],
-                "summary": "Add a new game",
-                "description": "",
+                "summary": "Agregar los resultados de un partido",
+                "description": "Agregar los resultados de un partido",
                 "operationId": "addGame",
                 "requestBody": {
                     "content": {
@@ -146,6 +146,97 @@
                                         ]
                                     },
                                     "game_id": 1
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "All fields are required"
+                    }
+                }
+            }
+        },
+        "/api/games/statsForTeam": {
+            "get": {
+                "tags": ["games"],
+                "summary": "Get stats for a team in a tournament",
+                "description": "Returns stats for team",
+                "operationId": "getStatsForTeam",
+                "parameters": [
+                    {
+                        "name": "team_id",
+                        "in": "query",
+                        "description": "ID of tournament to return stats for team",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found"
+                    }
+                }
+            }
+        },
+        "/api/games/create": {
+            "post": {
+                "tags": ["games"],
+                "summary": "Create a new game",
+                "description": "Create a new game",
+                "operationId": "createGame",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "time"
+                                    },
+                                    "home_team_id": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    },
+                                    "away_team_id": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "date": "2021-10-10",
+                                    "time": "12:00",
+                                    "home_team_id": 1,
+                                    "away_team_id": 2,
+                                    "location": "Stadium"
                                 }
                             }
                         }

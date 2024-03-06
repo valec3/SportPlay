@@ -1,12 +1,13 @@
+---
 paths:
-    /api/tournament/create-tournament:
+    '/api/tournament/create-tournament':
         post:
             tags:
                 - tournaments
             summary: Create a new tournament
             responses:
-                200:
-                    description: Torneo creado exitosamente
+                '200':
+                    description: Tournament created successfully
             requestBody:
                 required: true
                 content:
@@ -17,141 +18,44 @@ paths:
                                 logo:
                                     type: string
                                 creator_id:
-                                    type: integer
-                                    default: 18
+                                    type: string
                                 name:
                                     type: string
                                 players_count:
-                                    type: integer
-                                    default: 11
+                                    type: string
                                 teams_count:
-                                    type: integer
-                                    default: 8
+                                    type: string
                                 type_tournament:
-                                    type: integer
-
-    /api/tournament/all-tournaments:
+                                    type: string
+    '/api/tournament/all-tournaments':
         get:
             tags:
                 - tournaments
             summary: Get all tournaments
             operationId: getAllTournaments
             responses:
-                "200":
-                    description: Successful operation
+                '200':
+                    description: sucessfull operation
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/Tournaments"
-                                example:
-                                    - id: 1
-                                      logo: ""
-                                      creator_id: null
-                                      name: "Torneo prueba"
-                                      players_count: 8
-                                      teams_count: 8
-                                      type_tournament: 1
-                                      finished: 0
-                                    - id: 2
-                                      logo: null
-                                      creator_id: null
-                                      name: "Torneo prueba"
-                                      players_count: 8
-                                      teams_count: 8
-                                      type_tournament: 1
-                                      finished: 0
-                                    - id: 3
-                                      logo: null
-                                      creator_id: null
-                                      name: "Torneo prueba"
-                                      players_count: 8
-                                      teams_count: 8
-                                      type_tournament: 1
-                                      finished: 0
-                                    - id: 4
-                                      logo: null
-                                      creator_id: null
-                                      name: "Torneo prueba"
-                                      players_count: 8
-                                      teams_count: 8
-                                      type_tournament: 1
-                                      finished: 0
-                                    - id: 5
-                                      logo: null
-                                      creator_id: null
-                                      name: "Torneo prueba"
-                                      players_count: 8
-                                      teams_count: 8
-                                      type_tournament: 1
-                                      finished: 0
-                "401":
+                                '$ref': '#/components/schemas/tournaments'
+                '401':
                     description: Unauthorized
-
-    /api/tournament/my-tournaments:
+    '/api/tournament/my-tournaments':
         get:
             tags:
                 - tournaments
             summary: Get all tournaments by user
-            description: |
-                Devuelve todos los torneos asociados con el ID de usuario especificado. El ID de usuario debe proporcionarse como un parámetro de consulta denominado "id" en la URL. Ejemplo:
-
-                http://localhost:3100/api/tournament/my-tournaments?id=18
-
-                *Requiere autenticación JWT. Por favor, proporcione un token JWT válido en el encabezado 'Authorization' para acceder a este endpoint.
             operationId: getTournamentsByUser
-            parameters:
-                - in: query
-                  name: id
-                  required: true
-                  schema:
-                      type: string
-                  description: The ID of the user to retrieve tournaments for.
-            security:
-                - bearerAuth:
-                      [
-                          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTcwODkwNzUxNSwiZXhwIjoxNzA4OTQzNTE1fQ.tpCL-NlBGYLovjxtD_ZMtK_70EV36t4BAVFzwUzeQD8,
-                      ]
             responses:
-                "200":
-                    description: Successful operation
+                '200':
+                    description: successful operation
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/Tournaments"
-                                example:
-                                    - id: 10
-                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572493/sports-db/xdvkewvt3hixinfnmjvx.jpg"
-                                      creator_id: 18
-                                      name: "Torneo de gatos"
-                                      players_count: 11
-                                      teams_count: 16
-                                      type_tournament: 0
-                                      finished: 0
-                                    - id: 11
-                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708572868/sports-db/n6nhaqofil2rcklnmjyn.jpg"
-                                      creator_id: 18
-                                      name: "Torneo de gatos"
-                                      players_count: 11
-                                      teams_count: 16
-                                      type_tournament: 0
-                                      finished: 0
-                                    - id: 12
-                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708644660/sports-db/r7jfxng8uzzypxth7hgn.jpg"
-                                      creator_id: 18
-                                      name: "Torneo de gatos"
-                                      players_count: 11
-                                      teams_count: 16
-                                      type_tournament: 0
-                                      finished: 1
-                                    - id: 13
-                                      logo: "https://res.cloudinary.com/dy7ncwtov/image/upload/v1708650791/sports-db/lwydya8znliyzbss612e.jpg"
-                                      creator_id: 18
-                                      name: "Torneo de gatos"
-                                      players_count: 11
-                                      teams_count: 16
-                                      type_tournament: 0
-                                      finished: 1
-                "400":
+                                '$ref': '#/components/schemas/tournaments'
+                '400':
                     description: Invalid username id supplied
                 "401":
                     description: Unauthorized

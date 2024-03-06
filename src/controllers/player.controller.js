@@ -5,6 +5,7 @@ import {
     updatePlayerService,
     getAllPlayersService,
     getProfileService,
+    getPlayersByGameService,
 } from '../services/player.services.js';
 export const createPlayer = async (req, res) => {
     try {
@@ -57,6 +58,17 @@ export const getAllPlayers = async (req, res) => {
 export const getProfile = async (req, res) => {
     try {
         const data = await getProfileService(req, res);
+        res.json({ ...data });
+    } catch (error) {
+        console.error('Error en la consulta:', error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getPlayersByGame = async (req, res) => {
+    try {
+        const { game_id } = req.params;
+        const data = await getPlayersByGameService(game_id);
         res.json({ ...data });
     } catch (error) {
         console.error('Error en la consulta:', error);

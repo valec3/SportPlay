@@ -116,3 +116,13 @@ export const getProfileService = async (req, res) => {
         members,
     };
 };
+
+export const getPlayersByGameService = async (game_id) => {
+    const [players] = await pool.query(
+        `SELECT * FROM game_team_player_stats WHERE game_id = '${game_id}';`,
+    );
+    if (players.length < 1) throw new Error('No players found');
+    return {
+        players,
+    };
+};
