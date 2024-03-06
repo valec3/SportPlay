@@ -25,14 +25,8 @@ function App() {
 						<Routes>
 							<Route path='/' element={<Home />} />
 							<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />
-							<Route
-								path='/ResultadosTorneos'
-								element={<ResultadosTorneos />}
-							/>
-							<Route
-								path='/DetalleTorneoAbierto/:id'
-								element={<DetalleTorneoAbierto />}
-							/>
+							<Route path='/ResultadosTorneos' element={<ResultadosTorneos />} />
+							<Route path='/DetalleTorneoAbierto/:id' element={<DetalleTorneoAbierto />} />
 							<Route path='/Partidos' element={<Partidos />} />
 							<Route path='/Equipos' element={<Equipos />} />
 							<Route path='/Perfil' element={<Perfil />} />
