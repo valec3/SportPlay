@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 function AdminTorneo() {
 	const navigate = useNavigate();
-	const currentTournament = tournament => {
+	const currentTournament = (tournament) => {
 		return (
 			<details className='dropdown dropdown-end bg-secondary'>
 				<summary className='m-1 btn bg-secondary border-secondary'>
@@ -31,7 +31,7 @@ function AdminTorneo() {
 						<Link className='text-right block'>Organizar Partidos</Link>
 					</li>
 					<li>
-						<Link className='text-right block'>Cargar Resultados</Link>
+						<Link to={`/cargar-resultados/${tournament.id}`} className='text-right block'>Cargar Resultados</Link>
 					</li>
 					<li className=''>
 						<Link className='text-right block'>Notificaciones</Link>

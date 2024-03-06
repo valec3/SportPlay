@@ -15,31 +15,24 @@ import CrearTorneo from './pages/crear-torneo/CrearTorneo';
 import Addplayer from './modal/AddPlayer';
 import AdminResult from './pages/adminResultados/AdminResults';
 import AdministrarEquipos from './pages/administrarEquipos/AdministrarEquipos';
+import LoadResults from './pages/cargarResultados/LoadResults';
+
 
 function App() {
 	return (
 		<BrowserRouter>
 			<div className='text-base-100 h-screen flex flex-col relative z-0 lg:bg-hero lg:bg-[#2F2F42] lg:bg-cover lg:overflow-y-auto'>
-				<div className='lg:w-[1024px] lg:mx-auto bg-white'>
+				<div className='lg:w-[1024px] lg:mx-auto bg-primary h-full flex flex-col'>
 					<Header />
 					<main className='bg-primary'>
 						<Routes>
 							<Route path='/' element={<Home />} />
 							<Route path='/TorneosAbiertos' element={<TorneosAbiertos />} />
-							<Route
-								path='/ResultadosTorneos'
-								element={<ResultadosTorneos />}
-							/>
-							<Route
-								path='/DetalleTorneoAbierto/:id'
-								element={<DetalleTorneoAbierto />}
-							/>
+							<Route path='/ResultadosTorneos' element={<ResultadosTorneos />} />
+							<Route path='/DetalleTorneoAbierto/:id' element={<DetalleTorneoAbierto />} />
 							<Route path='/Partidos' element={<Partidos />} />
 							<Route path='/Equipos' element={<Equipos />} />
-							<Route
-								path='/administrar-equipos'
-								element={<AdministrarEquipos />}
-							/>
+							<Route path='/administrar-equipos' element={<AdministrarEquipos />} />
 							<Route path='/Perfil' element={<Perfil />} />
 							<Route path='/Modals' element={<Modals />} />
 							<Route path='/Activity' element={<Activity />} />
@@ -47,6 +40,7 @@ function App() {
 							<Route path='/crear-torneo' element={<CrearTorneo />} />
 							<Route path='/addPlayer/:id' element={<Addplayer />} />
 							<Route path='/Admin-Resultados' element={<AdminResult />} />
+							<Route path='/cargar-resultados/:id' element={<LoadResults />} />
 						</Routes>
 					</main>
 					<Footer />
