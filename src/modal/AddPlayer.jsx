@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import PeticionAllTournaments from '../components/common/PeticionAllTournaments';
 import { useSelector } from 'react-redux';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import Group from "../../public/images/Group.svg";
+import { useParams } from 'react-router';
+import { useEffect } from 'react';
 
 export default function Addplayer() {
 	const [teamSelect, setTeamSelect] = useState({
@@ -16,7 +19,19 @@ export default function Addplayer() {
 	const [menuTeams, setMenuTeams] = useState(false)
 	PeticionAllTournaments();
 	const allTeams = useSelector((state) => state.allTeams.allTeams);
+	const params = useParams();
 
+	useEffect(() => {
+		
+	 if( params.id!=null&&params.id!='id'){
+		handleTeam(params.id);
+	}
+	window.scrollTo({
+		top:0,
+		behavior:'smooth'
+	  })
+	}, [])
+	
 	const agregarJugador = e => {
 		e.preventDefault();
 		const nuevoJugador = {
@@ -36,20 +51,21 @@ export default function Addplayer() {
 	}
 	const handleModalContainerClick = e => e.stopPropagation();
 	const handleTeam=(id)=>{
-		const selectTeams = allTeams.find((obj)=>obj.id===id);
+		const selectTeams = allTeams.find((obj)=>obj.id==id);
 		selectTeams&&setTeamSelect(selectTeams)
-		handleClick()
+		params.id==null&&handleClick()
+		
 	}
 
 	return (
 		<section className=' py-[120px]'>
 			<div className='flex items-center justify-center gap-[18px]'>
-				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%]'>
+				<div className='flex justify-center items-center w-[90%] md:w-[80%] lg:w-[50%]'>
 					<div>
 						<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
 							<img
 								src={teamSelect.logo_url==null || teamSelect.logo_url==''?
-								'images/teamLogoDef.png':teamSelect.logo_url
+								Group:teamSelect.logo_url
 												}
 								alt='icono de equipo'
 								className='w-[40px] h-[40px] rounded-full'
@@ -59,13 +75,14 @@ export default function Addplayer() {
 					<h1 className='text-xl font-semibold font-Roboto w-[30%] text-center'>
 						Equipo:  
 					</h1>
+					{params.id!='id'&&params.id!=null?<div className='py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl'>{teamSelect.name}</div>:
 					<div className=' bg-secondary rounded-2xl py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{teamSelect.name?teamSelect.name:'Elija un equipo'}</h2>
 						<div>
 							<MdKeyboardArrowDown
 								className={` ${menuTeams ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-2 `}
 							/>
 						</div>
-					</div>
+					</div>}
 				</div>
 				
             {/* Dropdown para el menú de usuario */}

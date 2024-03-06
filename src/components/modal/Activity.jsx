@@ -9,7 +9,7 @@ const roleActivity =(role)=>{
 	if(role=='Administrador'){
 	roleUser='/administrar-torneo'
 }else if(role=='Jugador'){
-	roleUser='/addPlayer'
+	roleUser='/addPlayer/id'
 }
 return roleUser
 }

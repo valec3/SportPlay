@@ -87,7 +87,7 @@ const IconUser = () => {
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20'
 						onClick={() => toggleDropdown(false)}
 					>
-						<Link className='w-full' to='/addPlayer'>Jugador</Link>
+						<Link className='w-full' to='/addPlayer/id'>Jugador</Link>
 					</li>
 					<li
 						className='pl-[48px] h-[47px] flex items-center hover:bg-neutral/20 w-full'

@@ -10,6 +10,7 @@ const PeticionAllTournaments = () => {
 	const apiURL =
 		'https://tournament-sport.onrender.com/api/tournament/all-tournaments';
 	const apiTeamsURL = 'https://tournament-sport.onrender.com/api/teams/list';
+	
 
 	useEffect(() => {
 		const fetchDataTournaments = async () => {

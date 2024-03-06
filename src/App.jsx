@@ -45,7 +45,7 @@ function App() {
 							<Route path='/Activity' element={<Activity />} />
 							<Route path='/administrar-torneo' element={<AdminTorneo />} />
 							<Route path='/crear-torneo' element={<CrearTorneo />} />
-							<Route path='/addPlayer' element={<Addplayer />} />
+							<Route path='/addPlayer/:id' element={<Addplayer />} />
 							<Route path='/Admin-Resultados' element={<AdminResult />} />
 						</Routes>
 					</main>

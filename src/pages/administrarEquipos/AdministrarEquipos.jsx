@@ -4,15 +4,18 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 // import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
 import { useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom/dist';
 
 function AdministrarEquipos() {
-	const [imageUrl, setImageUrl] = useState('/images/torneo-nuevo.svg');
+	const navigate = useNavigate();
+	const [imageUrl, setImageUrl] = useState('/images/Group.svg');
 	//get data of tournament
 	const { state } = useLocation();
 	const idTournament = state.id;
 	//get teams of tournament
 	const [equiposDelTorneo, setEquiposDelTorneo] = useState([]);
 	const [actualizarEquipos, setActualizarEquipos] = useState(true);
+	
 
 	useEffect(() => {
 		if (actualizarEquipos) {
@@ -28,6 +31,9 @@ function AdministrarEquipos() {
 			setActualizarEquipos(false); // Reset after fetch
 		}
 	}, [actualizarEquipos, idTournament]);
+
+	const vacants_count = state.teams_count - equiposDelTorneo.length;
+	
 
 	//data of new team
 	const userData = useSelector(state => state.userData.userData);
@@ -77,7 +83,8 @@ function AdministrarEquipos() {
 					},
 				}
 			);
-
+			document.getElementById('modal-crear-equipo').showModal();
+			// Handle success here (e.g., display success message, redirect)
 			console.log('Success:', response.data); // Handle successful response data
 			setActualizarEquipos(true);
 			// Handle success here (e.g., display success message, redirect)
@@ -158,13 +165,16 @@ function AdministrarEquipos() {
 							/>
 							<ErrorMessage name='name' component='div' />
 							<div className='flex justify-center m-4'>
-								<button
+							{vacants_count<1?
+							(<Link to='/administrar-torneo' className='bg-warning btn btn-sm border-warning text-base-100 w-[260px]'>
+						volver
+					</Link>):(<button
 									type='submit'
 									className='bg-accent btn btn-sm border-accent text-base-100 w-[260px] '
 									disabled={isSubmitting}
 								>
 									Agregar equipo
-								</button>
+								</button>)}
 							</div>
 						</Form>
 					)}
@@ -175,7 +185,7 @@ function AdministrarEquipos() {
 				<div className='flex flex-col gap-4 py-4'>
 					<div className='flex flex-row justify-between py-4'>
 						<div>Equipos :</div>
-						<div className='text-warning'>{`Vacante: ${state.teams_count - equiposDelTorneo.length}`}</div>
+						<div className='text-warning'>{`Vacante: ${vacants_count}`}</div>
 					</div>
 
 					{equiposDelTorneo.map((equipo, index) => {
@@ -197,6 +207,7 @@ function AdministrarEquipos() {
 										src='/icons/add-member.svg'
 										alt='icono agregar a un integrante'
 										className='w-[26px] h-[21px]'
+										onClick={()=>navigate(`/addPlayer/${equipo.id}`)}
 									/>
 									<img
 										src='/icons/cancel-team.svg '
@@ -210,6 +221,24 @@ function AdministrarEquipos() {
 					})}
 				</div>
 			</div>
+			<dialog id='modal-crear-equipo' className='modal px-6'>
+				<div className='modal-box flex flex-col items-center'>
+					<img src='/images/trophy.svg' alt='es una imagen de trofeo' />
+					<h3 className='text-accent text-[2rem] font-bold'>Fantastico!</h3>
+					<p className='text-secondary font-semibold text-[24px] text-center'>
+						Tu Equipo ha sido creado con éxito
+					</p>
+				</div>
+				<form method='dialog' className='modal-backdrop'>
+					{vacants_count<1?(<Link to='/administrar-torneo' className=''>
+						close
+					</Link>):<Link to='/administrar-equipos' className=''>
+						close
+					</Link>}
+					
+				</form>
+
+			</dialog>
 		</>
 	);
 }

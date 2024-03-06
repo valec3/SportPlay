@@ -6,7 +6,9 @@ import userReducer from './featuresSlice/userSlice';
 import tournamentReducer from './featuresSlice/tournamentSlice';
 import teamReducer from './featuresSlice/teamSlice';
 import teamsPerTournamentReducer
-from './featuresSlice/teamsPerTournamentSlice'
+from './featuresSlice/teamsPerTournamentSlice';
+import statsTournamentReducer
+from './featuresSlice/statsTournamentSlice';
 export const store = configureStore({
     reducer: {
         isRegister: registerReducer,
@@ -15,5 +17,6 @@ export const store = configureStore({
         allTournaments: tournamentReducer,
         allTeams: teamReducer,
         allTeamsTournament: teamsPerTournamentReducer,
+        statsTournament: statsTournamentReducer,
     },
 })

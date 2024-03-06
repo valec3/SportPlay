@@ -66,7 +66,7 @@ function CrearTorneo() {
 			<div className=' flex flex-col items-center  mx-auto w-full '>
 				<div className='w-[134px] h-[134px] flex items-center rounded-full z-[2] bg-neutral'>
 					<img
-						src={`${imageUrl ? imageUrl : '/images/torneo-nuevo.svg'} `}
+						src={`${imageUrl ? imageUrl : '/images/Copa.svg'} `}
 						alt='logo tornep'
 						className='mx-auto w-[134px] h-[134px] rounded-full z-0'
 					/>
