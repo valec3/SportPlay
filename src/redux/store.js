@@ -5,7 +5,8 @@ import modalReducer from './featuresSlice/modalSlice';
 import userReducer from './featuresSlice/userSlice';
 import tournamentReducer from './featuresSlice/tournamentSlice';
 import teamReducer from './featuresSlice/teamSlice';
-
+import teamsPerTournamentReducer
+from './featuresSlice/teamsPerTournamentSlice'
 export const store = configureStore({
     reducer: {
         isRegister: registerReducer,
@@ -13,5 +14,6 @@ export const store = configureStore({
         userData: userReducer,
         allTournaments: tournamentReducer,
         allTeams: teamReducer,
+        allTeamsTournament: teamsPerTournamentReducer,
     },
 })
