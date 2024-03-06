@@ -9,18 +9,25 @@ function AdministrarEquipos() {
 	const [imageUrl, setImageUrl] = useState('/images/torneo-nuevo.svg');
 	//get data of tournament
 	const { state } = useLocation();
+	const idTournament = state.id;
 	//get teams of tournament
 	const [equiposDelTorneo, setEquiposDelTorneo] = useState([]);
+	const [actualizarEquipos, setActualizarEquipos] = useState(true);
 
-	const fetchEquiposDelTorneo = async () => {
-		const response = await axios.get(
-			`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${state.id}`
-		);
-		const data = await response.data;
-		console.log('equipos del partido', data);
-		setEquiposDelTorneo(data.teams);
-	};
-	fetchEquiposDelTorneo();
+	useEffect(() => {
+		if (actualizarEquipos) {
+			const fetchEquiposDelTorneo = async () => {
+				const response = await axios.get(
+					`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${idTournament}`
+				);
+				const data = await response.data;
+				console.log('equipos del partido', data);
+				setEquiposDelTorneo(data.teams);
+			};
+			fetchEquiposDelTorneo();
+			setActualizarEquipos(false); // Reset after fetch
+		}
+	}, [actualizarEquipos, idTournament]);
 
 	//data of new team
 	const userData = useSelector(state => state.userData.userData);
@@ -72,10 +79,9 @@ function AdministrarEquipos() {
 			);
 
 			console.log('Success:', response.data); // Handle successful response data
-
+			setActualizarEquipos(true);
 			// Handle success here (e.g., display success message, redirect)
 			setSubmitting(false); // Reset submitting state
-			fetchEquiposDelTorneo();
 		} catch (error) {
 			console.error('Error:', error.response.data); // Handle error response
 
