@@ -57,114 +57,90 @@ paths:
                                 '$ref': '#/components/schemas/tournaments'
                 '400':
                     description: Invalid username id supplied
-                '401':
+                "401":
                     description: Unauthorized
-                '404':
+                "404":
                     description: User not found
         patch:
             tags:
                 - tournaments
-            summary: Close a tournament
-            operationId: closeATournament
+            summary: Actualizar el estado del torneo.
+            description: |
+                Actualiza el estado de un torneo: abierto, cerrado o cancelado.
+
+                *Requiere autenticación JWT. Por favor, proporcione un token JWT válido en el encabezado 'Authorization' para acceder a este endpoint.
+            operationId: SetStateATournament
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                tournament_id:
+                                    type: integer
+                                    description: ID del torneo que se desea actualizar.
+                                status:
+                                    type: string
+                                    enum: ["ongoing", "finished", "cancelled"]
+                                    description: Nuevo estado del torneo ('ongoing', 'finished' o 'cancelled').
+            security:
+                - bearerAuth:
+                      [
+                          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImlhdCI6MTcwODkwNzUxNSwiZXhwIjoxNzA4OTQzNTE1fQ.tpCL-NlBGYLovjxtD_ZMtK_70EV36t4BAVFzwUzeQD8,
+                      ]
             responses:
-                '200':
-                    description: successful operation
+                "201":
+                    description: Éxito. El estado del torneo se ha cambiado correctamente.
                     content:
                         application/json:
                             schema:
-                                '$ref': '#/components/schemas/tournaments'
-                '400':
-                    description: Invalid username id supplied
-                '401':
-                    description: Unauthorized
-                '404':
-                    description: User not found
-    '/api/tournament/stats-tournament-team/{tournament_id}':
-        get:
-            tags:
-                - games
-            summary: Get stats for a tournament
-            description: Returns stats for tournament
-            operationId: getStatsForTournament
-            parameters:
-                - name: tournament_id
-                  in: path
-                  description: ID of tournament to return stats for
-                  required: true
-                  schema:
-                      type: integer
-                      format: int64
-            responses:
-                '200':
-                    description: successful operation
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                        description: Mensaje de éxito.
+                                    status:
+                                        type: string
+                                        description: Estado actual del torneo después del cambio.
+                "400":
+                    description: Error de solicitud. El ID del torneo o el estado no pueden estar vacíos.
                     content:
                         application/json:
                             schema:
-                                - game_id: 1
-                                  date: '2024-03-07T05:00:00.000Z'
-                                  time: '20:00:00'
-                                  location: Estadio Santiago Bernabéu
-                                  tournament_id: 54
-                                  team_id: 15
-                                  team_name: Barcelona FC
-                                  goals: 8
-                                  red_cards: 4
-                                  yellow_cards: 6
-                                  injuries: 4
-                                - game_id: 1
-                                  date: '2024-03-07T05:00:00.000Z'
-                                  time: '20:00:00'
-                                  location: Estadio Santiago Bernabéu
-                                  tournament_id: 54
-                                  team_id: 14
-                                  team_name: Real Madrid CF
-                                  goals: 8
-                                  red_cards: 4
-                                  yellow_cards: 6
-                                  injuries: 4
-                                - game_id: 2
-                                  date: '2024-03-11T05:00:00.000Z'
-                                  time: '16:30:00'
-                                  location: Allianz Stadium
-                                  tournament_id: 54
-                                  team_id: 44
-                                  team_name: Bayern Munchen
-                                  goals: 4
-                                  red_cards: 2
-                                  yellow_cards: 4
-                                  injuries: 2
-                                - game_id: 2
-                                  date: '2024-03-11T05:00:00.000Z'
-                                  time: '16:30:00'
-                                  location: Allianz Stadium
-                                  tournament_id: 54
-                                  team_id: 45
-                                  team_name: Juventus
-                                  goals: 4
-                                  red_cards: 2
-                                  yellow_cards: 4
-                                  injuries: 2
-                                - game_id: 3
-                                  date: '2024-03-12T05:00:00.000Z'
-                                  time: '14:00:00'
-                                  location: Etihad Stadium
-                                  tournament_id: 54
-                                  team_id: 46
-                                  team_name: Manchester City
-                                  goals: 0
-                                  red_cards: 0
-                                  yellow_cards: 0
-                                  injuries: 0
-                                - game_id: 3
-                                  date: '2024-03-12T05:00:00.000Z'
-                                  time: '14:00:00'
-                                  location: Etihad Stadium
-                                  tournament_id: 54
-                                  team_id: 47
-                                  team_name: Liverpool Inglaterra
-                                  goals: 0
-                                  red_cards: 0
-                                  yellow_cards: 0
-                                  injuries: 0
-                '404':
-                    description: Tournament not found
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: Descripción del error.
+                "401":
+                    description: Error de solicitud. El estado del torneo debe ser 'ongoing', 'finished' o 'cancelled'.
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                                        description: Descripción del error.
+
+
+components:
+    schemas:
+        Tournament:
+            type: object
+            properties:
+                id:
+                    type: integer
+                logo:
+                    type: string
+                creator_id:
+                    type: string
+                name:
+                    type: string
+                players_count:
+                    type: integer
+                teams_count:
+                    type: integer
+                type_tournament:
+                    type: string # or integer, depending on your use case

@@ -3,7 +3,7 @@ import {
     createTournament,
     getAllTournaments,
     getTournamentsByUserId,
-    closeTournament,
+    setStatusTournament,
     allTeamsPerTournament,
     indexTeamToTournament,
     getStatsTournament,
@@ -23,7 +23,7 @@ router.get('/', (res) => {
 router.post('/create-tournament', createTournament);
 router.get('/all-tournaments', getAllTournaments);
 router.get('/my-tournaments', validatorJwt, getTournamentsByUserId);
-router.patch('/my-tournaments', validatorJwt, closeTournament);
+router.patch('/my-tournaments', validatorJwt, setStatusTournament);
 router.get('/all-tournament-teams', allTeamsPerTournament);
 router.get('/tournament-teams', teamsPerTournament);
 router.post('/tournament-teams', indexTeamToTournament);
