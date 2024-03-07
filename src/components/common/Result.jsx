@@ -15,12 +15,10 @@ const Result = ({ id, name, teams_count, logo, status }) => {
 		  behavior:'smooth'
 		})
 		
-				// dispatch(resetTeamsTournament())
+	
 				const fetchDataTeams = async () => {
 					try {
 					  const res = await axios.get(apiTeamsOfTournamentURL);
-					  console.log(res.data.teams);					  
-					  // dispatch(getTeamsTournament(res.data.teams))
             setAllTeamsTournament(res.data.teams)
 					} catch (er) {
 					  console.log(er);
