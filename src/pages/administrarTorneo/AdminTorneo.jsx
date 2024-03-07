@@ -28,7 +28,7 @@ function AdminTorneo() {
 						</div>
 					</li>
 					<li>
-						<Link className='text-right block'>Organizar Partidos</Link>
+						<Link to={`/OrganizeGames/${tournament.id}`} className='text-right block'>Organizar Partidos</Link>
 					</li>
 					<li>
 						<Link to={`/cargar-resultados/${tournament.id}`} className='text-right block'>Cargar Resultados</Link>
