@@ -78,7 +78,7 @@ const LoadResults = () => {
 						setDataGame={setDataGame}
 						dataGame={dataGame}
 					/>
-					<p className='mt-10 mb-6'>
+					<p className='w-[90%] text-center mt-10 mb-6 mx-auto lg:w-[70%]'>
 						Ingresa los detalles del partido: tarjetas, lesiones y goles por
 						jugador para un seguimiento preciso
 					</p>

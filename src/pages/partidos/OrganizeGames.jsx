@@ -61,7 +61,7 @@ const OrganizeGames = () => {
 					  				  
 				  })
 				  
-					console.log(response1, response);
+					// console.log(response1, response);
 				  
 						  
 				
@@ -109,17 +109,21 @@ const OrganizeGames = () => {
 			</div>
 
 			<div>
-				<div className='flex flex-wrap justify-between'>
-					<div className='px-4 mt-2 w-full md:w-1/2 lg:w-auto'>
-						<h1 className='font-Roboto font-semibold text-lg mb-2'>
-							Grupo "A" - <span> </span>
+				<div className='flex justify-center pt-10 lg:w-[90%] mx-auto'>
+					<div className='px-4 mt-2 w-[90%] md:w-1/2 lg:w-[50%]'>
+			
+						<h1 className='font-Roboto font-semibold text-lg mb-2 h-[50px]'>
+							Grupo "A"  
 						</h1>
-						<div className='flex flex-wrap justify-between'>
+		
+						<div className='flex flex-wrap justify-between bg'>
 							<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
 								{teams ? (
 									<>
+
 										<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
 											{teams[0]?<img
+
 												className={`${teams[0].logo_url == null || teams[0].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[0].logo_url == null || teams[0].logo_url == ''
@@ -127,9 +131,11 @@ const OrganizeGames = () => {
 														: teams[0].logo_url
 												}
 												alt='Real Madrid'
+
 											/>:<></>}
 										</div>
 										<div>{!teams ? `cargando...` : teams[0]&&teams[0].name}</div>
+
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -139,7 +145,7 @@ const OrganizeGames = () => {
 							<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
 								{teams ? (
 									<>
-										<div>
+										<div className='pr-2'>
 											{' '}
 											{teams[1]&&<img
 												className={`${teams[1].logo_url == null || teams[1].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
@@ -160,15 +166,18 @@ const OrganizeGames = () => {
 						</div>
 					</div>
 
-					<div className='px-4 w-full md:w-1/2 lg:w-auto'>
-						<h1 className='font-Roboto font-semibold text-lg mb-2'>
-							Grupo "B" - 24/12/2024
+					<div className='px-4 mt-2 w-[90%] md:w-1/2 lg:w-[50%]'>
+						<div className='flex'>
+							<h1 className='font-Roboto font-semibold text-lg mb-2 h-[50px]'>
+							Grupo "B"  
 						</h1>
+						<span className='pl-2 text-accent'> - 24/12/2024</span>
+						</div>
 						<div className='flex flex-wrap justify-between'>
 							<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
 								{teams ? (
 									<>
-										<div>
+										<div className='pr-2'>
 											{' '}
 											{teams[2]&&<img
 												className={`${teams[2].logo_url == null || teams[2].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
@@ -189,7 +198,7 @@ const OrganizeGames = () => {
 							<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
 								{teams ? (
 									<>
-										<div>
+										<div className='pr-2'>
 											{' '}
 											{teams[3]&&<img
 												className={`${teams[3].logo_url == null || teams[3].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
@@ -212,43 +221,55 @@ const OrganizeGames = () => {
 				</div>
 			</div>
 
-			<div className='bg-primary rounded-lg p-4 flex flex-col md:flex-row md:justify-between md:items-center'>
-				<h1 className='font-Roboto font-semibold text-lg mb-2'>
-					Finales - 24/12/2024
-				</h1>
-				<div className='flex flex-wrap justify-between md:flex-nowrap'>
-					<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
-						<img
-							src='images/TeamAdminTorneoLogo.png'
-							alt='Equipo A'
-							className='px-4'
-						/>
-						Ganador Grupo "A"
-					</button>
-					<button className='w-full md:w-auto h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
-						<img
-							src='images/TeamAdminTorneoLogo.png'
-							alt='Equipo A'
-							className='px-4'
-						/>
-						Ganador Grupo "B"
-					</button>
-				</div>
-				<div className='flex justify-center pt-6'>
-					<FaTrophy className='size-9' />
-				</div>
+			<div className='bg-primary rounded-lg p-4 flex flex-col  md:items-center  py-8 '>
+			            <div className='flex py-5'>
+							<h1 className='font-Roboto font-semibold text-lg '>
+								Finales  	
+							</h1>
 
-				<button className='w-full md:w-auto h-20 mt-2 md:mt-0 rounded-2xl bg-secondary text-base-100 font-semibold flex-col justify-center items-center md:ml-4'>
-					<img
-						src='images/TeamAdminTorneoLogo.png'
-						alt='Equipo Campeón'
-						className='px-4 mt-4'
-					/>
-					Campeón
-				</button>
-				<button className='w-260 h-43 rounded-2xl bg-accent text-base-100 font-SourceSansPro font-semibold mt-8 py-2 px-4'>
-					Registrar
-				</button>
+							<span className='pl-2 text-accent'> - 24/12/2024</span>
+						</div>
+
+					<div className='flex justify-center flex-col items-center lg:w-[90%] lg:flex-row lg:gap-8'>
+						<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold py-2 justify-center px-1 mb-2 flex items-center lg:w-[45%]'>
+							<img
+								src='images/TeamAdminTorneoLogo.png'
+								alt='Equipo A:'
+								className='px-4'
+							/>
+							Ganador Grupo "A"
+						</button>
+					
+						<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold  py-2 px-1 mb-2 flex justify-center items-center lg:w-[45%]'>							<img
+								src='images/TeamAdminTorneoLogo.png'
+								alt='Equipo B:'
+								className='px-4'
+							/>
+							Ganador Grupo "B"
+						</button>
+					</div>
+
+					<div className='py-10 mx-auto'>
+						<FaTrophy className='size-9' />
+					</div>
+         
+
+					<div className='flex justify-center flex-col items-center lg:w-[90%]'>
+					<button className=' w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold py-2 px-1 mb-2 flex items-center justify-center lg:w-[45%]'>
+							<img
+								src='images/TeamAdminTorneoLogo.png'
+								alt='Equipo Campeón:'
+								className='px-4'
+							/>
+							Grupo "A"
+						</button>
+					</div>
+					
+					<div className='mx-auto'>
+						<button className='w-[260px] h-[43px] rounded-2xl bg-accent text-base-100 font-SourceSansPro font-semibold mt-8 py-2 px-4'>
+							Registrar
+						</button>
+					</div>
 			</div>
 		</div>
 	);
