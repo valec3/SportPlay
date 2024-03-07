@@ -1,7 +1,7 @@
 const ScoreBoard = ({ game, setDataGame, dataGame }) => {
 	return (
-		<div className='bg-secondary p-4 py-5 rounded-lg mt-10'>
-			<h3 className='text-2xl mb-8 text-center font-bold'>
+		<div className='bg-secondary w-[90%] mx-auto  p-4 py-5 rounded-lg mt-10 lg:w-[50%]'>
+			<h3 className='text-2xl mb-8 text-center font-Roboto  font-bold'>
 				{/* Grupo &quot;A&quot; */}
 				Marcador
 			</h3>

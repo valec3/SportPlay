@@ -41,7 +41,7 @@ const CustomSelect = ({ options, onChange }) => {
 								className='grid grid-cols-[1fr_0.2fr_1fr]'
 							>
 								<span className='text-right'>{option.home_team_name}</span>
-								<span className='text-red-400 px-2 font-bold'>VS</span>
+								<span className='text-success px-2 font-bold'>VS</span>
 								<span className='text-left'>{option.away_team_name}</span>
 							</button>
 						</li>

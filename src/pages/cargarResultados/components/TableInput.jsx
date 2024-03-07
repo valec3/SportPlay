@@ -102,8 +102,8 @@ const TableInput = ({ game, dataGame, setDataGame }) => {
 	};
 	console.log('game players', dataGame);
 	return (
-		<div className='w-full flex flex-col lg:flex-row lg:justify-between gap-x-8 gap-y-10 lg:gap-x-16 lg:mt-10'>
-			<table className='flex flex-1 flex-col bg-secondary p-5 rounded-lg'>
+		<div className='w-[90%] mx-auto flex flex-col lg:flex-row lg:justify-between gap-x-8 gap-y-10 lg:gap-x-16 lg:mt-10'>
+			<table className=' flex flex-1 flex-col bg-secondary p-5 rounded-lg'>
 				<thead>
 					<tr className='grid grid-cols-[5fr_1fr_1fr_1fr_1fr]'>
 						<th className='text-left text-xl text-red-400'>
