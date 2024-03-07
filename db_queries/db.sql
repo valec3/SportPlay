@@ -285,6 +285,7 @@ SELECT
     g.home_team_id AS team_id,
     t.name AS team_name,
     t_count.teams_count AS teams_count,
+    t.logo_url AS team_logo,
     COALESCE(home_goals.goals_count, 0) AS goals,
     COALESCE(home_red_cards.red_cards_count, 0) AS red_cards,
     COALESCE(home_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
@@ -297,20 +298,20 @@ LEFT JOIN (
     GROUP BY team_id
 ) AS home_goals ON g.home_team_id = home_goals.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS red_cards_count
+    SELECT team_id, COUNT(*) AS red_cards_count
     FROM red_cards
-    GROUP BY game_id
-) AS home_red_cards ON g.id = home_red_cards.game_id
+    GROUP BY team_id
+) AS home_red_cards ON g.home_team_id = home_red_cards.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS yellow_cards_count
+    SELECT team_id, COUNT(*) AS yellow_cards_count
     FROM yellow_cards
-    GROUP BY game_id
-) AS home_yellow_cards ON g.id = home_yellow_cards.game_id
+    GROUP BY team_id
+) AS home_yellow_cards ON g.home_team_id = home_yellow_cards.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS injuries_count
+    SELECT team_id, COUNT(*) AS injuries_count
     FROM injuries
-    GROUP BY game_id
-) AS home_injuries ON g.id = home_injuries.game_id
+    GROUP BY team_id
+) AS home_injuries ON g.home_team_id = home_injuries.team_id
 INNER JOIN (
     SELECT teams_count,id
     FROM tournament
@@ -327,6 +328,7 @@ SELECT
     g.away_team_id AS team_id,
     t.name AS team_name,
     t_count.teams_count AS teams_count,
+    t.logo_url AS team_logo,
     COALESCE(away_goals.goals_count, 0) AS goals,
     COALESCE(away_red_cards.red_cards_count, 0) AS red_cards,
     COALESCE(away_yellow_cards.yellow_cards_count, 0) AS yellow_cards,
@@ -339,29 +341,42 @@ LEFT JOIN (
     GROUP BY team_id
 ) AS away_goals ON g.away_team_id = away_goals.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS red_cards_count
+    SELECT team_id, COUNT(*) AS red_cards_count
     FROM red_cards
-    GROUP BY game_id
-) AS away_red_cards ON g.id = away_red_cards.game_id
+    GROUP BY team_id
+) AS away_red_cards ON g.away_team_id = away_red_cards.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS yellow_cards_count
+    SELECT team_id, COUNT(*) AS yellow_cards_count
     FROM yellow_cards
-    GROUP BY game_id
-) AS away_yellow_cards ON g.id = away_yellow_cards.game_id
+    GROUP BY team_id
+) AS away_yellow_cards ON g.away_team_id = away_yellow_cards.team_id
 LEFT JOIN (
-    SELECT game_id, COUNT(*) AS injuries_count
+    SELECT team_id, COUNT(*) AS injuries_count
     FROM injuries
-    GROUP BY game_id
-) AS away_injuries ON g.id = away_injuries.game_id
+    GROUP BY team_id
+) AS away_injuries ON g.away_team_id = away_injuries.team_id
 INNER JOIN (
     SELECT teams_count,id
     FROM tournament
 ) AS t_count ON t_count.id = g.tournament_id;
 
 
-SELECT * FROM game_team_stats;
+SELECT * FROM game_team_stats \G;
+---------------------------------- RESULTADO ----------------------------------
++---------+------------+----------+---------------------------+---------------+---------+----------------------+-------------+---------------------------------------------------------------------------------------------------------------------------+-------+-----------+--------------+----------+
+| game_id | date       | time     | location                  | tournament_id | team_id | team_name            | teams_count | team_logo                                                                                                                 | goals | red_cards | yellow_cards | injuries |
++---------+------------+----------+---------------------------+---------------+---------+----------------------+-------------+---------------------------------------------------------------------------------------------------------------------------+-------+-----------+--------------+----------+
+|       1 | 2024-03-07 | 20:00:00 | Estadio Santiago Bernabéu |            54 |      15 | Barcelona FC         |           8 | https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png |     2 |         4 |            6 |        4 |
+|       2 | 2024-03-11 | 16:30:00 | Allianz Stadium           |            54 |      44 | Bayern Munchen       |           8 | https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273067/sports-db/rhjsdbqzapd06ivrx2rq.png                          |     3 |         2 |            4 |        2 |
+|       3 | 2024-03-12 | 14:00:00 | Etihad Stadium            |            54 |      46 | Manchester City      |           8 | https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273203/sports-db/vkk4pczmzv6c6loswdja.png                          |     9 |         9 |           16 |        7 |
+|       1 | 2024-03-07 | 20:00:00 | Estadio Santiago Bernabéu |            54 |      14 | Real Madrid CF       |           8 | https://1000logos.net/wp-content/uploads/2020/09/Real-Madrid-logo.png                                                     |     2 |         4 |            6 |        4 |
+|       2 | 2024-03-11 | 16:30:00 | Allianz Stadium           |            54 |      45 | Juventus             |           8 | https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273151/sports-db/fkimydfj3d8msntuqqq0.png                          |     2 |         2 |            4 |        2 |
+|       3 | 2024-03-12 | 14:00:00 | Etihad Stadium            |            54 |      47 | Liverpool Inglaterra |           8 | https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273278/sports-db/vnjiyldsy31wtut2qcky.png                          |     8 |         9 |           16 |        7 |
++---------+------------+----------+---------------------------+---------------+---------+----------------------+-------------+---------------------------------------------------------------------------------------------------------------------------+-------+-----------+--------------+----------+ 
 
 
+
+-- =====================================================================
 -- VISTA PARA OBTENER LA INFORMACIÓN DE LOS EQUIPOS QUE PARTICIPAN 
 -- EN UN TORNEO EN UN JUEGO EN ESPECIFICO
 
@@ -375,9 +390,33 @@ SELECT
     hte.name AS home_team_name,
     ate.name AS away_team_name,
     hte.logo_url AS home_team_logo,
-    ate.logo_url AS away_team_logo
+    ate.logo_url AS away_team_logo,
+    t.name AS tournament_name,
+    t.logo AS tournament_logo
 FROM games g
 INNER JOIN teams hte ON g.home_team_id = hte.id
-INNER JOIN teams ate ON g.away_team_id = ate.id;
+INNER JOIN teams ate ON g.away_team_id = ate.id
+INNER JOIN tournament t ON g.tournament_id = t.id;
 
 SELECT * FROM tournament_games_teams;
+
+
+
+-- =====================================================================
+-- VISTA PARA OBTENER LA INFORMACIÓN DE LOS JUEGOS DE UN TORNEO CON INFORMACIÓN DE LOS EQUIPOS Y EL TORNEO
+
+DROP VIEW tournament_games_info;
+CREATE VIEW tournament_games_info AS
+SELECT
+    g.id AS game_id,
+    g.date,
+    g.time,
+    g.location,
+    g.tournament_id,
+    t.name AS tournament_name,
+    t.logo_url AS tournament_logo,
+    teams.id AS home_team_id,
+    teams.name AS home_team_name,
+    teams.logo_url AS home_team_logo,
+
+    

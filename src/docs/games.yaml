@@ -167,3 +167,38 @@ paths:
                                 location: Stadium
                 '405':
                     description: All fields are required
+    '/api/games/info-list':
+        get:
+            tags:
+                - games
+            summary: 'Get all info of games '
+            description: 'Returns all info of games '
+            operationId: getAllGames
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            example:
+                                message: Games found
+                                data:
+                                    - game_id: 1
+                                      tournament_id: 54
+                                      home_team_id: 15
+                                      away_team_id: 14
+                                      home_team_name: Barcelona FC
+                                      away_team_name: Real Madrid CF
+                                      home_team_logo: https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1200px-FC_Barcelona_%28crest%29.svg.png
+                                      away_team_logo: https://1000logos.net/wp-content/uploads/2020/09/Real-Madrid-logo.png
+                                      tournament_name: UEFA Champions League
+                                      tournament_logo: https://res.cloudinary.com/dy7ncwtov/image/upload/v1709339234/sports-db/kqdsya5npryptnafcf5n.webp
+                                    - game_id: 2
+                                      tournament_id: 54
+                                      home_team_id: 44
+                                      away_team_id: 45
+                                      home_team_name: Bayern Munchen
+                                      away_team_name: Juventus
+                                      home_team_logo: https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273067/sports-db/rhjsdbqzapd06ivrx2rq.png
+                                      away_team_logo: https://res.cloudinary.com/dy7ncwtov/image/upload/v1709273151/sports-db/fkimydfj3d8msntuqqq0.png
+                                      tournament_name: UEFA Champions League
+                                      tournament_logo: https://res.cloudinary.com/dy7ncwtov/image/upload/v1709339234/sports-db/kqdsya5npryptnafcf5n.webp

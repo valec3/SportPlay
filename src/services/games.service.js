@@ -182,10 +182,18 @@ export const getDataGameForTournamentService = async (tournament_id) => {
     };
 };
 
-export const getInfoTeamsOfGamesByTournamentService = async (tournament_id) => {
-    if (!tournament_id) throw new Error('Tournament id is required');
-    const query = `SELECT * FROM tournament_games_teams WHERE tournament_id = '${tournament_id}';`;
+export const getInfoTeamsOfGamesByTournamentService = async () => {
+    const query = `SELECT * FROM tournament_games_teams;`;
     const [games] = await pool.query(query);
+    if (!games) throw new Error('Internal server error');
+    return {
+        message: 'Games found',
+        data: games,
+    };
+};
+
+export const getAllGamesService = async () => {
+    const [games] = await pool.query('SELECT * FROM games');
     if (!games) throw new Error('Internal server error');
     return {
         message: 'Games found',

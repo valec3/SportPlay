@@ -5,6 +5,7 @@ import {
     createGameService,
     addGameStatsService,
     getInfoTeamsOfGamesByTournamentService,
+    getAllGamesService,
 } from '../services/games.service.js';
 
 export const createGame = async (req, res) => {
@@ -59,10 +60,16 @@ export const getDataGameForTournament = async (req, res) => {
 
 export const getInfoTeamsOfGamesByTournament = async (req, res) => {
     try {
-        const { tournament_id } = req.params;
-        const response = await getInfoTeamsOfGamesByTournamentService(
-            tournament_id,
-        );
+        const response = await getInfoTeamsOfGamesByTournamentService();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const getAllGames = async (req, res) => {
+    try {
+        const response = await getAllGamesService();
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({ message: error.message });
