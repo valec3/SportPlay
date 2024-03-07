@@ -28,8 +28,8 @@ const Partidos = () => {
 
 		fetchPartidosData();
 	}, []);
-	console.log('Torneos', torneos);
-	console.log('partidos', partidos);
+	// console.log('Torneos', torneos);
+	// console.log('partidos', partidos);
 
 	return (
 		<>
@@ -39,15 +39,15 @@ const Partidos = () => {
 				</h1>
 			</div>
 			{}
-			<div className='ml-12 mb-5 text-SansPro font-semibold'>
+			<div className='ml-12 mb-5 text-SansPro font-semibold rounded-full'>
 				<img
-					src={torneos[0][0].tournament_logo}
+					src={torneos[0]&&torneos[0][0].tournament_logo}
 					alt='logo del torneo'
-					className='w-10 h-10 mr-3 inline-block'
+					className='w-10 h-10 mr-3 inline-block rounded-full'
 				/>
-				{torneos[0][0].tournament_name}
+				{torneos[0]&&torneos[0][0].tournament_name}
 			</div>
-			{torneos[0].map((partido, index) => {
+			{torneos[0]&&torneos[0].map((partido, index) => {
 				return (
 					<div key={index}>
 						{/* <div className='ml-12 mb-5 text-SansPro font-semibold'>
@@ -71,7 +71,7 @@ const Partidos = () => {
 											/>
 										</div>
 										<div className='text-warning flex items-center justify-center ml-5 '>
-											fecha
+											vs
 										</div>
 										<div className='flex items-center '>
 											<img
