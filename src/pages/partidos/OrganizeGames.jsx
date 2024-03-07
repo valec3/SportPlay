@@ -1,11 +1,8 @@
-import { useNavigate, useParams } from 'react-router';
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState } from 'react';
+
 import { FaTrophy } from 'react-icons/fa';
 
 const OrganizeGames = () => {
-	const [startDate, setStartDate] = useState(new Date());
 	return (
 		<div className='bg-primary py-4 px-4 w-full min-h-screen'>
 			<div className='flex justify-center items-center'>
@@ -37,8 +34,7 @@ const OrganizeGames = () => {
 				<div className='flex flex-wrap justify-between'>
 					<div className='px-4 mt-2 w-full md:w-1/2 lg:w-auto'>
 						<h1 className='font-Roboto font-semibold text-lg mb-2'>
-							Grupo "A" - <span><DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /></span>
-							
+							Grupo "A" - <span> </span>
 						</h1>
 						<div className='flex flex-wrap justify-between'>
 							<button className='w-full h-16 rounded-2xl bg-secondary text-base-100 font-semibold text-xl py-2 px-4 mb-2 flex items-center'>
