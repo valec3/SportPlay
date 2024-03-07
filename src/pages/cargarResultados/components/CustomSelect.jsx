@@ -15,21 +15,21 @@ const CustomSelect = ({ options, onChange }) => {
 		setIsOpen(!isOpen);
 	};
 	return (
-		<div className='flex flex-col my-2 relative'>
+		<div className='flex flex-col my-2 relative w-[90%] lg:w-[50%] m-auto '>
 			<button
-				className='w-full flex gap-2 items-center justify-between bg-secondary px-6 py-2 rounded-md text-white'
+				className='w-full flex gap-2 items-center justify-between bg-secondary px-6 py-2 rounded-xl text-white'
 				onClick={handleButtonClick}
 			>
 				<p className='text-ellipsis overflow-x-hidden whitespace-nowrap'>
 					{selectedOption ? selectedOption : 'Seleccione una equipo'}
 				</p>
-				<MdKeyboardArrowDown className='size-8' />
+				<MdKeyboardArrowDown className='size-6' />
 			</button>
 			{isOpen && (
 				<ul className='absolute top-[100%] left-0 py-2 bg-slate-950 w-full shadow-xl px-6 border-t-transparent rounded-md  flex flex-col gap-y-2 max-h-[10rem] overflow-y-auto'>
 					{options?.length === 0 && (
 						<li className='py-1 flex justify-center'>
-							<p className='text-center text-white'>
+							<p className='text-center text-white text-sm font-Roboto'>
 								No hay partidos disponibles
 							</p>
 						</li>

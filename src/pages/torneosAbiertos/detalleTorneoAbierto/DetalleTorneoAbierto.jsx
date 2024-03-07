@@ -74,27 +74,29 @@ const DetalleTorneoAbierto = () => {
 	);
 
 	return (
-		<div className='bg-primary w-full min-h-96 flex flex-col justify-center items-center'>
+		<div className='bg-primary w-full min-h-96 flex flex-col justify-center items-center '>
 			<button
 				onClick={() => {
 					navigate('/TorneosAbiertos');
 				}}
-				className='bg-primary w-full overflow-hidden px-[30px] flex justify-around items-center'
+				className='bg-primary w-full overflow-hidden px-[30px] flex justify-around items-center lg:w-[45%]'
 			>
-				<div className='rounded-full bg-neutral w-[40px] h-[40px]  flex justify-center items-center'>
-					<img
-						className={`${tournament.logo==null||tournament.logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
-						src={tournament.logo==null||tournament.logo==''?trophy:tournament.logo}
-						alt='logo'
-					/>
+				<div className='w-[90%] flex items-center'>
+					<div className='rounded-full bg-neutral w-[40px] h-[40px]  flex justify-center items-center '>
+						<img
+							className={`${tournament.logo==null||tournament.logo==''?'w-[25px] h-[25px]':'p-0.5 w-[40px] h-[40px] rounded-full'}`}
+							src={tournament.logo==null||tournament.logo==''?trophy:tournament.logo}
+							alt='logo'
+						/>
+					</div>
+					<div className='text-left py-4 ml-4 flex flex-col '>
+						<h1 className='text-SorceSansPro font-semibold text-[20px]'>{tournament.name}</h1>
+						
+					</div>
 				</div>
-				<div className='text-left py-4 ml-4 flex flex-col '>
-					<h1 className='text-SorceSansPro font-semibold text-[20px]'>{tournament.name}</h1>
-					
-				</div>
-				<h2 className='text-Roboto text-SemiBold text-base text-warning pl-1'>
+				<h2 className='text-Roboto text-SemiBold text-base text-warning pl-1 w-36 '>
 					Vacantes: {vacants}
-				    </h2>
+				</h2>
 			</button>
 
 			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
@@ -106,7 +108,7 @@ const DetalleTorneoAbierto = () => {
 			<button
 			key={team.id}
 
-				className='bg-secondary w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl h-[47px] overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-start items-center mb-2 mx-auto'
+				className='bg-secondary px-3 w-11/12 md:w-4/5 lg:w-3/5 xl:w-2/5 rounded-2xl h-[47px] overflow-hidden drop-shadow-[3px_3px_2px_rgba(0,0,0,0.5)] mt-8 flex justify-between items-center mb-2 mx-auto'
 
 			
 

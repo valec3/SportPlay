@@ -57,7 +57,7 @@ function Carrousel() {
 							<img
 								src={slide.imageDesktop}
 								alt={`Slide ${index + 1}`}
-								className='w-full h-auto lg:visible'
+								className='w-full h-[423px]  lg:visible'
 							/>
 							<div
 								className='whitespace-pre-line text-roboto font-bold text-[32px] leading-[38px] line-height-[120%] 

@@ -66,31 +66,34 @@ function AdminTorneo() {
 		.reverse();
 
 	return (
-		<div className='space-y-4'>
-			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral'>
+		<div className='space-y-4 '>
+			<div className='m-auto w-full md:w-[400px] space-y-4 text-neutral] py-10 '>
 				<div className='text-center'>
-					<h1 className='text-[2rem] text-base-100 mb-8'>
+					<h1 className='text-[2rem] text-base-100 mb-8 font-Roboto font-bold lg:text-2xl'>
 						Administrador del Torneo
 					</h1>
 					<Link
 						to='/crear-torneo'
-						className='bg-accent btn btn-sm border-accent text-base-100 '
+						className='bg-accent btn btn-sm border-accent  w-[260px]  text-base-100 h-[40px] rounded-2xl'
 					>
 						Crear torneo
 					</Link>
 				</div>
 			</div>
-			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
-			<div className='m-auto pb-60 w-[327px] md:w-[400px] space-y-4 text-neutral'>
-				<h2>Torneos creados</h2>
+
+			<hr className='border-[#545458] my-[10px]' />
+
+			
+			<div className='m-auto pb-60 w-[90%] md:w-[400px] space-y-4 text-neutral lg:w-[50%]'>
+				<h2 className="text-[22px] font-Roboto font-bold">Torneos creados</h2>
 				{activeTournaments.map((tournament, index) => {
 					return (
 						<div
 							className='flex flex-row items-center justify-between bg-secondary h-[61px] p-4 rounded-[14px]'
 							key={index}
 						>
-							<div className='flex flex-row gap-4 items-center '>
-								<div className='w-[45px] h-[45px] rounded-full bg-neutral flex justify-center items-center'>
+							<div className='flex flex-row items-center w-full '>
+								<div className='w-[40px] h-[40px] rounded-full bg-neutral flex justify-center items-center '>
 									<img
 										src={
 											tournament.logo
@@ -98,11 +101,11 @@ function AdminTorneo() {
 												: '/icons/trophyAdminTournament.svg'
 										}
 										alt='icono de trofeo'
-										className='w-[40px] h-[40px] rounded-full'
+										className='w-[40px] h-[40px] rounded-full '
 									/>
 								</div>
 
-								<div className='w-full'>{tournament.name}</div>
+								<div className='w-full pl-5'>{tournament.name}</div>
 							</div>
 							{tournament.status == 'ongoing'
 								? currentTournament(tournament)
