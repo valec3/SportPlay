@@ -21,9 +21,8 @@ const ResultadosTorneos = () => {
 		   window.scrollTo({
 			 top:0,
 			 behavior:'smooth'
-		   })
-		   
-				   // dispatch(resetTeamsTournament())
+		   })		   
+			// dispatch(resetTeamsTournament())
 			   torneosMap()
 				  
 				   
