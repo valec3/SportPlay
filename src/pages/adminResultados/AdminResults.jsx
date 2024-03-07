@@ -29,12 +29,12 @@ const AdminResult = () => {
 	return (
 		<section className='pb-[119px] bg-primary text-base-100 xl:w-[1024px] xl:m-auto '>
 			<div className='px-[30px] h-52 flex flex-col justify-center gap-[5px] md:items-center'>
-				<h1 className='font-Roboto font-bold text-[32px] mb-5'>Resultados</h1>
+				<h1 className='font-Roboto font-bold text-[32px] lg:text-2xl mb-5'>Resultados</h1>
 				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%]'>
-					<div className=' bg-secondary rounded-2xl py-[15px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{selectTournament.name?selectTournament.name:'Elija un Torneo'}</h2>
+					<div className=' bg-secondary rounded-2xl py-[13px] pl-[37.52px] w-full flex justify-between items-center text-xl' onClick={handleClick}><h2>{selectTournament.name?selectTournament.name:'Elija un Torneo'}</h2>
 						<div>
 							<MdKeyboardArrowDown
-								className={` ${menuTournamnet ? 'rotate-180' : 'rotate-0'} lg:w-[45px] lg:h-[45px] transition-all duration-300 ml-5 `}
+								className={` ${menuTournamnet ? 'rotate-180' : 'rotate-0'} lg:w-[22px] lg:h-[25px] mx-4 transition-all duration-300 ml-5 `}
 							/>
 						</div>
 					</div>
@@ -78,13 +78,9 @@ const AdminResult = () => {
 				
 			</div>
 
-			<img
-				className='my-[30px] md:w-full'
-				src='images/divider.svg'
-				alt='Divider'
-			/>
+				<hr className='border-[#545458] my-[10px]' />
 
-			<div className='flex items-center justify-center gap-5'>
+			<div className='flex items-center justify-center gap-5 py-10'>
 			<div className='w-[55px] h-[55px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
 											<img
 												src={
@@ -101,7 +97,7 @@ const AdminResult = () => {
 			</div>
 
 			<div className='w-full flex flex-col  justify-center  items-center gap-4 '>
-				<div className='mt-12'>
+				{/*<div className='mt-12'>
 					<svg
 						width='41'
 						height='37'
@@ -114,8 +110,9 @@ const AdminResult = () => {
 							fill='#FFFCFC'
 						/>
 					</svg>
-				</div>
-				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[50%] gap-5  rounded-[14px]  bg-secondary'>
+				</div>*/}
+				<p className="text-[22px] font-Roboto font-bold">Equipo ganador</p>
+				<div className='flex justify-start items-center w-[90%] md:w-[80%] lg:w-[40%] gap-5  rounded-[14px]  bg-secondary py-[13px] px-4'>
 					
 					<div className='w-[45px] h-[45px] mr-3 rounded-full bg-neutral flex justify-center items-center'>
 							<img
@@ -132,15 +129,15 @@ const AdminResult = () => {
 				</div>
 			</div>
 
-			<div className='w-[90%] m-auto bg-secondary mt-[45px] text-base-100 rounded-[14px] text-center py-[28px] px-[15px] md:w-[65%]'>
-				<h2 className=' text-[32px] font-semibold font-Roboto md:text-[38px] md:leading-[54px]'>
+			<div className='w-[90%] m-auto bg-secondary mt-[45px] text-base-100 rounded-[14px] text-center py-[28px] px-[15px] md:w-[65%] lg:w-[50%] lg:mb-5'>
+				<h2 className=' text-[32px] font-semibold font-Roboto md:text-[38px] md:leading-[54px] lg:text-[32px]'>
 					Final
 				</h2>
 				<p className='text-lg text-neutral md:text-[20px] font-Roboto'>
 					29 Julio 2024
 				</p>
 
-				<div className='mt-[15px] flex items-center justify-between md:justify-evenly'>
+				<div className='mt-[15px] flex items-center justify-between md:justify-evenly lg:w-[80%] lg:m-auto'>
 					<div className=" w-[35%]">
 					<div className='w-[45px] h-[45px]  rounded-full bg-neutral flex justify-center items-center mx-auto'>
 							<img
@@ -157,13 +154,13 @@ const AdminResult = () => {
 					</div>
 
 					<div className='flex justify-center gap-2 w-[30%]'>
-						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[64px]'>
+						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[40px]'>
 							2
 						</span>
-						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[64px]'>
+						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[40px]'>
 							:
 						</span>
-						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[64px]'>
+						<span className=' font-Roboto font-semibold text-[48px] leading-[96px] md:text-[40px]'>
 							1
 						</span>
 					</div>
@@ -185,8 +182,8 @@ const AdminResult = () => {
 				</div>
 			</div>
 
-			<div className='lg:flex'>
-				<div className='w-[90%] m-auto p-1 pt-0 mt-10  bg-secondary rounded-[16px] mb-4 md:w-[80%] lg:w-[40%]'>
+			<div className='lg:flex lg:w-[90%] lg:m-auto'>
+				<div className='w-[90%] m-auto p-1 pt-0 mt-10  bg-secondary rounded-[16px] mb-4 md:w-[80%] lg:w-[45%] '>
 					<table className='w-full  '>
 						{/* head */}
 						<thead className=''>
@@ -228,7 +225,7 @@ const AdminResult = () => {
 					</table>
 				</div>
 
-				<div className='w-[90%] m-auto p-1 pt-0 mt-10 bg-secondary rounded-[16px] mb-4 md:w-[80%] lg:w-[50%]'>
+				<div className='w-[90%] m-auto p-1 pt-0 mt-10 bg-secondary rounded-[16px] mb-4 md:w-[80%] lg:w-[45%]'>
 					<table className='w-full  '>
 						{/* head */}
 						<thead className=''>
