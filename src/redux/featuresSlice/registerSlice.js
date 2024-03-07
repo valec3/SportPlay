@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 //const [first, setfirst] = useState(initialState)
 
 const initialState = {
-    isRegister: false,
+	isRegister: false,
 };
 
 export const registerSlice = createSlice({
-    name: "isRegister",
-    initialState,
-    reducers: {
-        initiaSesion: ( state ) => {
-            state.isRegister = true;
-         },
-        closeSesion: ( state) => {
-            state.isRegister= false;
-        },
-    },
+	name: 'isRegister',
+	initialState,
+	reducers: {
+		initiaSesion: state => {
+			state.isRegister = true;
+		},
+		closeSesion: state => {
+			state.isRegister = false;
+		},
+	},
 });
 
-export const { initiaSesion , closeSesion} = registerSlice.actions;
+export const { initiaSesion, closeSesion } = registerSlice.actions;
 export default registerSlice.reducer;

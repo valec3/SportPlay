@@ -7,6 +7,7 @@ function Carrousel() {
 	const slides = [
 		{
 			image: 'images/banner0.png',
+			imageDesktop: 'images/banner-desktop.png',
 			caption: `Simplifica
                 la gestion
                 deportiva con
@@ -14,6 +15,7 @@ function Carrousel() {
 		},
 		{
 			image: 'images/banner1.png',
+			imageDesktop: 'images/banner-desktop2.png',
 			caption: `Inscribete
                 y juega.
                 La cancha
@@ -22,6 +24,7 @@ function Carrousel() {
 		},
 		{
 			image: 'images/banner2.png',
+			imageDesktop: 'images/banner-desktop3.png',
 			caption: `Desafia a
                 tus Amigos.
                 La Competencia
@@ -49,10 +52,17 @@ function Carrousel() {
 							<img
 								src={slide.image}
 								alt={`Slide ${index + 1}`}
-								className='w-full h-auto'
+								className='w-full h-auto lg:hidden'
+							/>
+							<img
+								src={slide.imageDesktop}
+								alt={`Slide ${index + 1}`}
+								className='w-full h-auto lg:visible'
 							/>
 							<div
-								className='whitespace-pre-line text-roboto font-bold text-[32px] leading-[38px] line-height-[120%] absolute top-10 left-10 transform -translate-x-4 text-left text-3xl flex flex-col'
+								className='whitespace-pre-line text-roboto font-bold text-[32px] leading-[38px] line-height-[120%] 
+								absolute top-10 left-10 transform -translate-x-4 text-left text-3xl flex flex-col lg:text-[50px] lg:ml-20 lg:h-52
+								lg:leading-[52px] '							 
 								style={{
 									color: slide.color ? slide.color : 'inherit',
 								}}
