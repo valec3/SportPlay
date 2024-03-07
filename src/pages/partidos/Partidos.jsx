@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const Partidos = () => {
 	const [partidos, setPartidos] = useState([]);
@@ -42,6 +43,13 @@ const Partidos = () => {
 
 			setPartidos(mockData);
 			setTorneo(mockData[0].torneo);
+
+			const response = await axios.get(
+				`https://tournament-sport.onrender.com/api/games/info-list`
+			);
+			const partidos = await response.data;
+			console.log(partidos.data);
+			// setPartidos(partidos.data);
 		};
 
 		fetchPartidosData();
