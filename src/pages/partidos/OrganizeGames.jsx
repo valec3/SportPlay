@@ -119,7 +119,7 @@ const OrganizeGames = () => {
 								{teams ? (
 									<>
 										<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
-											<img
+											{teams[0]?<img
 												className={`${teams[0].logo_url == null || teams[0].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[0].logo_url == null || teams[0].logo_url == ''
@@ -127,9 +127,9 @@ const OrganizeGames = () => {
 														: teams[0].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>:<></>}
 										</div>
-										<div>{!teams ? `cargando...` : teams[0].name}</div>
+										<div>{!teams ? `cargando...` : teams[0]&&teams[0].name}</div>
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -141,7 +141,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[0]&&<img
 												className={`${teams[1].logo_url == null || teams[1].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[1].logo_url == null || teams[1].logo_url == ''
@@ -149,9 +149,9 @@ const OrganizeGames = () => {
 														: teams[1].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[1].name}
+										{!teams ? `cargando...` : teams[0]&&teams[1].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -170,7 +170,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[0]&&<img
 												className={`${teams[2].logo_url == null || teams[2].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[2].logo_url == null || teams[2].logo_url == ''
@@ -178,9 +178,9 @@ const OrganizeGames = () => {
 														: teams[2].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[2].name}
+										{!teams ? `cargando...` : teams[0]&&teams[2].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -191,7 +191,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[0]&&<img
 												className={`${teams[3].logo_url == null || teams[3].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[3].logo_url == null || teams[3].logo_url == ''
@@ -199,9 +199,9 @@ const OrganizeGames = () => {
 														: teams[3].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[3].name}
+										{!teams ? `cargando...` : teams[0]&&teams[3].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>

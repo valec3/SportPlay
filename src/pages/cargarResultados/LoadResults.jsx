@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ScoreBoard, CustomSelect, TableInput } from './components';
-
 import './LoadResults.css';
 import {
 	getInfoTeamsByTournament,
 	getInfoTournament,
 	addGameStats,
 } from '../../services';
+import { useNavigate } from 'react-router-dom/dist';
 const LoadResults = () => {
 	const [options, setOptions] = useState([]);
 	const [game, setGame] = useState(null);
@@ -26,6 +26,7 @@ const LoadResults = () => {
 		},
 		game_id: game?.game_id,
 	});
+	const navigate = useNavigate();
 	
 	useEffect(() => {
 		const getTeams = async () => {
@@ -58,7 +59,7 @@ const LoadResults = () => {
 	};
 	return (
 		<section>
-			<div className='w-full flex justify-center items-center gap-3 font-semibold py-2'>
+			<div onClick={()=>{navigate('/administrar-torneo')}} className='w-full flex justify-center items-center gap-3 font-semibold py-2'>
 				<img
 					className='size-10 rounded-full object-contain'
 					src={infoTournament.logo}	
