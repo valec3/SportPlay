@@ -44,8 +44,6 @@ const Result = ({ id, name, teams_count, logo, status }) => {
 
     const trunName = name.slice(0, 18);
 
-    console.log("torneos",  allTeamsTournament)
-
   return (
     <div className='py-5 w-full px-5 sm:w-[90%] md:w-[70%] lg:px-10 bg-secondary rounded-3xl mb-4 m-2 mt-8'>
       {/* Title */}

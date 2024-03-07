@@ -42,6 +42,7 @@ const ResultadosTorneos = () => {
 				 fetchDataTeams(torneo);
 			});	
 		};
+		const arraySinRepetidos = tournamentComplete.filter((valor, indice, arreglo) => arreglo.indexOf(valor) === indice);
 	
 	return (
 		<div className='bg-primary h-auto w-full px-[30px] flex flex-col items-center lg:flex-row lg:flex-wrap lg:justify-center gap-x-14'>
@@ -52,7 +53,7 @@ const ResultadosTorneos = () => {
 			</div>
 			
 			{/* Mostrar los resultados de cada torneo */}
-			{tournamentComplete.map((tournament, index ) => (
+			{arraySinRepetidos.map((tournament, index ) => (
 				<Result key={index} {...tournament}  />
 			))}
 		</div>
