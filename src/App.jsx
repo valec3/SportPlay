@@ -48,7 +48,7 @@ function App() {
 							<Route path='/addPlayer/:id' element={<Addplayer />} />
 							<Route path='/Admin-Resultados' element={<AdminResult />} />
 							<Route path='/cargar-resultados/:id' element={<LoadResults />} />
-							<Route path='/cargar-resultados/:id' element={<LoadResults />} />
+							<Route path='/OrganizeGames/:id' element={<OrganizeGames />} />
 						</Routes>
 					</main>
 					<Footer />
