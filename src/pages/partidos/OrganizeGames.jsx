@@ -4,9 +4,11 @@ import { useParams } from 'react-router';
 import { FaTrophy } from 'react-icons/fa';
 import axios from 'axios';
 import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
+import { useNavigate } from 'react-router-dom/dist';
 
 const OrganizeGames = () => {
 	const params = useParams();
+	const navigate = useNavigate()
 	const [teams, setTeams] = useState(null);
 	const [teamsRamdom, setTeamsRamdom] = useState(false);
 	const apiTeamsOfTournamentURL = `https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${params.id}`;
@@ -45,8 +47,8 @@ const OrganizeGames = () => {
 						"time": "12:00",
 						"home_team_id": teams[0].id,
 						"away_team_id": teams[1].id,
-						"location": "stadium"
-					  				  
+						"location": "stadium",
+					  	'tournament_id':params.id
 				  })
 				  const response1 = await axios.post('https://tournament-sport.onrender.com/api/games/create',{
 										
@@ -54,7 +56,8 @@ const OrganizeGames = () => {
 						"time": "12:00",
 						"home_team_id": teams[2].id,
 						"away_team_id": teams[3].id,
-						"location": "stadium"
+						"location": "stadium",
+						'tournament_id':params.id
 					  				  
 				  })
 				  
@@ -70,7 +73,7 @@ const OrganizeGames = () => {
 	return (
 		<div className='bg-primary py-4 px-4 w-full min-h-screen'>
 			<div className='flex justify-center items-center'>
-				<button className='bg-primary w-full max-w-[260px] rounded-lg overflow-hidden flex justify-center items-center'>
+				<button onClick={()=>{navigate('/administrar-torneo')}} className='bg-primary w-full max-w-[260px] rounded-lg overflow-hidden flex justify-center items-center'>
 					<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center lg:-ml-0 '>
 						{tournament && (
 							<img
