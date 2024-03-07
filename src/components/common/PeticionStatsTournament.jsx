@@ -12,7 +12,7 @@ const PeticionStatsTournament = (tournament_id) => {
 		const fetchStatsTournaments = async () => {
 			try {
 				const res = await axios.get(statsTournamentURL);
-				console.log('fetchStatsTournaments', res);
+				// console.log('fetchStatsTournaments', res);
 				dispatch(getStatsTournament(res.data));
 			} catch (er) {
 				console.log(er);

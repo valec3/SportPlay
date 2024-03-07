@@ -4,9 +4,11 @@ import { useParams } from 'react-router';
 import { FaTrophy } from 'react-icons/fa';
 import axios from 'axios';
 import PeticionAllTournaments from '../../components/common/PeticionAllTournaments';
+import { useNavigate } from 'react-router-dom/dist';
 
 const OrganizeGames = () => {
 	const params = useParams();
+	const navigate = useNavigate()
 	const [teams, setTeams] = useState(null);
 	const [teamsRamdom, setTeamsRamdom] = useState(false);
 	const apiTeamsOfTournamentURL = `https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${params.id}`;
@@ -45,8 +47,8 @@ const OrganizeGames = () => {
 						"time": "12:00",
 						"home_team_id": teams[0].id,
 						"away_team_id": teams[1].id,
-						"location": "stadium"
-					  				  
+						"location": "stadium",
+					  	'tournament_id':params.id
 				  })
 				  const response1 = await axios.post('https://tournament-sport.onrender.com/api/games/create',{
 										
@@ -54,7 +56,8 @@ const OrganizeGames = () => {
 						"time": "12:00",
 						"home_team_id": teams[2].id,
 						"away_team_id": teams[3].id,
-						"location": "stadium"
+						"location": "stadium",
+						'tournament_id':params.id
 					  				  
 				  })
 				  
@@ -70,7 +73,7 @@ const OrganizeGames = () => {
 	return (
 		<div className='bg-primary py-4 px-4 w-full min-h-screen'>
 			<div className='flex justify-center items-center'>
-				<button className='bg-primary w-full max-w-[260px] rounded-lg overflow-hidden flex justify-center items-center'>
+				<button onClick={()=>{navigate('/administrar-torneo')}} className='bg-primary w-full max-w-[260px] rounded-lg overflow-hidden flex justify-center items-center'>
 					<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-5 mt-4 flex justify-center items-center lg:-ml-0 '>
 						{tournament && (
 							<img
@@ -116,7 +119,7 @@ const OrganizeGames = () => {
 								{teams ? (
 									<>
 										<div className='rounded-full bg-neutral w-[40px] h-[40px] ml-1 flex justify-center items-center'>
-											<img
+											{teams[0]?<img
 												className={`${teams[0].logo_url == null || teams[0].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[0].logo_url == null || teams[0].logo_url == ''
@@ -124,9 +127,9 @@ const OrganizeGames = () => {
 														: teams[0].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>:<></>}
 										</div>
-										<div>{!teams ? `cargando...` : teams[0].name}</div>
+										<div>{!teams ? `cargando...` : teams[0]&&teams[0].name}</div>
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -138,7 +141,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[1]&&<img
 												className={`${teams[1].logo_url == null || teams[1].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[1].logo_url == null || teams[1].logo_url == ''
@@ -146,9 +149,9 @@ const OrganizeGames = () => {
 														: teams[1].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[1].name}
+										{!teams ? `cargando...` : teams[0]&&teams[1].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -167,7 +170,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[2]&&<img
 												className={`${teams[2].logo_url == null || teams[2].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[2].logo_url == null || teams[2].logo_url == ''
@@ -175,9 +178,9 @@ const OrganizeGames = () => {
 														: teams[2].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[2].name}
+										{!teams ? `cargando...` : teams[2]&&teams[2].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>
@@ -188,7 +191,7 @@ const OrganizeGames = () => {
 									<>
 										<div>
 											{' '}
-											<img
+											{teams[3]&&<img
 												className={`${teams[3].logo_url == null || teams[3].logo_url == '' ? 'w-[25px] h-[25px]' : 'p-0.5 w-[40px] h-[40px] rounded-full'}`}
 												src={
 													teams[3].logo_url == null || teams[3].logo_url == ''
@@ -196,9 +199,9 @@ const OrganizeGames = () => {
 														: teams[3].logo_url
 												}
 												alt='Real Madrid'
-											/>
+											/>}
 										</div>
-										{!teams ? `cargando...` : teams[3].name}
+										{!teams ? `cargando...` : teams[3]&&teams[3].name}
 									</>
 								) : (
 									<div>Añadir Equipo</div>

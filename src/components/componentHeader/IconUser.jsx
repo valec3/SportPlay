@@ -55,14 +55,15 @@ const IconUser = () => {
 				)}
 			</button>
 			{/* Dropdown para el menú de usuario */}
-			<div
-				className={`absolute top-[80px] right-0  scale-0  w-[50%] bg-secondary  shadow-lg ${isDropdownOpen && isRegister && 'scale-100 '} transition-all ease-in-out duration-500 overflow-hidden `}
-				onClick={handleModalContainerClick}
-			>
+  { isDropdownOpen && isRegister && (
+                <div className='w-full   h-screen absolute top-0 left-0 bg-black/75'
+                    onClick={toggleDropdown}>
+                   <div className='absolute right-0 top-[90px]  w-[50%] bg-secondary  shadow-lg md:w-[20%]' 
+                    onClick={handleModalContainerClick}>
 				<ul className='h-[376px]'>
-					<div className=' w-full  h-[47px] flex justify-start items-center'>
+					<div className=' w-full  md:w-[25%]   h-[47px] flex justify-start items-center lg:w-full'>
 						<FiUser className='h-[20px] w-[20px] mr-[13px] ml-[14px]' />
-						<h3>¡Hola, {userData.first_name}!</h3>
+						<h3 >¡Hola, {userData.first_name}!</h3>
 					</div>
 					<hr className='border-[#545458]' />
 					<li
@@ -104,7 +105,9 @@ const IconUser = () => {
 					<RxExit className='w-[15px] h-[15px] mr-[7px]' />{' '}
 					<div>Cerrar Sesión</div>
 				</button>
-			</div>
+					</div>
+					</div>
+					    )}
 		</>
 	);
 };

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ScoreBoard, CustomSelect, TableInput } from './components';
-
 import './LoadResults.css';
 import {
 	getInfoTeamsByTournament,
 	getInfoTournament,
 	addGameStats,
 } from '../../services';
+import { useNavigate } from 'react-router-dom/dist';
 const LoadResults = () => {
 	const [options, setOptions] = useState([]);
 	const [game, setGame] = useState(null);
@@ -26,6 +26,7 @@ const LoadResults = () => {
 		},
 		game_id: game?.game_id,
 	});
+	const navigate = useNavigate();
 	
 	useEffect(() => {
 		const getTeams = async () => {
@@ -57,19 +58,21 @@ const LoadResults = () => {
 		addGameStats(data);
 	};
 	return (
-		<section className='px-6 md:px-28 lg:px-20'>
-			<div className='w-full flex justify-center items-center gap-3 font-semibold py-2'>
+		<section>
+			<div onClick={()=>{navigate('/administrar-torneo')}} className='w-full flex justify-center items-center gap-3 font-semibold py-2'>
 				<img
 					className='size-10 rounded-full object-contain'
-					src={infoTournament.logo}
+					src={infoTournament.logo}	
 					alt={`Logo del torneo ${infoTournament.name}`}
 				/>
 				<p className='text-[1.2rem]'>{infoTournament.name}</p>
 			</div>
-			<h2 className='text-[2rem] font-bold mb-10'>Cargar Resultados</h2>
+			<hr className='border-[#545458] my-[10px] ' />
+
+			<h2 className='text-[2rem] font-bold mb-10 font-Roboto lg:text-center lg:text-2xl pt-8 pl-6'>Cargar Resultados</h2>
 			<CustomSelect onChange={setGame} options={options} />
 			{game !== null ? (
-				<div>
+				<div className="">
 					<ScoreBoard
 						game={game}
 						setDataGame={setDataGame}

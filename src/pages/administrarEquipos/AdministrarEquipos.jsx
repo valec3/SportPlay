@@ -124,9 +124,11 @@ function AdministrarEquipos() {
 					</div>
 				</div>
 			</div>
-			<div className='bg-[#545458] w-full h-[0.5px] mt-0'></div>
+
+			<hr className='border-[#545458] my-[10px]' />
+
 			<div className='m-auto w-[327px] md:w-[400px] space-y-4 text-neutral '>
-				<h1 className='font-bold text-[2rem] my-4'>Administrar Equipos</h1>
+				<h1 className='font-bold text-[2rem] font-Roboto text-center my-5'>Administrar Equipos</h1>
 				<p className='font-bold my-4 text-[22px]'>Nuevo Equipo</p>
 				<div className='flex justify-center'>
 					<div className='w-[134px] h-[134px] flex  rounded-full z-[2] bg-neutral'>

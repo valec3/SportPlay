@@ -13,7 +13,6 @@ const ResultadosTorneos = () => {
 	const torneosToShow = allTournaments.slice(-21).reverse();
 	const [tournamentComplete, setTournamentComplete] = useState([])
 		
-	
 	// Datos de los torneos
 	PeticionAllTournaments();//hace una nueva peticion para actulizar datos
 	
@@ -21,42 +20,42 @@ const ResultadosTorneos = () => {
 		   window.scrollTo({
 			 top:0,
 			 behavior:'smooth'
+
 		   })		   
-			// dispatch(resetTeamsTournament())
 			   torneosMap()
-				  
-				   
 	   }, []);
-	   const fetchDataTeams = async (id, teams_count) => {
+	   
+	   const fetchDataTeams = async (torneo) => {
 					   try {
-						 const res = await axios.get(`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${id}`);
-						 //console.log(res.data.teams);					  
-						 // dispatch(getTeamsTournament(res.data.teams))
+						 const res = await axios.get(`https://tournament-sport.onrender.com/api/tournament/tournament-teams?id=${torneo.id}`);
+					
 			              const team = res.data.teams;
-						  if(teams_count==team.length){
-							setTournamentComplete(...tournamentComplete, id)
-							console.log('coincidencias',id);
-						  }
+						  if(torneo.teams_count==team.length){
+							 const torneoCompleto = torneosToShow.find(t => t.id === torneo.id);// Buscar el objeto completo que coincide con el ID y guardarlo en el estado
+							 if (torneoCompleto) {
+								 setTournamentComplete(prevState => [...prevState, torneoCompleto]);
+						  }}
 					   } catch (er) {
 						 console.log(er);
 					   }
 					 };
+					 
 	const torneosMap = ()=>{ torneosToShow.map(torneo => {
-				 fetchDataTeams(torneo.id, torneo.teams_count);
-				 console.log('map id:',torneo.id);
-			});	}
-	 
-	   console.log('useStado',tournamentComplete);
+				 fetchDataTeams(torneo);
+			});	
+		};
+		const arraySinRepetidos = tournamentComplete.filter((valor, indice, arreglo) => arreglo.indexOf(valor) === indice);
+	
 	return (
 		<div className='bg-primary h-auto w-full px-[30px] flex flex-col items-center lg:flex-row lg:flex-wrap lg:justify-center gap-x-14'>
 			<div className='w-full lg:w-full'>
-				<h1 className='text-3xl font-roboto text-white text-center py-2'>
+				<h1 className='text-2xl font-roboto font-bold text-white text-center pt-8'>
 					Resultados Torneos
 				</h1>
 			</div>
 			
 			{/* Mostrar los resultados de cada torneo */}
-			{torneosToShow.map((tournament, index ) => (
+			{arraySinRepetidos.map((tournament, index ) => (
 				<Result key={index} {...tournament}  />
 			))}
 		</div>

@@ -16,7 +16,7 @@ const PeticionAllTournaments = () => {
 		const fetchDataTournaments = async () => {
 			try {
 				const res = await axios.get(apiURL);
-				console.log('fetchDataTournaments', res.data);
+				// console.log('fetchDataTournaments', res.data);
 				dispatch(getTournaments(res.data));
 			} catch (er) {
 				console.log(er);
@@ -25,7 +25,7 @@ const PeticionAllTournaments = () => {
 		const fetchDataTeams = async () => {
 			try {
 				const res = await axios.get(apiTeamsURL);
-				console.log('fetchDataTeams', res.data);
+				// console.log('fetchDataTeams', res.data);
 				dispatch(getTeams(res.data));
 			} catch (er) {
 				console.log(er);
