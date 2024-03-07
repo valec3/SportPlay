@@ -207,13 +207,13 @@ function AdministrarEquipos() {
 									<img
 										src='/icons/add-member.svg'
 										alt='icono agregar a un integrante'
-										className='w-[26px] h-[21px]'
+										className='w-[26px] h-[21px] cursor-pointer'
 										onClick={()=>navigate(`/addPlayer/${equipo.id}`)}
 									/>
 									<img
 										src='/icons/cancel-team.svg '
 										alt='icono cancelar'
-										className='w-[20px] h-[21px]'
+										className='w-[20px] h-[21px] cursor-pointer'
 										onClick={() => eliminarEquipo(equipo.id)}
 									/>
 								</div>
@@ -231,12 +231,10 @@ function AdministrarEquipos() {
 					</p>
 				</div>
 				<form method='dialog' className='modal-backdrop'>
-					{vacants_count<1?(<Link to='/administrar-torneo' className=''>
-						close
-					</Link>):<Link to='/administrar-equipos' className=''>
-						close
-					</Link>}
-					
+					{vacants_count<1?(
+					<Link to='/administrar-torneo' className=''>close</Link>):
+					<button>close</button>
+					}
 				</form>
 
 			</dialog>
