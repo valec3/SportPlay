@@ -4,7 +4,8 @@ import {
     getGamesByTeamService,
     createGameService,
     addGameStatsService,
-    getInfoTeamsOfGamesByTournamentService,
+    getInfoTeamsOfGamesTournamentService,
+    getInfoTeamsOfGamesTournamentByIdService,
     getAllGamesService,
 } from '../services/games.service.js';
 
@@ -58,9 +59,21 @@ export const getDataGameForTournament = async (req, res) => {
     }
 };
 
-export const getInfoTeamsOfGamesByTournament = async (req, res) => {
+export const getInfoTeamsOfGamesTournament = async (req, res) => {
     try {
-        const response = await getInfoTeamsOfGamesByTournamentService();
+        const response = await getInfoTeamsOfGamesTournamentService();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const getInfoTeamsOfGamesTournamentById = async (req, res) => {
+    try {
+        const { tournament_id } = req.params;
+        const response = await getInfoTeamsOfGamesTournamentByIdService(
+            tournament_id,
+        );
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({ message: error.message });
