@@ -1,13 +1,20 @@
 import { pool } from '../db/index.js';
 
 export const createGameService = async (game) => {
-    const { date, time, home_team_id, away_team_id, location } = game;
-    if (!date || !time || !home_team_id || !away_team_id || !location)
+    const { date, time, home_team_id, away_team_id, location, tournament_id } =
+        game;
+    if (
+        !date ||
+        !time ||
+        !home_team_id ||
+        !away_team_id ||
+        !location ||
+        !tournament_id
+    )
         throw new Error('All fields are required');
-    const query = `INSERT INTO games (date, time, home_team_id, away_team_id, location) VALUES ('${date}', '${time}', '${home_team_id}', '${away_team_id}', '${location}');`;
+    const query = `INSERT INTO games (date, time, home_team_id, away_team_id, location, tournament_id) VALUES ('${date}', '${time}', '${home_team_id}', '${away_team_id}', '${location}', '${tournament_id}');`;
     const [response] = await pool.query(query);
     if (!response) throw new Error('Internal server error');
-
     return {
         message: 'Game created successfully',
         data: {
