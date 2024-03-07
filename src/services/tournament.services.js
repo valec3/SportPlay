@@ -91,24 +91,27 @@ export const getTournamentsByUserIdService = async (userId, res) => {
     }
 };
 
-export const closeTournamentService = async (tournamentId) => {
+export const setStatusTournamentService = async (status, tournament_id) => {
     try {
-        if (!tournamentId) {
-            throw new Error('El ID del torneo no puede estar vacío.');
-        }
-        const query = `
-            UPDATE tournament
-            SET finished = true
-            WHERE id = ?
+        const updateQuery = `
+        UPDATE tournament
+        SET status = ?
+        WHERE id = ?
         `;
-        const result = await pool.query(query, [tournamentId]);
 
-        return result;
+        await pool.query(updateQuery, [status, tournament_id]);
+
+        const currentStatusQuery = 'SELECT status FROM tournament WHERE id = ?';
+        const [currentStatusRows] = await pool.query(currentStatusQuery, [tournament_id]);
+        const currentStatus = currentStatusRows[0].status;
+
+        return { currentStatus };
     } catch (error) {
         console.error('Error al cerrar el torneo:', error);
-        throw new Error('Error interno del servidor');
+        throw new Error('Error al cerrar el torneo');
     }
 };
+
 
 export const getAllTeamsPerTournamentService = async () => {
     try {
@@ -237,16 +240,14 @@ export const indexTeamToTournamentService = async (data, logoImage) => {
     }
 };
 
-export const deleteTeamPerTournamentService = async (data) => {
+export const deleteTeamPerTournamentService = async (tournament_id, team_id) => {
     try {
-        if (!data.tournament_id || !data.team_id) {
-            throw new Error(
-                'El ID del torneo o del equipo no pueden estar vacíos.',
-            );
+        if (!tournament_id || !team_id) {
+            throw new Error('El ID del torneo o del equipo no pueden estar vacíos.');
         }
 
         const query = `DELETE FROM tournament_teams WHERE tournament_id = ? AND team_id = ?`;
-        await pool.query(query, [data.tournament_id, data.team_id]);
+        await pool.query(query, [tournament_id, team_id]);
 
         return { message: 'Equipo eliminado correctamente' };
     } catch (error) {
