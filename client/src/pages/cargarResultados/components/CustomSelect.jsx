@@ -21,7 +21,7 @@ const CustomSelect = ({ options, onChange }) => {
 				onClick={handleButtonClick}
 			>
 				<p className='text-ellipsis overflow-x-hidden whitespace-nowrap'>
-					{selectedOption ? selectedOption : 'Seleccione una equipo'}
+					{selectedOption || 'Seleccione un equipo'}
 				</p>
 				<MdKeyboardArrowDown className='size-6' />
 			</button>

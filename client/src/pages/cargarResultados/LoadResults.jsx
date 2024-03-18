@@ -13,19 +13,7 @@ const LoadResults = () => {
 	const [game, setGame] = useState(null);
 	const { id: tournament_id } = useParams();
 	const [infoTournament, setInfoTournament] = useState({});
-	const [dataGame, setDataGame] = useState({
-		home_team: {
-			id: game?.home_team_id,
-			score: 0,
-			players: [],
-		},
-		away_team: {
-			id: game?.away_team_id,
-			score: 0,
-			players: [],
-		},
-		game_id: game?.game_id,
-	});
+	const [dataGame, setDataGame] = useState({});
 	const navigate = useNavigate();
 	
 	useEffect(() => {
@@ -72,7 +60,7 @@ const LoadResults = () => {
 			<h2 className='text-[2rem] font-bold mb-10 font-Roboto lg:text-center lg:text-2xl pt-8 pl-6'>Cargar Resultados</h2>
 			<CustomSelect onChange={setGame} options={options} />
 			{game !== null ? (
-				<div className="">
+				<div>
 					<ScoreBoard
 						game={game}
 						setDataGame={setDataGame}
