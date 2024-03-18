@@ -253,7 +253,7 @@ Al explorar la plataforma, descubrirás una variedad de funciones básicas que t
 <td align='center'>
       <div >
         <a href="https://github.com/valec3" target="_blank" rel="author">
-          <img width="110" src="https://media.licdn.com/dms/image/D4E35AQH_xfaXd76nXQ/profile-framedphoto-shrink_200_200/0/1707694830011?e=1710381600&v=beta&t=c3TL8RaJwd4g2VhRiYb41Wl1c1LPSyAoMBLaoeogi6U"/>
+          <img width="110" src="https://media.licdn.com/dms/image/D4E35AQH_xfaXd76nXQ/profile-framedphoto-shrink_200_200/0/1707694830011?e=1711242000&v=beta&t=v0yPV7yNu0GhCbP7UdKWmg1zcX1qRKh-PKCdcKoS5_Y"/>
         </a>
         <a href="https://github.com/valec3" target="_blank" rel="author">
           <h4 style="margin-top: 1rem;">Victor Maye</br><small>Back-End</small></h4>
