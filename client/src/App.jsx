@@ -21,10 +21,8 @@ import LoadResults from './pages/cargarResultados/LoadResults';
 function App() {
     return (
         <BrowserRouter>
-            <div
-                className="text-base-100 h-screen flex flex-col relative z-0 lg:bg-hero bg-local lg:bg-[#2F2F42] lg:bg-cover "
-                id="container-app"
-            >
+            <div className="text-base-100 h-screen flex flex-col relative z-0" id="container-app">
+                <div className="-z-10 fixed top-0 left-0 h-screen w-screen lg:bg-hero lg:bg-[#2F2F42] lg:bg-cover"></div>
                 <div className="lg:w-[1024px] lg:mx-auto bg-primary h-full flex flex-col">
                     <Header />
                     <main className="bg-primary">
