@@ -1,25 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 //const [name, reducers] = useState(initialState)
 
 const initialState = {
-    allTeams: [
-        {
-        id: null,
-        logo_url:'',
-        name:'',
-        creator_id: null,
-        },
-    ]
+    allTeams: [],
 };
 
 export const teamSlice = createSlice({
-    name: "allTeams",
+    name: 'allTeams',
     initialState,
     reducers: {
-        getTeams: ( state , action ) => {
-            state.allTeams = action.payload
-         },
+        getTeams: (state, action) => {
+            state.allTeams = action.payload;
+        },
     },
 });
 

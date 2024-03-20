@@ -1,6 +1,5 @@
 import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom/dist';
 import { closeModal } from '../../redux/featuresSlice/modalSlice';
 
 const ModalForm = ({ children }) => {
@@ -8,11 +7,11 @@ const ModalForm = ({ children }) => {
     const handleModalContainerClick = (e) => e.stopPropagation();
     return (
         <div
-            className={`z-40 bg-black/50 fixed w-full h-full top-0 left-0 p-3 py-4 overflow-y-auto`}
+            className={`z-40 bg-black/50 fixed w-full h-full top-0 left-0 overflow-y-auto flex items-center`}
             onClick={() => dispatch(closeModal())}
         >
             <div
-                className="relative bg-primary w-full max-w-[470px] h-[100%] mx-auto flex justify-center flex-col rounded-lg z-[99]"
+                className="relative bg-primary drop-shadow-xl w-full px-2 py-1 sm:px-14 md:px-2 md:max-w-[470px] h-full md:h-fit mx-auto flex justify-center flex-col z-[99] md:rounded-xl lg:my-2"
                 onClick={handleModalContainerClick}
             >
                 <FaArrowLeft
